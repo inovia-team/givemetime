@@ -26,7 +26,6 @@ TODO (features)
 ---------------
 
 - Better header (logout)
-- Add project error messages
-- Credit users every month
-- Better side menu
-- Better grid system
+- Project delete
+- Better UI
+- Deploy on some cloud provider using docker containers

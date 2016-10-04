@@ -30,12 +30,12 @@ begin
 
   -- check if the person has enough credits
   if (person_row.credit < amount) then
-    raise exception 'This person only have % and cannot transfer %', round(person_row.credit, 2), amount;
+    raise exception 'This person only have % and cannot transfer %', round(person_row.credit), amount;
   end if;
 
   -- check if the project can accept this much credits
   if (project_row.estimate - project_row.acquired < amount) then
-    raise exception 'This project can only accept %, we have to refuse your % credits', round(project_row.estimate, 2) - round(project_row.acquired, 2), amount;
+    raise exception 'This project can only accept %, we have to refuse your % credits', round(project_row.estimate) - round(project_row.acquired), amount;
   end if;
 
   -- do the transfer
