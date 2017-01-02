@@ -5,10 +5,6 @@
 [![Dependency Status](https://www.versioneye.com/user/projects/576040de4931050040054918/badge.svg?style=flat)](https://www.versioneye.com/user/projects/576040de4931050040054918)
 [![Forkability in progress](https://img.shields.io/badge/forkable-73%-blue.svg)](https://basicallydan.github.io/forkability/?u=prevostc&r=givemetime&l=nodejs)
 
-# install node dependencies
-
-npm install
-
 # install docker for your distribution
 
 - https://docs.docker.com/engine/installation/linux/
@@ -16,12 +12,13 @@ npm install
 
 # start project
 
-    npm run db
+    npm start
+    # graphiql interface located at http://localhost:3000
+    # application interface located at http://localhost:4000
+
     npm run db:migrate --loglevel=silent
     npm run db:test --loglevel=silent
 
-    GOOGLE_CLIENT_ID=xxxxxx-xxxxx.apps.googleusercontent.com GOOGLE_CLIENT_SECRET=xxxxxxx GOOGLE_REDIRECT_URL=http://localhost:8080/smth npm run server
-    # graphiql interface located at http://localhost:3000
+# use google login
 
-    GOOGLE_CLIENT_ID=xxxxxx-xxxxx.apps.googleusercontent.com npm start
-    # project located at http://localhost:8080
+    API_URL=http://localhost:3000 PGADMINPASSWORD=postgres PGPASSWORD=give_me_time GOOGLE_CLIENT_ID=xxxxxx-xxxxx.apps.googleusercontent.com GOOGLE_CLIENT_SECRET=xxxxxxx GOOGLE_REDIRECT_URL=http://localhost:8080/smt docker-compose -f docker-compose.yml -f docker-compose.dev.yml up

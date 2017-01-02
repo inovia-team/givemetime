@@ -84,7 +84,9 @@ export function checkLocalUser () {
         // we need to wait google auth lib to be loaded
         const waitGoogleAuthLoaded = () => {
 
-            if (window.gapi && window.gapi.auth2) {
+            if (process.env.GOOGLE_AUTH_MOCK) {
+                logUserInWithTokenAndId(dispatch, userAuth.user_id, userAuth.token)
+            } else if (window.gapi && window.gapi.auth2) {
                 const auth2Instance = window.gapi.auth2.getAuthInstance()
                 auth2Instance.isSignedIn.listen(loggedIn => {
                     if (loggedIn) {

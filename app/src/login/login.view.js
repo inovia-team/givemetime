@@ -14,6 +14,13 @@ export class LoginComponent extends React.Component {
                     <button onClick={this.props.handleLogout}>Logout</button>
                 </div>
             )
+        } else if (process.env.GOOGLE_AUTH_MOCK) {
+            return (
+                <button
+                    onClick={this.props.createUserIfNotExists.bind(this)}>
+                    Login
+                </button>
+            )
         } else {
             return (
                 <GoogleLogin
