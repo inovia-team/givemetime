@@ -37,10 +37,6 @@ export const PostRequest = (userToken, variables, route, onSuccess, onError) => 
     }
 }
 
-export const getGraphQL = (userToken, query, variables, onSuccess, onError) => {
-
-}
-
 export const GetRequest = (userToken, route, onSuccess, onError) => {
     onSuccess = onSuccess || (a => a)
     return dispatch => {

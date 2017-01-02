@@ -68,7 +68,7 @@ export function handleLogout () {
 export function checkLocalUser () {
     return dispatch => {
         // if the user is "google" logged in and an id is present in localstorage,
-        // we try to fetch user from graphql and dispatch the userLoggedInAction
+        // we try to fetch user from the api and dispatch the userLoggedInAction
 
         const userAuth = JSON.parse(localStorage.getItem(USER_TOKEN_KEY) || 'null')
 

@@ -1,7 +1,7 @@
 import { GetRequest } from '../common/common.actions.js'
 import * as constants from './project.actionTypes'
 
-const graphQLDispatchNodeFetched = dispatch => node => {
+const handleNodeFetched = dispatch => node => {
     dispatch(projectFetched(
       node.id,
       node.title,
@@ -16,7 +16,7 @@ export function loadProjects () {
     return dispatch => {
         dispatch(GetRequest(null, 'projects',
             ({ response }) => {
-                response.map(graphQLDispatchNodeFetched(dispatch))
+                response.map(handleNodeFetched(dispatch))
             }
         ))
     }
@@ -25,7 +25,7 @@ export function loadProjects () {
 export function loadProject (id) {
     return () => dispatch => {
         dispatch(GetRequest(null, `project/${id}`,
-            ({ response }) => graphQLDispatchNodeFetched(dispatch)(response)
+            ({ response }) => handleNodeFetched(dispatch)(response)
         ))
     }
 }
