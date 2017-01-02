@@ -6,7 +6,7 @@ const ProjectPropTypes = PropTypes.shape({
     description: PropTypes.string,
     estimate: PropTypes.number.isRequired,
     acquired: PropTypes.number.isRequired,
-    author: PropTypes.string.isRequired,
+    author: PropTypes.string,
 })
 
 export default ProjectPropTypes

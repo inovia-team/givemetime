@@ -15,24 +15,21 @@ const graphQLNodeFields = `
     }
 `
 const graphQLDispatchNodeFetched = dispatch => node => {
-  console.log(node)
-   dispatch(projectFetched(
-    node.id,
-    node.title,
-    node.estimate,
-    node.acquired,
-    node.description,
-    node.personByAuthorId ? node.personByAuthorId.fullname : null
+    dispatch(projectFetched(
+      node.id,
+      node.title,
+      node.estimate,
+      node.acquired,
+      node.description,
+      node.personByAuthorId ? node.personByAuthorId.fullname : null
   ))
 }
 
 export function loadProjects () {
     return dispatch => {
         dispatch(GetRequest(null, 'projects',
-            ({response}) => {
-              console.log(response)
-              response
-                .map(graphQLDispatchNodeFetched(dispatch))
+            ({ response }) => {
+                response.map(graphQLDispatchNodeFetched(dispatch))
             }
         ))
     }

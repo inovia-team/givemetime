@@ -66,7 +66,6 @@ export const GetRequest = (userToken, route, onSuccess, onError) => {
             return { errors: [ err ] }
         })
         .then(response => {
-            console.log(response)
             if (response.errors) {
                 onError(response.errors.map(err => err.message || err).join('. '))
             } else {
