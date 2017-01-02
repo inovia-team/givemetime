@@ -4,7 +4,7 @@ const webpack = require('webpack')
 
 const PATHS = {
     src: path.join(__dirname, 'src'),
-    build: path.join(__dirname, ''),
+    build: path.join(__dirname, 'build'),
 }
 
 process.env.BABEL_ENV = 'development'

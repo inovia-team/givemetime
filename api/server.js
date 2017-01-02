@@ -37,17 +37,6 @@ app.get('/project/:id', handlers.project.index.get)
 app.delete('/project/:id', handlers.project.index.delete)
 app.get('/projects', handlers.projects.index.get)
 app.post('/login', handlers.login.index.post)
-app.use('/graphql', postgraphql(
-    `postgres://${env.PGUSER}:${env.PGPASSWORD}@${env.PGHOST}:${env.PGPORT}/${env.PGDATABASE}`,
-    'give_me_time_public',
-    {
-        development: true,
-        secret: JWT_SECRET,
-        log: true,
-        // any non logged user is not admin
-        anonymousRole: 'give_me_time_user'
-    }
-))
 
 console.log('Listening to port 3000')
 app.listen(3000)
