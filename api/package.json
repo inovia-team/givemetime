@@ -8,7 +8,9 @@
     "start-dev": "./server-dev.sh"
   },
   "devDependencies": {
-    "nodemon": "^1.10.2"
+    "auto-load": "^2.1.0",
+    "nodemon": "^1.10.2",
+    "pg": "^6.1.2"
   },
   "dependencies": {
     "cors": "^2.8.1",

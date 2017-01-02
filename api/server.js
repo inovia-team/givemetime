@@ -6,7 +6,7 @@ const pgFetch = require('./auth/db-fetch')
 const pgJwt = require('./auth/pg-jwt')
 const bodyParser = require('body-parser')
 const cors = require('cors');
-
+const handlers = require('./lib/handlers')
 const app = express()
 const env = process.env
 
@@ -31,6 +31,9 @@ app.use(pgFetch)
 app.use(pgJwt(JWT_SECRET))
 
 // graphql endpoint
+console.log(handlers)
+app.get('/projects', handlers.projects.index.get)
+app.post('/login', handlers.login.index.post)
 app.use('/graphql', postgraphql(
     `postgres://${env.PGUSER}:${env.PGPASSWORD}@${env.PGHOST}:${env.PGPORT}/${env.PGDATABASE}`,
     'give_me_time_public',

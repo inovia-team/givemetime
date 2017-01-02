@@ -1,4 +1,4 @@
-import { getGraphQL } from '../common/common.actions.js'
+import { GetRequest, getGraphQL } from '../common/common.actions.js'
 import * as constants from './project.actionTypes'
 
 const graphQLNodeFields = `
@@ -14,31 +14,26 @@ const graphQLNodeFields = `
         credit
     }
 `
-const graphQLDispatchNodeFetched = dispatch => node => dispatch(projectFetched(
+const graphQLDispatchNodeFetched = dispatch => node => {
+  console.log(node)
+   dispatch(projectFetched(
     node.id,
-    node.rowId,
     node.title,
     node.estimate,
     node.acquired,
     node.description,
     node.personByAuthorId ? node.personByAuthorId.fullname : null
-))
+  ))
+}
 
 export function loadProjects () {
     return dispatch => {
-        dispatch(getGraphQL(null, `
-            query {
-                viewer {
-                    projectNodes {
-                        nodes {
-                            ${graphQLNodeFields}
-                        }
-                    }
-                }
-            }`,
-            {},
-            response => response.viewer.projectNodes.nodes
+        dispatch(GetRequest(null, 'projects',
+            ({response}) => {
+              console.log(response)
+              response
                 .map(graphQLDispatchNodeFetched(dispatch))
+            }
         ))
     }
 }
@@ -59,11 +54,10 @@ export function loadProject (id) {
     }
 }
 
-export const projectFetched = (id, row_id, title, estimate, acquired, description, author) => {
+export const projectFetched = (id, title, estimate, acquired, description, author) => {
     return {
         type: constants.PROJECT_FETCHED,
         id: id,
-        rowId: row_id,
         estimate: estimate,
         acquired: acquired,
         description: description,
