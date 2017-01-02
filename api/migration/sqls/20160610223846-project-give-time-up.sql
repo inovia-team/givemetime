@@ -2,14 +2,13 @@ BEGIN;
 
 
 -- Transfer some credits from a user to a project
-create function give_me_time_public.project_give_time(project_id integer, amount integer) returns give_me_time_public.project as $$
+create function give_me_time_public.project_give_time(person_id integer, project_id integer, amount integer) returns give_me_time_public.project as $$
 declare
   person_row record;
   project_row record;
-  person_id integer;
 begin
   -- get logged in user id
-  select current_setting('jwt.claims.user_rowId')::integer into person_id;
+  -- select current_setting('iss.claims.user_rowId')::integer into person_id;
 
   -- check if the amount is valid
   if (amount <= 0) then
@@ -49,8 +48,8 @@ $$ language plpgsql strict
 security definer
 set search_path = give_me_time_public, pg_temp;
 
-comment on function give_me_time_public.project_give_time(integer, integer) is 'Transfer credits from a user to a project.';
+comment on function give_me_time_public.project_give_time(integer, integer, integer) is 'Transfer credits from a user to a project.';
 
-grant execute on function give_me_time_public.project_give_time(integer, integer) to give_me_time_user;
+grant execute on function give_me_time_public.project_give_time(integer, integer, integer) to give_me_time_user;
 
 COMMIT;

@@ -1,19 +1,9 @@
 'use strict';
 
+var config = require('../../config.js').config;
+var pg = require('pg');
+
 module.exports.post = function(req, res, next) {
-  var pg = require('pg');
-const env = process.env;
-
-var config = {
-  user: env.PGUSER,
-  database: env.PGDATABASE,
-  password: env.PGPASSWORD,
-  host: env.PGHOST,
-  port: env.PGPORT,
-  max: 10, // max number of clients in the pool
-  idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
-};
-
   const id = req.body.userId;
   const title = req.body.title;
   const estimate = req.body.estimate;
@@ -34,18 +24,6 @@ var config = {
 };
 
 module.exports.get = function(req, res, next) {
-  var pg = require('pg');
-const env = process.env;
-
-var config = {
-  user: env.PGUSER,
-  database: env.PGDATABASE,
-  password: env.PGPASSWORD,
-  host: env.PGHOST,
-  port: env.PGPORT,
-  max: 10, // max number of clients in the pool
-  idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
-};
   const id = req.params.id;
   var pool = new pg.Pool(config);
   pool.connect(function(err, client, done) {
@@ -65,18 +43,6 @@ var config = {
 };
 
 module.exports.delete = function(req, res, next) {
-  var pg = require('pg');
-const env = process.env;
-
-var config = {
-  user: env.PGUSER,
-  database: env.PGDATABASE,
-  password: env.PGPASSWORD,
-  host: env.PGHOST,
-  port: env.PGPORT,
-  max: 10, // max number of clients in the pool
-  idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
-};
   const id = req.params.id;
   var pool = new pg.Pool(config);
   pool.connect(function(err, client, done) {

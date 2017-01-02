@@ -1,19 +1,9 @@
 'use strict';
 
+var config = require('../../config.js').config;
+var pg = require('pg');
+
 module.exports.get = function(req, res, next) {
-  var pg = require('pg');
-const env = process.env;
-
-var config = {
-  user: env.PGUSER,
-  database: env.PGDATABASE,
-  password: env.PGPASSWORD,
-  host: env.PGHOST,
-  port: env.PGPORT,
-  max: 10, // max number of clients in the pool
-  idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
-};
-
   var pool = new pg.Pool(config);
   pool.connect(function(err, client, done) {
     if(err) {
