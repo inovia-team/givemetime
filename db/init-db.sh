@@ -6,5 +6,3 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" -c "create database $PG_PROJ
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" -c "alter database $PG_PROJECT_DATABASE set datestyle = ISO;"
 # allow owner to impersonate user or guest
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" -c "grant $PG_PROJECT_USER to $PG_PROJECT_OWNER;"
-# setup extensions
-psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" -f /sql/superuser.sql $PG_PROJECT_DATABASE

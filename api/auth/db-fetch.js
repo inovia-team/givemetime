@@ -1,6 +1,5 @@
 var pg = require('pg');
 
-
 module.exports = (req, res, next)=>{
     // only trigger when auth infos is present
     if (!req.auth) return next();

@@ -1,0 +1,33 @@
+{
+  "name": "givemetime-server",
+  "version": "0.0.1",
+  "description": "Project application server",
+  "main": "server.js",
+  "scripts": {
+    "start": "./server.sh",
+    "start-dev": "./server-dev.sh"
+  },
+  "devDependencies": {
+    "nodemon": "^1.10.2"
+  },
+  "dependencies": {
+    "cors": "^2.8.1",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "googleapis": "^13.0.0",
+    "jsonwebtoken": "^7.1.9",
+    "pg": "^6.1.0",
+    "postgraphql": "^1.9.3",
+    "db-migrate": "^0.9.25"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inovia-team/givemetime.git"
+  },
+  "author": "inovia-team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/inovia-team/givemetime/issues"
+  },
+  "homepage": "https://github.com/inovia-team/givemetime#readme"
+}

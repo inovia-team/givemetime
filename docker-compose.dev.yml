@@ -1,0 +1,18 @@
+version: '2'
+services:
+  api:
+    image: node
+    volumes:
+      - ./api:/usr/src/app
+    command: /usr/src/app/server-dev.sh
+    ports:
+      - 3000:3000
+
+  app:
+    image: node
+    volumes:
+      - ./app:/usr/src/app
+    command: /usr/src/app/server-dev.sh
+    ports:
+      - 4000:4000
+
