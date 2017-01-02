@@ -1,19 +1,6 @@
-import { GetRequest, getGraphQL } from '../common/common.actions.js'
+import { GetRequest } from '../common/common.actions.js'
 import * as constants from './project.actionTypes'
 
-const graphQLNodeFields = `
-    id,
-    rowId,
-    title,
-    estimate,
-    acquired,
-    description,
-    personByAuthorId {
-        id,
-        fullname,
-        credit
-    }
-`
 const graphQLDispatchNodeFetched = dispatch => node => {
     dispatch(projectFetched(
       node.id,
@@ -37,16 +24,8 @@ export function loadProjects () {
 
 export function loadProject (id) {
     return () => dispatch => {
-        dispatch(getGraphQL(null, `
-             query project($id: ID!) {
-                viewer {
-                  project(id: $id) {
-                    ${graphQLNodeFields}
-                  }
-                }
-            }`,
-            { id: id },
-            response => graphQLDispatchNodeFetched(dispatch)(response.viewer.project)
+        dispatch(GetRequest(null, `project/${id}`,
+            ({ response }) => graphQLDispatchNodeFetched(dispatch)(response)
         ))
     }
 }

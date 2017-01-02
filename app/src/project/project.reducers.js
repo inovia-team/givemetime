@@ -11,7 +11,6 @@ export default function (state = { projects: [] }, action) {
                 .filter(project => project.id !== action.id)
                 .concat([{
                     id: action.id,
-                    rowId: action.rowId,
                     name: action.name,
                     time: action.time,
                     title: action.title,

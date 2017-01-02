@@ -1,4 +1,4 @@
-import { PostRequest, getGraphQL, apologize } from '../common/common.actions'
+import { PostRequest, apologize } from '../common/common.actions'
 import * as constant from './login.actionTypes'
 import fetch from 'isomorphic-fetch'
 import * as config from '../config'
@@ -100,10 +100,10 @@ export function checkLocalUser () {
     }
 }
 
-export const userLoggedIn = (token, id, rowId, fullname, credit) => {
+export const userLoggedIn = (token, id, fullname, credit) => {
     return {
         type: constant.USER_LOGGED_IN,
-        token, id, rowId, fullname, credit,
+        token, id, fullname, credit,
     }
 }
 

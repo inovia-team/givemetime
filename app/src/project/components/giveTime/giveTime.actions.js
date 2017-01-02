@@ -1,29 +1,11 @@
-import { getGraphQL } from '../../../common/common.actions'
+import { PostRequest } from '../../../common/common.actions'
 import * as constants from './giveTime.actionTypes'
 
-export function giveTime ({ userToken, amount, projectRowId }) {
+export function giveTime ({ userToken, amount, projectId }) {
     return dispatch => {
-        dispatch(getGraphQL(userToken, `
-            mutation giveTime(
-                $projectRowId: Int!,
-                $credit: Int!
-            ){
-                projectGiveTime(input: {
-                    projectId: $projectRowId,
-                    amount: $credit
-                }) {
-                    output {
-                        rowId,
-                        acquired
-                    }
-                }
-            }`,
-            {
-                credit: amount,
-                projectRowId: projectRowId,
-            },
+        dispatch(PostRequest(userToken, { amount }, `project/give/${projectId}`,
             () => {
-                dispatch(gaveTime(amount, projectRowId))
+                dispatch(gaveTime(amount, projectId))
             }
         ))
     }

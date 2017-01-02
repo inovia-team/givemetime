@@ -5,11 +5,12 @@ import { bindActionCreators } from 'redux'
 import { replace } from 'react-router-redux'
 import { AddProjectComponent } from './addProject.view'
 
-const mapStateToProps = state => {
+function mapStateToProps (state) {
     return {
         initialValues: {
             author: state.project.login.user.fullname,
             userToken: state.project.login.user.token,
+            userId: state.project.login.user.id,
         },
     }
 }

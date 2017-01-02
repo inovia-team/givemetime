@@ -25,6 +25,7 @@ module.exports.post = function(req, res, next) {
       if(err) {
         return console.error('error running query', err);
       }
+      result.rows[0].credit = Math.round(parseInt(result.rows[0].credit));
       res.send(result.rows[0]);
     });
   });

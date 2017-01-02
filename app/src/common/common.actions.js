@@ -75,6 +75,40 @@ export const GetRequest = (userToken, route, onSuccess, onError) => {
     }
 }
 
+export const DelRequest = (userToken, route, onSuccess, onError) => {
+    onSuccess = onSuccess || (a => a)
+    return dispatch => {
+        onError = onError || (a => dispatch(apologize(a)))
+        let headers = { 'content-type': 'application/json' }
+        if (userToken) {
+            headers['authorization'] = `Bearer ${userToken}`
+        }
+        return fetch(`${config.API_URL}/${route}`, {
+            method: 'DELETE',
+            headers: headers,
+        })
+        .then(response => {
+            if (response.status === 200) {
+                return response.json()
+            }
+            return Promise.reject(response)
+        })
+        .catch(err => {
+            if (err.json) {
+                return err.json()
+            }
+            return { errors: [ err ] }
+        })
+        .then(response => {
+            if (response.errors) {
+                onError(response.errors.map(err => err.message || err).join('. '))
+            } else {
+                onSuccess({ response })
+            }
+        })
+    }
+}
+
 export const apologize = msg => ({
     type: constants.APOLOGIZE,
     message: msg,

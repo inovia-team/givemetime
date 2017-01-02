@@ -8,11 +8,11 @@ import { GiveTimeComponent } from './giveTime.view'
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        project: state.project.project.projects.find(project => project.id === ownProps.params.id),
+        project: state.project.project.projects.find(project => project.id == ownProps.params.id),
         userCredit: state.project.login.user.credit,
         initialValues: {
             userId: state.project.login.user.id,
-            projectRowId: ownProps.params.rowId,
+            projectId: ownProps.params.id,
             userToken: state.project.login.user.token,
         },
     }

@@ -5,7 +5,7 @@ import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card'
 import ProjectPropTypes from '../../project.propTypes'
 import { Link } from 'react-router'
 
-export function ProjectRowComponent ({ userToken, project: { id, rowId, title, estimate, acquired, author }, deleteProject }) {
+export function ProjectRowComponent ({ userToken, project: { id, title, estimate, acquired, author }, deleteProject }) {
     return (
       <Card expanded={null} expandable={false} initiallyExpanded={false}>
           <CardHeader title={title} subtitle={author}/>
@@ -15,8 +15,8 @@ export function ProjectRowComponent ({ userToken, project: { id, rowId, title, e
           </CardText>
           <CardActions>
               <Link to={`/view/${id}`}>View</Link>
-              <Link to={`/give/${id}/${rowId}`}>Give Time</Link>
-              <IconButton onTouchTap={() => deleteProject({ rowId, userToken })}>
+              <Link to={`/give/${id}`}>Give Time</Link>
+              <IconButton onTouchTap={() => deleteProject({ id, userToken })}>
                   <ActionDelete />
               </IconButton>
           </CardActions>
