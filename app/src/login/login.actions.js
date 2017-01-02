@@ -1,4 +1,4 @@
-import { getGraphQL, apologize } from '../common/common.actions'
+import { PostRequest, getGraphQL, apologize } from '../common/common.actions'
 import * as constant from './login.actionTypes'
 import fetch from 'isomorphic-fetch'
 import * as config from '../config'
@@ -6,20 +6,11 @@ import * as config from '../config'
 const USER_TOKEN_KEY = 'userAuth'
 
 function logUserInWithTokenAndId (dispatch, id, token) {
-    dispatch(getGraphQL(null, `
-            query findPersonById($id: ID!) {
-              person(id: $id) {
-                id,
-                rowId,
-                fullname
-                credit
-                createdAt
-              }
-            }
-        `,
+    dispatch(PostRequest(null,
         { id },
-        ({ person }) => {
-            dispatch(userLoggedIn(token, person.id, person.rowId, person.fullname, person.credit))
+        'login',
+        ({ response }) => {
+            dispatch(userLoggedIn(token, response.id, response.fullname, response.credit))
             // TODO: use a middleware to dispatch non-pure functions
             dispatch(() => {
                 localStorage.setItem(USER_TOKEN_KEY, JSON.stringify({ user_id: id, token }))

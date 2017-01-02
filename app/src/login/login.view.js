@@ -40,7 +40,7 @@ LoginComponent.propTypes = {
     createUserIfNotExists: PropTypes.func.isRequired,
     failureError: PropTypes.func.isRequired,
     user: PropTypes.shape({
-        id: PropTypes.string,
+        id: PropTypes.int,
         fullname: PropTypes.string,
         credit: PropTypes.number,
     }).isRequired,

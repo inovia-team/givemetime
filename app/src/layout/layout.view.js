@@ -58,8 +58,7 @@ export class LayoutComponent extends React.Component {
 
 LayoutComponent.propTypes = {
     user: PropTypes.shape({
-        id: PropTypes.string,
-        rowId: PropTypes.number,
+        id: PropTypes.number,
     }).isRequired,
     globalMenuOpen: PropTypes.bool.isRequired,
     globalMenuToggle: PropTypes.func.isRequired,

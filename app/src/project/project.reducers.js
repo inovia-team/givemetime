@@ -6,6 +6,7 @@ export default function (state = { projects: [] }, action) {
     switch (action.type) {
 
     case projectActions.PROJECT_FETCHED:
+    console.log(action)
         return { ...state,
             projects: state.projects
                 .filter(project => project.id !== action.id)

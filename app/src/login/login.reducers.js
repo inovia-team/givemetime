@@ -6,7 +6,6 @@ export default function (state = { user: {}, projects: [] }, action) {
     case loginActions.USER_LOGGED_IN:
         return { ...state, user: {
             id : action.id,
-            rowId: action.rowId,
             credit: action.credit,
             fullname: action.fullname,
             token: action.token,
@@ -14,7 +13,6 @@ export default function (state = { user: {}, projects: [] }, action) {
     case loginActions.USER_LOGGED_OUT:
         return { ...state, user: {
             id: null,
-            rowId: null,
             fullname: null,
             credit : null,
             token: null,
