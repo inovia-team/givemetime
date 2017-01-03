@@ -70,7 +70,7 @@ select throws_ok('do_create');
 
 -- logged in as give_me_time_user
 set role give_me_time_user;
-set local jwt.claims.user_rowId to 1;
+set local jwt.claims.user_id to 1;
 select lives_ok('do_create', 'Should be ok if user is logged in');
 select isnt_empty('do_create');
 
