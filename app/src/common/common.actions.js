@@ -29,9 +29,9 @@ export const PostRequest = (userToken, variables, route, onSuccess, onError) => 
         })
         .then(response => {
             if (response.errors) {
-                onError(response.errors.map(err => err.message || err).join('. '))
+                return onError(response.errors.map(err => err.message || err).join('. '))
             } else {
-                onSuccess({ response })
+                return onSuccess({ response })
             }
         })
     }
@@ -63,9 +63,9 @@ export const GetRequest = (userToken, route, onSuccess, onError) => {
         })
         .then(response => {
             if (response.errors) {
-                onError(response.errors.map(err => err.message || err).join('. '))
+                return onError(response.errors.map(err => err.message || err).join('. '))
             } else {
-                onSuccess({ response })
+                return onSuccess({ response })
             }
         })
     }
@@ -98,9 +98,9 @@ export const DelRequest = (userToken, userId, route, onSuccess, onError) => {
         })
         .then(response => {
             if (response.errors) {
-                onError(response.errors.map(err => err.message || err).join('. '))
+                return onError(response.errors.map(err => err.message || err).join('. '))
             } else {
-                onSuccess({ response })
+                return onSuccess({ response })
             }
         })
     }
