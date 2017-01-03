@@ -1,10 +1,10 @@
 import { DelRequest } from '../../../common/common.actions'
 import * as constants from './projectRow.actionTypes'
 
-export function deleteProject ({ userToken, id }) {
+export function deleteProject ({ userToken, id, userId }) {
     return dispatch => {
 
-        dispatch(DelRequest(userToken, `project/${id}`,
+        dispatch(DelRequest(userToken, userId, `project/${id}`,
             response => dispatch(projectDeleted(parseInt(response.output || '0')))
         ))
     }

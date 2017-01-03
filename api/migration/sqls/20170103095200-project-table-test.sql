@@ -63,14 +63,13 @@ select function_privs_are(
 );
 
 prepare do_create as
-  select author_id, title, description, estimate, acquired from project_create('title', 12, 'description');
+  select author_id, title, description, estimate, acquired from project_create(1, 'title', 12, 'description');
 
 -- 'Should throw if user is not logged in'
 select throws_ok('do_create');
 
 -- logged in as give_me_time_user
 set role give_me_time_user;
-set local jwt.claims.user_id to 1;
 select lives_ok('do_create', 'Should be ok if user is logged in');
 select isnt_empty('do_create');
 

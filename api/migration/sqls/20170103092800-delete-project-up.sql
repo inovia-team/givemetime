@@ -2,13 +2,10 @@ drop function if exists give_me_time_public.project_delete(integer);
 
 BEGIN;
 
-create function give_me_time_public.project_delete(_id integer) returns integer as $$
+create function give_me_time_public.project_delete(_id integer, _user_id integer) returns integer as $$
 declare
     _project record;
-    _user_id integer;
 begin
-
-    select current_setting('jwt.claims.user_id')::integer into _user_id;
     select * from give_me_time_public.project where id = _id into _project;
 
     if (_project.author_id <> _user_id) then
@@ -23,8 +20,8 @@ $$ language plpgsql strict
 security definer
 set search_path = give_me_time_public, pg_temp;
 
-comment on function give_me_time_public.project_delete(integer) is 'Delete a project';
+comment on function give_me_time_public.project_delete(integer, integer) is 'Delete a project';
 
-grant execute on function give_me_time_public.project_delete(integer) to give_me_time_user;
+grant execute on function give_me_time_public.project_delete(integer, integer) to give_me_time_user;
 
 COMMIT;

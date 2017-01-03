@@ -25,12 +25,10 @@ set role give_me_time_user;
 select throws_ok('delete_project_1');
 
 -- cannot delete another one's project
-set local jwt.claims.user_id to 2;
-select throws_ok('delete_project_1');
+select throws_ok('delete_project_1', 2);
 
 -- can delete
-set local jwt.claims.user_id to 1;
-select lives_ok('delete_project_1');
+select lives_ok('delete_project_1', 1);
 SELECT results_eq(
     $$select id from give_me_time_public.project order by id$$,
     $$values (2), (3)$$,

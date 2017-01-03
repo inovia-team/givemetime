@@ -65,8 +65,6 @@ values (1, 'abc', 23.0), (2, 'abc', 6.0);
 
 -- test we can do all that using a regular user
 set role give_me_time_user;
-set local jwt.claims.user_id to 1;
-
 
 -- 1000h / year -> 0.00003170979h / sec -> 2.8538811h to give (*90000)
 -- 2 persons -> 1.4269406393h per person

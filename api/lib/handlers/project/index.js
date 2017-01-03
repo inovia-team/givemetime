@@ -9,7 +9,7 @@ module.exports.post = function(req, res, next) {
   const estimate = req.body.estimate;
   const description = req.body.description;
 
-  const result = ApiService('INSERT INTO give_me_time_public.project (author_id, title, estimate, description) VALUES ($1, $2, $3, $4) RETURNING *',
+  const result = ApiService('SELECT give_me_time_public.project_create($1, $2, $3, $4)',
   [id, title, estimate, description],
   (err, result) => {
     return res.send(err || result);
@@ -17,7 +17,7 @@ module.exports.post = function(req, res, next) {
 };
 
 module.exports.get = function(req, res, next) {
-  const id = null;
+  const id = req.params.id;
 
   const result = ApiService('SELECT * FROM give_me_time_public.project WHERE id=($1)',
   [id && parseInt(id)],
@@ -29,9 +29,10 @@ module.exports.get = function(req, res, next) {
 
 module.exports.delete = function(req, res, next) {
   const id = req.params.id;
+  const userId = req.headers.userid;
 
-  const result = ApiService('DELETE FROM give_me_time_public.project WHERE id=($1)',
-  [id && parseInt(id)],
+  const result = ApiService('SELECT give_me_time_public.project_delete($1, $2)',
+  [id && parseInt(id), userId],
   (err, result) => {
     return res.send(err || result);
   });

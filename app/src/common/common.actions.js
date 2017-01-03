@@ -71,13 +71,14 @@ export const GetRequest = (userToken, route, onSuccess, onError) => {
     }
 }
 
-export const DelRequest = (userToken, route, onSuccess, onError) => {
+export const DelRequest = (userToken, userId, route, onSuccess, onError) => {
     onSuccess = onSuccess || (a => a)
     return dispatch => {
         onError = onError || (a => dispatch(apologize(a)))
         let headers = { 'content-type': 'application/json' }
         if (userToken) {
-            headers['authorization'] = `Bearer ${userToken}`
+            headers['authorization'] = `Bearer ${userToken}`,
+            headers['userId'] = userId
         }
         return fetch(`${config.API_URL}/${route}`, {
             method: 'DELETE',
