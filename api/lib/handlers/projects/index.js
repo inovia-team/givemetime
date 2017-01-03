@@ -1,25 +1,20 @@
 'use strict';
 
-var config = require('../../config.js').config;
-var pg = require('pg');
+var ApiService = require('../../ApiService.js').ApiService;
+var roundValues = require('../../ApiService.js').roundValues;
 
 module.exports.get = function(req, res, next) {
-  var pool = new pg.Pool(config);
-  pool.connect(function(err, client, done) {
-    if(err) {
-      return console.error('error fetching client from pool', err);
-    }
-    client.query('SELECT * FROM give_me_time_public.project', [], function(err, result) {
-      done();
-      if(err) {
-        return console.error('error running query', err);
-      }
-      var roundedRes = result.rows.map((row) => {
-          row.acquired = Math.round(parseInt(row.acquired));
-          row.estimate = Math.round(parseInt(row.estimate));
-          return row
-      });
-      res.send(roundedRes);
+  const id = req.params.id;
+  const amount = req.body.amount;
+  const userId = req.body.userId;
+
+  const result = ApiService('SELECT * FROM give_me_time_public.project',
+  [],
+  (result) => {
+    var roundedRes = result.map((row) => {
+      roundValues(row)
+      return row
     });
+    res.send(roundedRes);
   });
 };
