@@ -26,7 +26,7 @@ export default function (state = { projects: [] }, action) {
         return { ...state,
             projects: state.projects.map(
                 project => project.id === action.id
-                    ? { ...project, acquired: project.acquired + action.amount }
+                    ? { ...project, acquired: action.acquired }
                     : project
             ),
         }

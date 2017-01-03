@@ -44,13 +44,14 @@ module.exports.post = function(req, res, next) {
         return cb(err, result)
       });
     }, function updateProject(updateRes, cb) {
-      const result = ApiService('UPDATE give_me_time_public.project SET acquired=acquired+($1) WHERE id=($2)',
+      const result = ApiService('UPDATE give_me_time_public.project SET acquired=acquired+($1) WHERE id=($2) RETURNING *',
       [amount, id],
       (err, result) => {
         return cb(err, result);
       });
     }
   ], function (err, result) {
+    console.log(result)
     return res.send(err || result);
   });
 };

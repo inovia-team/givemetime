@@ -4,17 +4,17 @@ import * as constants from './giveTime.actionTypes'
 export function giveTime ({ userToken, userId, amount, projectId }) {
     return dispatch => {
         dispatch(PostRequest(userToken, { userId, amount }, `project/give/${projectId}`,
-            () => {
-                dispatch(gaveTime(amount, projectId))
+            ({ response }) => {
+                dispatch(gaveTime(parseInt(response.acquired), response.id))
             }
         ))
     }
 }
 
-export const gaveTime = (amount, projectId) => {
+export const gaveTime = (acquired, projectId) => {
     return {
         type: constants.GAVE_TIME,
-        amount: amount,
+        acquired: acquired,
         id: projectId,
     }
 }
