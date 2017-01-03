@@ -4,7 +4,7 @@ import * as constants from './addProject.actionTypes'
 export function createProject ({ userToken, userId, title, estimate, description }) {
     return dispatch => {
         dispatch(PostRequest(userToken, { userId, title, estimate, description }, 'project',
-            response => {
+            ({ response }) => {
                 dispatch(projectCreated(
                     response.id,
                     response.title,

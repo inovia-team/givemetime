@@ -1,9 +1,9 @@
 import { PostRequest } from '../../../common/common.actions'
 import * as constants from './giveTime.actionTypes'
 
-export function giveTime ({ userToken, amount, projectId }) {
+export function giveTime ({ userToken, userId, amount, projectId }) {
     return dispatch => {
-        dispatch(PostRequest(userToken, { amount }, `project/give/${projectId}`,
+        dispatch(PostRequest(userToken, { userId, amount }, `project/give/${projectId}`,
             () => {
                 dispatch(gaveTime(amount, projectId))
             }
