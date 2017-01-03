@@ -5,14 +5,14 @@ export function deleteProject ({ userToken, id, userId }) {
     return dispatch => {
 
         dispatch(DelRequest(userToken, userId, `project/${id}`,
-            response => dispatch(projectDeleted(parseInt(response.output || '0')))
+            ({ response }) => dispatch(projectDeleted(response.id || '0'))
         ))
     }
 }
 
-export const projectDeleted = rowId => {
+export const projectDeleted = id => {
     return {
         type: constants.PROJECT_DELETED,
-        rowId: rowId,
+        id: id,
     }
 }

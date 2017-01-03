@@ -45,7 +45,7 @@ module.exports.delete = function(req, res, next) {
         return cb(err, result)
       });
     }, function deleteProject(resultCheck, cb) {
-      const result = ApiService('DELETE FROM give_me_time_public.project WHERE id=($1)',
+      const result = ApiService('DELETE FROM give_me_time_public.project WHERE id=($1) RETURNING id',
       [id],
       (err, result) => {
         return cb(err, result);

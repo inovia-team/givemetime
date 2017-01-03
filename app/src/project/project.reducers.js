@@ -47,7 +47,7 @@ export default function (state = { projects: [] }, action) {
 
     case projectRowActions.PROJECT_DELETED:
         return { ...state,
-            projects: state.projects.filter(project => project.rowId !== action.rowId),
+            projects: state.projects.filter(project => project.id !== action.id),
         }
 
     default:
