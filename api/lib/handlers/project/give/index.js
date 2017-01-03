@@ -9,7 +9,7 @@ module.exports.post = function(req, res, next) {
 
   const result = ApiService('SELECT give_me_time_public.project_give_time ($1, $2, $3)',
   [userId, id, amount],
-  (result) => {
-    res.send(result);
+  (err, result) => {
+    return res.send(err || result);
   });
 };
