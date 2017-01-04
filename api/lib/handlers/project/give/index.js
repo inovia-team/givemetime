@@ -12,7 +12,7 @@ module.exports.post = function(req, res, next) {
   async.waterfall([
     function checkArguments(cb) {
       if (amount <= 0)
-        return cb(error['AMOUNT_INVALID'], null)
+        return cb(error.AMOUNT_INVALID, null)
       return cb(null);
     },
     function checkUser(cb) {
@@ -20,7 +20,7 @@ module.exports.post = function(req, res, next) {
       [userId],
       (err, result) => {
         if (!err && !result.id)
-          err = error['UNKNOWN_PERSON']
+          err = error.UNKNOWN_PERSON
         return cb(err, result)
       });
     },
@@ -29,11 +29,11 @@ module.exports.post = function(req, res, next) {
       [id],
       (err, result) => {
         if (!err && !result.id)
-          err = error['UNKNOWN_PROJECT']
+          err = error.UNKNOWN_PROJECT;
         else if (!err && result.estimate - result.acquired < amount)
-          err = error['TOO_MUCH_CREDIT']
+          err = error.TOO_MUCH_CREDIT;
         else if (!err && resCheck.credit < amount)
-          err = error['NOT_ENOUGH_CREDIT'];
+          err = error.NOT_ENOUGH_CREDIT;
         return cb(err, result)
       });
     },
