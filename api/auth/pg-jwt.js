@@ -10,8 +10,8 @@ module.exports = jwtSecret => (req, res, next) => {
 
     res.json({
         user_id: req.user.id,
-        token
-    })
+        token,
+    });
 
     next();
 };

@@ -1,44 +1,43 @@
-const express = require('express')
-const gAuth = require('./auth/google-oauth')
-const gAuthMock = require('./auth/google-oauth-dev-mock')
-const pgFetch = require('./auth/db-fetch')
-const pgJwt = require('./auth/pg-jwt')
-const bodyParser = require('body-parser')
+const express = require('express');
+const gAuth = require('./auth/google-oauth');
+const gAuthMock = require('./auth/google-oauth-dev-mock');
+const pgFetch = require('./auth/db-fetch');
+const pgJwt = require('./auth/pg-jwt');
+const bodyParser = require('body-parser');
 const cors = require('cors');
-const handlers = require('./lib/handlers')
+const handlers = require('./lib/handlers');
 const errorMiddleware = require('./lib/config').errorMiddleware;
-const app = express()
-const env = process.env
+const app = express();
 
 const JWT_SECRET = 'supersecret';
 
 // set cors headers first or you get an error
-app.use(cors())
+app.use(cors());
 
 // TODO: eslint
 // TODO: server tests
 
 // parse json body
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 // handle auth requests
 //   - get access_token from parameters
 //   - check it against whatever is relevant
 //   - ask the db to upsert this user
 //   - create a jwt token with the user id
-app.post('/jwt_auth', process.env.GOOGLE_AUTH_MOCK ? gAuthMock : gAuth)
-app.use(pgFetch)
-app.use(pgJwt(JWT_SECRET))
+app.post('/jwt_auth', process.env.GOOGLE_AUTH_MOCK ? gAuthMock : gAuth);
+app.use(pgFetch);
+app.use(pgJwt(JWT_SECRET));
 
 // endpoints
-app.post('/project', handlers.project.index.post)
-app.post('/project/give/:id', handlers.project.give.index.post)
-app.get('/project/:id', handlers.project.index.get)
-app.delete('/project/:id', handlers.project.index.delete)
-app.get('/projects', handlers.projects.index.get)
-app.post('/login', handlers.login.index.post)
+app.post('/project', handlers.project.index.post);
+app.post('/project/give/:id', handlers.project.give.index.post);
+app.get('/project/:id', handlers.project.index.get);
+app.delete('/project/:id', handlers.project.index.delete);
+app.get('/projects', handlers.projects.index.get);
+app.post('/login', handlers.login.index.post);
 
 app.use(errorMiddleware);
 
-console.log('Listening to port 3000')
-app.listen(3000)
+console.log('Listening to port 3000');
+app.listen(3000);

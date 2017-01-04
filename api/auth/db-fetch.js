@@ -21,7 +21,7 @@ module.exports = (req, res, next)=>{
             req.user = result.rows[0];
 
             // also refresh credits
-            client.query('SELECT give_me_time_public.everybody_gets_credits()', [], (err)=>{
+            client.query('SELECT give_me_time_public.everybody_gets_credits()', [], err => {
                 if (err) throw err;
 
                 // disconnect the client
@@ -29,7 +29,7 @@ module.exports = (req, res, next)=>{
                     if (err) throw err;
                 });
 
-                next()
+                next();
             });
         });
     });

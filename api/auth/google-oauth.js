@@ -24,7 +24,7 @@ module.exports = (req, res, next)=>{
             email: response.emails
                 .filter(emailObj => emailObj.type === 'account')
                 .map(emailObj => emailObj.value)
-                .shift()
+                .shift(),
         };
         next();
     });
