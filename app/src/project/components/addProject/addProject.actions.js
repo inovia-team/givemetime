@@ -1,9 +1,9 @@
-import { PostRequest } from '../../../common/common.actions'
+import { RequestService } from '../../../common/common.actions'
 import * as constants from './addProject.actionTypes'
 
 export function createProject ({ userToken, userId, title, estimate, description }) {
     return dispatch => {
-        dispatch(PostRequest(userToken, { userId, title, estimate, description }, 'project',
+        dispatch(RequestService('POST', userToken, { userId, title, estimate, description }, 'project',
             ({ response }) => {
                 dispatch(projectCreated(
                     response.id,

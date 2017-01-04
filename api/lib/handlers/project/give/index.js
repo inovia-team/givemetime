@@ -7,7 +7,7 @@ var async = require('async');
 module.exports.post = function (req, res, next) {
     const id = req.params.id;
     const amount = req.body.amount;
-    const userId = req.body.userId;
+    const userId = 1; // TODO: Get the ID from the OAuth
 
     async.waterfall([
         function checkArguments (cb) {

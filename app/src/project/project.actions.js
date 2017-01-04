@@ -1,4 +1,4 @@
-import { GetRequest } from '../common/common.actions.js'
+import { RequestService } from '../common/common.actions.js'
 import * as constants from './project.actionTypes'
 
 const handleNodeFetched = dispatch => node => {
@@ -14,7 +14,7 @@ const handleNodeFetched = dispatch => node => {
 
 export function loadProjects () {
     return dispatch => {
-        dispatch(GetRequest(null, 'projects',
+        dispatch(RequestService('GET', null, null, 'projects',
             ({ response }) => {
                 response.map(handleNodeFetched(dispatch))
             }
@@ -24,7 +24,7 @@ export function loadProjects () {
 
 export function loadProject (id) {
     return () => dispatch => {
-        dispatch(GetRequest(null, `project/${id}`,
+        dispatch(RequestService('GET', null, null, `project/${id}`,
             ({ response }) => handleNodeFetched(dispatch)(response)
         ))
     }

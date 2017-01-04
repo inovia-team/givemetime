@@ -11,7 +11,6 @@ const mapStateToProps = (state, ownProps) => {
         project: state.project.project.projects.find(project => project.id == ownProps.params.id),
         userCredit: state.project.login.user.credit,
         initialValues: {
-            userId: state.project.login.user.id,
             projectId: ownProps.params.id,
             userToken: state.project.login.user.token,
         },

@@ -1,9 +1,9 @@
-import { DelRequest } from '../../../common/common.actions'
+import { RequestService } from '../../../common/common.actions'
 import * as constants from './projectRow.actionTypes'
 
-export function deleteProject ({ userToken, id, userId }) {
+export function deleteProject ({ userToken, id }) {
     return dispatch => {
-        dispatch(DelRequest(userToken, userId, `project/${id}`,
+        dispatch(RequestService('DELETE', userToken, null, `project/${id}`,
             ({ response }) => dispatch(projectDeleted(response.id || '0'))
         ))
     }

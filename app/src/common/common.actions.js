@@ -2,7 +2,7 @@ import * as constants from './common.actionTypes'
 import fetch from 'isomorphic-fetch'
 import * as config from '../config'
 
-export const PostRequest = (userToken, variables, route, onSuccess, onError) => {
+export const RequestService = (method, userToken, variables, route, onSuccess, onError) => {
     onSuccess = onSuccess || (a => a)
     return dispatch => {
         onError = onError || (a => dispatch(apologize(a)))
@@ -11,9 +11,9 @@ export const PostRequest = (userToken, variables, route, onSuccess, onError) => 
             headers['authorization'] = `Bearer ${userToken}`
         }
         return fetch(`${config.API_URL}/${route}`, {
-            method: 'POST',
+            method: method,
             headers: headers,
-            body: JSON.stringify(variables),
+            body: variables ? JSON.stringify(variables) : null,
         })
         .then(response => {
             if (response.status === 200) {
@@ -26,69 +26,6 @@ export const PostRequest = (userToken, variables, route, onSuccess, onError) => 
         })
         .then(response => {
             if (response.error) {
-                return onError(response.error.message)
-            } else {
-                return onSuccess({ response })
-            }
-        })
-    }
-}
-
-export const GetRequest = (userToken, route, onSuccess, onError) => {
-    onSuccess = onSuccess || (a => a)
-    return dispatch => {
-        onError = onError || (a => dispatch(apologize(a)))
-        let headers = { 'content-type': 'application/json' }
-        if (userToken) {
-            headers['authorization'] = `Bearer ${userToken}`
-        }
-        return fetch(`${config.API_URL}/${route}`, {
-            method: 'GET',
-            headers: headers,
-        })
-        .then(response => {
-            if (response.status === 200) {
-                return response.json()
-            }
-            return Promise.reject(response)
-        })
-        .catch(err => {
-            return err.json()
-        })
-        .then(response => {
-            if (response.error) {
-                return onError(response.error.message)
-            } else {
-                return onSuccess({ response })
-            }
-        })
-    }
-}
-
-export const DelRequest = (userToken, userId, route, onSuccess, onError) => {
-    onSuccess = onSuccess || (a => a)
-    return dispatch => {
-        onError = onError || (a => dispatch(apologize(a)))
-        let headers = { 'content-type': 'application/json' }
-        if (userToken) {
-            headers['authorization'] = `Bearer ${userToken}`,
-            headers['userId'] = userId
-        }
-        return fetch(`${config.API_URL}/${route}`, {
-            method: 'DELETE',
-            headers: headers,
-        })
-        .then(response => {
-            if (response.status === 200) {
-                return response.json()
-            }
-            return Promise.reject(response)
-        })
-        .catch(err => {
-            return err.json()
-        })
-        .then(response => {
-            if (response.errors) {
                 return onError(response.error.message)
             } else {
                 return onSuccess({ response })

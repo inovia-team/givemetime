@@ -1,4 +1,4 @@
-import { PostRequest, apologize } from '../common/common.actions'
+import { RequestService, apologize } from '../common/common.actions'
 import * as constant from './login.actionTypes'
 import fetch from 'isomorphic-fetch'
 import * as config from '../config'
@@ -6,7 +6,7 @@ import * as config from '../config'
 const USER_TOKEN_KEY = 'userAuth'
 
 function logUserInWithTokenAndId (dispatch, id, token) {
-    dispatch(PostRequest(null,
+    dispatch(RequestService('POST', null,
         { id },
         'login',
         ({ response }) => {

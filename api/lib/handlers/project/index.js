@@ -26,13 +26,15 @@ module.exports.get = function (req, res, next) {
     ApiService('SELECT * FROM give_me_time_public.project WHERE id=($1)',
     [id], next,
     result => {
+        if (!result.length)
+            return next({ message: error.UNKNOWN_PROJECT });
         return res.send(result);
     });
 };
 
 module.exports.delete = function (req, res, next) {
     const id = req.params.id;
-    const userId = req.headers.userid;
+    const userId = 1; // TODO: Get the ID from the OAuth
 
     async.waterfall([
         function checkOwner (cb) {
