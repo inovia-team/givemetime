@@ -1,5 +1,4 @@
 const express = require('express')
-const postgraphql = require('postgraphql').default
 const gAuth = require('./auth/google-oauth')
 const gAuthMock = require('./auth/google-oauth-dev-mock')
 const pgFetch = require('./auth/db-fetch')
