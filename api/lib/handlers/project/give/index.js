@@ -12,45 +12,45 @@ module.exports.post = function(req, res, next) {
   async.waterfall([
     function checkArguments(cb) {
       if (amount <= 0)
-        return cb(error.AMOUNT_INVALID, null)
+        return next ({message: error.AMOUNT_INVALID});
       return cb(null);
     },
     function checkUser(cb) {
       const result = ApiService('SELECT * FROM give_me_time_public.person WHERE id=($1)',
-      [userId],
-      (err, result) => {
-        if (!err && !result.id)
-          err = error.UNKNOWN_PERSON
-        return cb(err, result)
+      [userId], next,
+      (result) => {
+        if (!result.id)
+          return next ({message: error.UNKNOWN_PERSON});
+        return cb(null, result)
       });
     },
     function checkProject(resCheck, cb) {
       const result = ApiService('SELECT * FROM give_me_time_public.project WHERE id=($1)',
-      [id],
-      (err, result) => {
-        if (!err && !result.id)
-          err = error.UNKNOWN_PROJECT;
-        else if (!err && result.estimate - result.acquired < amount)
-          err = error.TOO_MUCH_CREDIT;
-        else if (!err && resCheck.credit < amount)
-          err = error.NOT_ENOUGH_CREDIT;
-        return cb(err, result)
+      [id], next,
+      (result) => {
+        if (!result.id)
+          return next ({message: error.UNKNOWN_PROJECT});
+        else if (result.estimate - result.acquired < amount)
+          return next ({message: error.TOO_MUCH_CREDIT});
+        else if (resCheck.credit < amount)
+          return next ({message: error.NOT_ENOUGH_CREDIT});
+        return cb(null);
       });
     },
-    function updateUser(resCheck, cb) {
+    function updateUser(cb) {
       const result = ApiService('UPDATE give_me_time_public.person SET credit=credit-($1) WHERE id=($2)',
-      [amount, userId],
-      (err, result) => {
-        return cb(err, result)
+      [amount, userId], next,
+      (result) => {
+        return cb(null);
       });
-    }, function updateProject(updateRes, cb) {
+    }, function updateProject(cb) {
       const result = ApiService('UPDATE give_me_time_public.project SET acquired=acquired+($1) WHERE id=($2) RETURNING *',
-      [amount, id],
-      (err, result) => {
-        return cb(err, result);
+      [amount, id], next,
+      (result) => {
+        return cb(result);
       });
     }
-  ], function (err, result) {
-    return res.send(err || result);
+  ], function (result) {
+    return res.send(result);
   });
 };

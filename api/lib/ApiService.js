@@ -12,24 +12,24 @@ function checkArguments(args) {
   return true;
 }
 
-module.exports.ApiService = function(query, args, cb) {
+module.exports.ApiService = function(query, args, next, cb) {
   if (!checkArguments(args)) {
     console.error(error['ARGUMENT_MISSING']);
-    return cb(error['ARGUMENT_MISSING'], null)
+    return next({message: error.ARGUMENT_MISSING})
   }
   const pool = new pg.Pool(config);
   return pool.connect(function(err, client, done) {
     if(err) {
       console.error('error fetching client from pool', err);
-      return cb(error['DATABASE_ERROR'], null);
+      return next({message: error.DATABASE_ERROR})
     }
     client.query(query, args, function(err, result) {
       done();
       if(err) {
         console.error('error running query', err);
-        return cb(error['DATABASE_ERROR'], null);
+        return next({message: error.DATABASE_ERROR})
       }
-      return cb(null, result.rows.length === 1 ? result.rows[0] : result.rows);
+      return cb(result.rows.length === 1 ? result.rows[0] : result.rows);
     });
   });
 };

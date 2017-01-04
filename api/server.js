@@ -7,6 +7,7 @@ const pgJwt = require('./auth/pg-jwt')
 const bodyParser = require('body-parser')
 const cors = require('cors');
 const handlers = require('./lib/handlers')
+const errorMiddleware = require('./lib/config').errorMiddleware;
 const app = express()
 const env = process.env
 
@@ -37,6 +38,8 @@ app.get('/project/:id', handlers.project.index.get)
 app.delete('/project/:id', handlers.project.index.delete)
 app.get('/projects', handlers.projects.index.get)
 app.post('/login', handlers.login.index.post)
+
+app.use(errorMiddleware);
 
 console.log('Listening to port 3000')
 app.listen(3000)

@@ -22,14 +22,11 @@ export const PostRequest = (userToken, variables, route, onSuccess, onError) => 
             return Promise.reject(response)
         })
         .catch(err => {
-            if (err.json) {
-                return err.json()
-            }
-            return { errors: [ err ] }
+            return err.json()
         })
         .then(response => {
-            if (response.errors) {
-                return onError(response.errors.map(err => err.message || err).join('. '))
+            if (response.error) {
+                return onError(response.error.message)
             } else {
                 return onSuccess({ response })
             }
@@ -56,14 +53,11 @@ export const GetRequest = (userToken, route, onSuccess, onError) => {
             return Promise.reject(response)
         })
         .catch(err => {
-            if (err.json) {
-                return err.json()
-            }
-            return { errors: [ err ] }
+            return err.json()
         })
         .then(response => {
-            if (response.errors) {
-                return onError(response.errors.map(err => err.message || err).join('. '))
+            if (response.error) {
+                return onError(response.error.message)
             } else {
                 return onSuccess({ response })
             }
@@ -91,14 +85,11 @@ export const DelRequest = (userToken, userId, route, onSuccess, onError) => {
             return Promise.reject(response)
         })
         .catch(err => {
-            if (err.json) {
-                return err.json()
-            }
-            return { errors: [ err ] }
+            return err.json()
         })
         .then(response => {
             if (response.errors) {
-                return onError(response.errors.map(err => err.message || err).join('. '))
+                return onError(response.error.message)
             } else {
                 return onSuccess({ response })
             }
