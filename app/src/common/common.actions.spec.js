@@ -4,6 +4,7 @@ import nock from 'nock'
 import sinon from 'sinon'
 import * as config from '../config'
 import * as actions from './common.actions'
+import * as constants from './common.actionTypes'
 
 import configureMockStore from 'redux-mock-store'
 
@@ -72,5 +73,10 @@ describe('GraphQL actions', () => {
             done()
         }).catch(done)
     })
-
+    it('should handle close modal action', () => {
+        var store = mockStore({})
+        const expected = { type: constants.CLOSE_MODAL }
+        store.dispatch(actions.closeModal())
+        expect(store.getActions()[0]).toEqual(expected)
+    })
 })

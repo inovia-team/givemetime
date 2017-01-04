@@ -12,15 +12,3 @@ export const menuToggle = open => {
         open: !!open,
     }
 }
-
-export function closeModal () {
-    return dispatch => {
-        dispatch(closeModalAction())
-    }
-}
-
-export const closeModalAction = () => {
-    return {
-        type: constants.CLOSE_MODAL,
-    }
-}

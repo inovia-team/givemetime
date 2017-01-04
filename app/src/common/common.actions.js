@@ -42,3 +42,15 @@ export const apologize = msg => ({
     type: constants.APOLOGIZE,
     message: msg,
 })
+
+export function closeModal () {
+    return dispatch => {
+        dispatch(closeModalAction())
+    }
+}
+
+export const closeModalAction = () => {
+    return {
+        type: constants.CLOSE_MODAL,
+    }
+}
