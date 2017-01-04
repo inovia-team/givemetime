@@ -10,8 +10,7 @@
   "devDependencies": {
     "auto-load": "^2.1.0",
     "nodemon": "^1.10.2",
-    "async": "^2.1.4",
-    "pg": "^6.1.2"
+    "async": "^2.1.4"
   },
   "dependencies": {
     "cors": "^2.8.1",
@@ -19,7 +18,7 @@
     "express": "^4.14.0",
     "googleapis": "^13.0.0",
     "jsonwebtoken": "^7.1.9",
-    "pg": "^6.1.0",
+    "pg": "^6.1.2",
     "postgraphql": "^1.9.3",
     "db-migrate": "^0.9.25"
   },
