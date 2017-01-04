@@ -1,7 +1,6 @@
 'use strict';
 
 var ApiService = require('../../ApiService.js').ApiService;
-var roundValues = require('../../ApiService.js').roundValues;
 
 module.exports.get = function(req, res, next) {
   const result = ApiService('SELECT * FROM give_me_time_public.project',
@@ -14,10 +13,6 @@ module.exports.get = function(req, res, next) {
     else if (!result.length) {
       result = [result]
     }
-    var roundedRes = result.map((row) => {
-      roundValues(row)
-      return row
-    });
-    return res.send(roundedRes);
+    return res.send(result);
   });
 };

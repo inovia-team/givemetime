@@ -5,16 +5,17 @@ export function giveTime ({ userToken, userId, amount, projectId }) {
     return dispatch => {
         dispatch(PostRequest(userToken, { userId, amount }, `project/give/${projectId}`,
             ({ response }) => {
-                dispatch(gaveTime(parseInt(response.acquired), response.id))
+                dispatch(gaveTime(response.acquired, amount, response.id))
             }
         ))
     }
 }
 
-export const gaveTime = (acquired, projectId) => {
+export const gaveTime = (acquired, amount, projectId) => {
     return {
         type: constants.GAVE_TIME,
         acquired: acquired,
+        amount: amount,
         id: projectId,
     }
 }

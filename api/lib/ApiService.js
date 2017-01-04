@@ -29,8 +29,3 @@ module.exports.ApiService = function(query, args, cb) {
     });
   });
 };
-
-module.exports.roundValues = function(row) {
-  row.acquired = Math.round(parseInt(row.acquired));
-  row.estimate = Math.round(parseInt(row.estimate));
-};

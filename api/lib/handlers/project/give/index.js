@@ -32,7 +32,7 @@ module.exports.post = function(req, res, next) {
           err = error['UNKNOWN_PROJECT']
         else if (!err && result.estimate - result.acquired < amount)
           err = error['TOO_MUCH_CREDIT']
-        else if (!err && parseInt(resCheck.credit) < amount)
+        else if (!err && resCheck.credit < amount)
           err = error['NOT_ENOUGH_CREDIT'];
         return cb(err, result)
       });
@@ -51,7 +51,6 @@ module.exports.post = function(req, res, next) {
       });
     }
   ], function (err, result) {
-    console.log(result)
     return res.send(err || result);
   });
 };

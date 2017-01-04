@@ -2,6 +2,7 @@ import { PostRequest } from '../../../common/common.actions'
 import * as constants from './addProject.actionTypes'
 
 export function createProject ({ userToken, userId, title, estimate, description }) {
+  console.log(estimate, typeof estimate)
     return dispatch => {
         dispatch(PostRequest(userToken, { userId, title, estimate, description }, 'project',
             ({ response }) => {

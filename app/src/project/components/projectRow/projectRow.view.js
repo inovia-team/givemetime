@@ -10,7 +10,7 @@ export function ProjectRowComponent ({ userToken, userId, project: { id, title, 
       <Card expanded={null} expandable={false} initiallyExpanded={false}>
           <CardHeader title={title} subtitle={author}/>
           <CardText>
-              <div>{acquired}h of {estimate}h {(acquired / estimate).toFixed(4) * 100}%</div>
+              <div>{acquired}h of {estimate}h {(acquired / estimate * 100).toFixed(2)}%</div>
               <LinearProgress max={estimate} min={0} value={acquired} mode="determinate"/>
           </CardText>
           <CardActions>
@@ -28,5 +28,5 @@ ProjectRowComponent.propTypes = {
     project: ProjectPropTypes,
     deleteProject: PropTypes.func.isRequired,
     userToken: PropTypes.string,
-    userId: PropTypes.string,
+    userId: PropTypes.number,
 }

@@ -10,7 +10,7 @@ module.exports.post = function(req, res, next) {
   (err, result) => {
     if (err)
       return res.send(err);
-    result.credit = Math.round(parseInt(result.credit));
+    result.credit = Math.round(result.credit);
     return res.send(result);
   });
 };
