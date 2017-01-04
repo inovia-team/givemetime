@@ -20,7 +20,7 @@
     "googleapis": "^16.0.0",
     "jsonwebtoken": "^7.2.1",
     "pg": "^6.1.2",
-    "db-migrate-pg": "^0.1.11"
+    "db-migrate": "^0.9.25"
   },
   "repository": {
     "type": "git",

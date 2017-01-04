@@ -11,7 +11,7 @@ import configureMockStore from 'redux-mock-store'
 const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)
 
-describe('GraphQL actions', () => {
+describe('Common actions', () => {
     let store, onSuccess, onError
 
     beforeEach(() => {
