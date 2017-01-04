@@ -19,10 +19,14 @@ export const RequestService = (method, userToken, variables, route, onSuccess, o
             if (response.status === 200) {
                 return response.json()
             }
+
             return Promise.reject(response)
         })
         .catch(err => {
-            return err.json()
+            if (err.json) {
+                return err.json()
+            }
+            return { error: err }
         })
         .then(response => {
             if (response.error) {

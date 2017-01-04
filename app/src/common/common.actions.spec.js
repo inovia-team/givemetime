@@ -23,20 +23,20 @@ describe('GraphQL actions', () => {
         nock.cleanAll()
     })
 
-    it('should call the graphql endpoint and call the success function', done => {
+    it('should call any API endpoint and call the success function', done => {
         nock(config.API_URL, {
             reqheaders: {
                 'content-type': 'application/json',
             },
         })
-            .post('/graphql')
-            .reply(200, { data: { todos: ['do something'] } })
+            .post('/project')
+            .reply(200, { todos: ['do something'] })
 
-        store.dispatch(actions.getGraphQL(
-            null, 'query { ... }', { params : {} }, onSuccess, onError
+        store.dispatch(actions.RequestService(
+            'POST', null, { params : {} }, 'project', onSuccess, onError
         )).then(() => {
             expect(onSuccess.calledOnce).toEqual(true)
-            expect(onSuccess.calledWith({ todos: ['do something'] })).toEqual(true)
+            expect(onSuccess.calledWith({ response: { todos: ['do something'] } })).toEqual(true)
             expect(onError.calledOnce).toEqual(false)
             done()
         }).catch(done)
@@ -44,16 +44,31 @@ describe('GraphQL actions', () => {
 
     it('should call the error function on server error', done => {
         nock(config.API_URL)
-            .post('/graphql')
-            .replyWithError('OMG nope!')
+            .post('/project')
+            .reply(500, { error: { status: 500, message: 'OMG nope!' } })
 
-        store.dispatch(actions.getGraphQL(
-            null, 'query { ... }', { params : {} }, onSuccess, onError
+        store.dispatch(actions.RequestService(
+            'POST', null, { params : {} }, 'project', onSuccess, onError
         )).then(() => {
             expect(onSuccess.calledOnce).toEqual(false)
             expect(onError.calledOnce).toEqual(true)
-            // @todo: I could not make it call the handler with the exact response body...
-            expect(onError.calledWithMatch(/OMG nope!/)).toEqual(true)
+            expect(onError.calledWith('OMG nope!')).toEqual(true)
+            done()
+        }).catch(done)
+    })
+
+    it('should call the error function on fetch error', done => {
+        nock(config.API_URL)
+            .post('/project')
+            .replyWithError('Fetch error! :(')
+
+        store.dispatch(actions.RequestService(
+            'POST', null, { params : {} }, 'project', onSuccess, onError
+        )).then(() => {
+            expect(onSuccess.calledOnce).toEqual(false)
+            expect(onError.calledOnce).toEqual(true)
+            // need to perform a 'match' since fetch is addind his own message
+            expect(onError.calledWith(sinon.match('Fetch error! :('))).toEqual(true)
             done()
         }).catch(done)
     })
