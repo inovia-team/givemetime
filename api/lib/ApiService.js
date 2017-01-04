@@ -5,11 +5,15 @@ var pg = require('pg');
 var error = require('./config.js').errors;
 
 function checkArguments(args) {
-   return args.find((arg) => !arg); // return undefined if one argument is not provided
+  for (let i = 0; i < args.length; i++) {
+    if (!args[i])
+      return false;
+  }
+  return true;
 }
 
 module.exports.ApiService = function(query, args, cb) {
-  if (checkArguments(args) === 'undefined') {
+  if (!checkArguments(args)) {
     console.error(error['ARGUMENT_MISSING']);
     return cb(error['ARGUMENT_MISSING'], null)
   }

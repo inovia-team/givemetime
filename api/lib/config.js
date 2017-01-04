@@ -18,5 +18,6 @@ module.exports.errors = {
   'UNKNOWN_PROJECT': 'This project doesn\'t exist',
   'TOO_MUCH_CREDIT': 'This project doesn\'t need that much credit',
   'NOT_ENOUGH_CREDIT': 'You don\'t have enough credits',
+  'BAD_AMOUNT': 'The estimated number of credits is not valid',
   'ARGUMENT_MISSING': 'A required argument is missing.'
 };

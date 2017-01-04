@@ -10,6 +10,9 @@ module.exports.post = function(req, res, next) {
   const estimate = req.body.estimate;
   const description = req.body.description;
 
+  if (!estimate || !(!isNaN(parseFloat(estimate)) && isFinite(estimate)) || estimate < 0.0) // check that it's a valid and positive value
+    return res.send(error['BAD_AMOUNT']);
+
   const result = ApiService('INSERT INTO give_me_time_public.project (author_id, title, estimate, description) VALUES ($1, $2, $3, $4) RETURNING *',
   [id, title, estimate, description],
   (err, result) => {
