@@ -2,6 +2,9 @@ import React, { PropTypes } from 'react'
 import { AppBar, MenuItem, Drawer } from 'material-ui'
 import LoginButton from '../login/login'
 import { Link } from 'react-router'
+import Modal from 'react-modal'
+import closeImg from '../../assets/cross.png'
+import './layout.style.css'
 
 // Use named export for unconnected component (for tests)
 export class LayoutComponent extends React.Component {
@@ -10,18 +13,25 @@ export class LayoutComponent extends React.Component {
     }
 
     render () {
-        const style = {
-            margin: '30px 30px 30px 50px',
-        }
         const content = this.props.user.id
             ? (
-                <div style={style}>
-                    {this.props.apology}
+                <div className="layout">
+                    <Modal
+                        isOpen={this.props.apology != null}
+                        className="modalStyle"
+                        contentLabel="Modal"
+                    >
+                        <div className="error_header">
+                            <h2>Error !</h2>
+                            <img src={closeImg} onClick={this.props.closeModal}/>
+                        </div>
+                        <p>{this.props.apology}</p>
+                </Modal>
                     {this.props.children}
                 </div>
             )
             : (
-                <div style={style}>Login to view projects. {this.props.apology}</div>
+                <div className="layout">Login to view projects. {this.props.apology}</div>
             )
 
         return (
@@ -61,6 +71,7 @@ LayoutComponent.propTypes = {
         id: PropTypes.number,
     }).isRequired,
     globalMenuOpen: PropTypes.bool.isRequired,
+    closeModal: PropTypes.func.isRequired,
     globalMenuToggle: PropTypes.func.isRequired,
     apology: PropTypes.string,
     children: PropTypes.element.isRequired,

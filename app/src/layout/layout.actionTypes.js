@@ -1,1 +1,2 @@
 export const GLOBAL_MENU_TOGGLE = 'GLOBAL_MENU_TOGGLE'
+export const CLOSE_MODAL = 'CLOSE_MODAL'

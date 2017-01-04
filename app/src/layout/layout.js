@@ -13,7 +13,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators({
-        globalMenuToggle: actions.globalMenuToggle }, dispatch)
+        globalMenuToggle: actions.globalMenuToggle,
+        closeModal: actions.closeModal }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LayoutComponent)

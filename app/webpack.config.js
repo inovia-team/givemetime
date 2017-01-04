@@ -27,6 +27,10 @@ const common = {
                 loader: 'babel?cacheDirectory',
                 include: PATHS.src,
             },
+            {
+                test: /\.(png|jpg|jpeg|gif)(\?[\s\S]+)?$/,
+                loader: 'url-loader',
+            },
         ],
         noParse: /react\/lib\/ExecutionEnvironment/,
     },
