@@ -71,7 +71,7 @@ set role give_me_time_user;
 execute apply_credits_after_one_day;
 SELECT results_eq(
     $$select id, credit from give_me_time_public.person$$,
-    $$values (1, (23.0 + 1.4269406393)::credits), (2, (6.0 + 1.4269406393)::credits)$$,
+    $$values (1, (23.0 + 1.4269406392694)::credits), (2, (6.0 + 1.4269406392694)::credits)$$,
     'We can give one day and an hour of credits to everyone (2 pers)'
 );
 
@@ -96,7 +96,7 @@ set role give_me_time_user;
 execute apply_credits_after_one_day;
 SELECT results_eq(
     $$select id, credit from give_me_time_public.person$$,
-    $$values (1, (23.0 + 0.9512937595)::credits), (2, (6.0 + 0.9512937595)::credits), (3, (0.0 + 0.9512937595)::credits)$$,
+    $$values (1, (23.0 + 0.9512937595129)::credits), (2, (6.0 + 0.9512937595129)::credits), (3, (0.0 + 0.9512937595129)::credits)$$,
     'Check we can give one day and an hour of credits to everyone (3 pers)'
 );
 
