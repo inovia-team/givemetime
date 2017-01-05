@@ -1,6 +1,7 @@
 import * as constants from './common.actionTypes'
 import fetch from 'isomorphic-fetch'
 import * as config from '../config'
+import { replace } from 'react-router-redux'
 
 export const RequestService = (method, userToken, variables, route, onSuccess, onError) => {
     onSuccess = onSuccess || (a => a)
@@ -46,6 +47,12 @@ export const apologize = msg => ({
 export function closeModal () {
     return dispatch => {
         dispatch(closeModalAction())
+    }
+}
+
+export function goHomepage () {
+    return dispatch => {
+        dispatch(replace('/'))
     }
 }
 

@@ -38,6 +38,8 @@ export class LayoutComponent extends React.Component {
             <div>
                     <AppBar
                         title="Give R&D time"
+                        titleStyle={{ cursor: 'pointer' }}
+                        onTitleTouchTap={() => this.props.goHomepage()}
                         onLeftIconButtonTouchTap={() => this.handleMenuClick()}
                         iconElementRight={<LoginButton />}
                     />
@@ -72,6 +74,7 @@ LayoutComponent.propTypes = {
     }).isRequired,
     globalMenuOpen: PropTypes.bool.isRequired,
     closeModal: PropTypes.func.isRequired,
+    goHomepage: PropTypes.func.isRequired,
     globalMenuToggle: PropTypes.func.isRequired,
     apology: PropTypes.string,
     children: PropTypes.element.isRequired,
