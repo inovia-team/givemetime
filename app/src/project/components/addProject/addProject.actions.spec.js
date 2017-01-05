@@ -37,4 +37,19 @@ describe('addProject actions', () => {
             done()
         })
     })
+
+    it('should handle create project error', done => {
+        var store = mockStore({})
+        const expected = { message: 'Error create project', type: 'APOLOGIZE' }
+
+        nock(config.API_URL)
+        .post('/project')
+        .reply(500, { error: { status: 500, message: expected.message } })
+
+        store.dispatch(actions.createProject({ userToken: null, id: 42 }))
+        unsubscribe = store.subscribe(function () {
+            expect(store.getActions()[0]).toEqual(expected)
+            done()
+        })
+    })
 })
