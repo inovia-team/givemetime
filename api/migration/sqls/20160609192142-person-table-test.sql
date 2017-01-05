@@ -16,7 +16,7 @@ select col_hasnt_default('person'::name, 'fullname'::name);
 select col_not_null('person'::name, 'fullname'::name);
 
 select has_domain('credits'::name);
-select domain_type_is('credits'::name, 'numeric');
+select domain_type_is('credits'::name, 'double precision');
 select has_column('person'::name, 'credit'::name);
 select col_type_is('person'::name, 'credit'::name, 'credits');
 select col_hasnt_default('person'::name, 'credit'::name);

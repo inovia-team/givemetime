@@ -66,12 +66,12 @@ values (1, 'abc', 23.0), (2, 'abc', 6.0);
 -- test we can do all that using a regular user
 set role give_me_time_user;
 
--- 1000h / year -> 0.00003170979h / sec -> 2.8538811h to give (*90000)
--- 2 persons -> 1.4269406393h per person
+-- 1000 credits / year = 0.00003170979credits / sec -> 2.8538811credits to give for one day and one hour(*25*60*60)
+-- 2 persons -> 1.426940639269406 per person
 execute apply_credits_after_one_day;
 SELECT results_eq(
     $$select id, credit from give_me_time_public.person$$,
-    $$values (1, (23.0 + 1.4269406392694)::credits), (2, (6.0 + 1.4269406392694)::credits)$$,
+    $$values (1, (23.0 + 1.426940639269406)::credits), (2, (6.0 + 1.426940639269406)::credits)$$,
     'We can give one day and an hour of credits to everyone (2 pers)'
 );
 
@@ -91,12 +91,12 @@ insert into give_me_time_public.person (id, fullname, credit)
 values (1, 'abc', 23.0), (2, 'abc', 6.0), (3, 'abc', 0.0);
 set role give_me_time_user;
 
--- 1000h / year -> 0.00003170979h / sec -> 2.8538811h to give (*90000)
--- 2 persons -> 0.9512937595h per person
+-- 1000 credits / year = 0.00003170979credits / sec -> 2.8538811credits to give for one day and one hour(*25*60*60)
+-- 3 persons -> 0.951293759512938 per person
 execute apply_credits_after_one_day;
 SELECT results_eq(
     $$select id, credit from give_me_time_public.person$$,
-    $$values (1, (23.0 + 0.9512937595129)::credits), (2, (6.0 + 0.9512937595129)::credits), (3, (0.0 + 0.9512937595129)::credits)$$,
+    $$values (1, (23.0 + 0.9512937595129375951294)::credits), (2, (6.0 + 0.9512937595129375951294)::credits), (3, (0.0 + 0.9512937595129375951294)::credits)$$,
     'Check we can give one day and an hour of credits to everyone (3 pers)'
 );
 
