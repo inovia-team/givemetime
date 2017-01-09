@@ -77,10 +77,6 @@ if (process.env.STAGING !== 'production') {
             port: process.env.PORT || 4000,
 
             proxy: {
-                '/graphql': {
-                    target: 'http://localhost:3000',
-                    pathRewrite: { '^/graphql' : '/?' },
-                },
                 '/jwt_auth': {
                     target: 'http://localhost:3000',
                 },

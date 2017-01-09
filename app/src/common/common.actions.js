@@ -9,7 +9,7 @@ export const RequestService = (method, userToken, variables, route, onSuccess, o
         onError = onError || (a => dispatch(apologize(a)))
         let headers = { 'content-type': 'application/json' }
         if (userToken) {
-            headers['authorization'] = `Bearer ${userToken}`
+            headers['authorization'] = userToken
         }
         return fetch(`${config.API_URL}/${route}`, {
             method: method,

@@ -1,16 +1,21 @@
 'use strict';
 
 var ApiService = require('../../../ApiService.js').ApiService;
+var getUserIdFromToken = require('../../../../auth/getIdFromToken.js').getUserIdFromToken;
 var error = require('../../../config.js').errors;
 var async = require('async');
 
 module.exports.post = function (req, res, next) {
     const id = req.params.id;
     const amount = req.body.amount;
-    const userId = 1; // TODO: Get the ID from the OAuth
+    let userId;
 
     async.waterfall([
-        function checkArguments (cb) {
+        function getID (cb) {
+            return getUserIdFromToken(req.headers.authorization, next, cb);
+        },
+        function checkArguments (userIdRes, cb) {
+            userId = userIdRes;
             if (amount <= 0)
                 return next({ message: error.AMOUNT_INVALID });
             return cb(null);

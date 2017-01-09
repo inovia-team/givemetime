@@ -1,8 +1,10 @@
 'use strict';
 
 var ApiService = require('../../ApiService.js').ApiService;
+var getUserIdFromToken = require('../../../auth/getIdFromToken.js').getUserIdFromToken;
 var error = require('../../config.js').errors;
 var async = require('async');
+
 
 module.exports.post = function (req, res, next) {
     const id = req.body.userId;
@@ -34,10 +36,12 @@ module.exports.get = function (req, res, next) {
 
 module.exports.delete = function (req, res, next) {
     const id = req.params.id;
-    const userId = 1; // TODO: Get the ID from the OAuth
 
     async.waterfall([
-        function checkOwner (cb) {
+        function getID (cb) {
+            return getUserIdFromToken(req.headers.authorization, next, cb);
+        },
+        function checkOwner (userId, cb) {
             ApiService('SELECT * from give_me_time_public.project WHERE id=($1)',
             [id], next,
             result => {

@@ -2,19 +2,16 @@ const express = require('express');
 const gAuth = require('./auth/google-oauth');
 const gAuthMock = require('./auth/google-oauth-dev-mock');
 const pgFetch = require('./auth/db-fetch');
-const pgJwt = require('./auth/pg-jwt');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const handlers = require('./lib/handlers');
 const errorMiddleware = require('./lib/config').errorMiddleware;
 const app = express();
-
+const pgJwt = require('./auth/pg-jwt');
 const JWT_SECRET = 'supersecret';
-
 // set cors headers first or you get an error
 app.use(cors());
 
-// TODO: eslint
 // TODO: server tests
 
 // parse json body
@@ -28,7 +25,6 @@ app.use(bodyParser.json());
 app.post('/jwt_auth', process.env.GOOGLE_AUTH_MOCK ? gAuthMock : gAuth);
 app.use(pgFetch);
 app.use(pgJwt(JWT_SECRET));
-
 // endpoints
 app.post('/project', handlers.project.index.post);
 app.post('/project/give/:id', handlers.project.give.index.post);

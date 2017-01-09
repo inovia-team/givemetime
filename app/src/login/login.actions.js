@@ -26,6 +26,7 @@ export function failureError (response) {
 }
 
 export function createUserIfNotExists (response) {
+
     const access_token = response.accessToken
     return dispatch => {
         // auth the user and get a token
@@ -50,7 +51,7 @@ export function createUserIfNotExists (response) {
             if (jwtResponse.errors) {
                 apologize(jwtResponse.errors.map(err => err.message || err).join('. '))
             } else {
-                logUserInWithTokenAndId(dispatch, jwtResponse.user_id, jwtResponse.token)
+                logUserInWithTokenAndId(dispatch, jwtResponse.user_id, access_token)
             }
         })
     }
