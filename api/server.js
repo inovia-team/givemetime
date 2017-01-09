@@ -26,14 +26,17 @@ app.post('/jwt_auth', process.env.GOOGLE_AUTH_MOCK ? gAuthMock : gAuth);
 app.use(pgFetch);
 app.use(pgJwt(JWT_SECRET));
 // endpoints
-app.post('/project', handlers.project.index.post);
-app.post('/project/give/:id', handlers.project.give.index.post);
-app.get('/project/:id', handlers.project.index.get);
-app.delete('/project/:id', handlers.project.index.delete);
-app.get('/projects', handlers.projects.index.get);
-app.post('/login', handlers.login.index.post);
+
+app.post('/project', handlers.project.s.post);
+app.post('/project/give/:id', handlers.project.give.s.post);
+app.get('/project/:id', handlers.project.s.get);
+app.delete('/project/:id', handlers.project.s.delete);
+app.get('/projects', handlers.projects.s.get);
+app.post('/login', handlers.login.s.post);
 
 app.use(errorMiddleware);
 
 console.log('Listening to port 3000');
 app.listen(3000);
+
+module.exports = app;
