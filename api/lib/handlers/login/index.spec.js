@@ -4,8 +4,16 @@ require('should');
 var async = require('async');
 var request = require('supertest');
 var server = require('../../../server.js');
+var ApiService = require('../../ApiService.js').ApiService;
 
 describe('Login', function () {
+
+    before(() =>
+        ApiService('UPDATE give_me_time_public.person SET credit=20 WHERE id=1', // Reset the original credits
+        [], null,
+        () => {
+        })
+    );
 
     it('should get a user', function (done) {
         async.waterfall([
