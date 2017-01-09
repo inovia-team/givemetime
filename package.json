@@ -13,9 +13,9 @@
     "db.migration.create": "npm --loglevel=silent run _db_migrate --sql-file create",
     "db.test": "./api/db-test.sh",
     "reset": "docker-compose stop && docker-compose rm --force",
-    "test.lint": "npm --prefix ./app --loglevel=silent run test.lint",
-    "test.lint:fix": "npm --prefix ./app --loglevel=silent run test.lint.fix",
-    "test.unit": "npm --prefix ./app --loglevel=silent run test.unit"
+    "test.lint": "npm --prefix ./app --loglevel=silent run test.lint && npm --prefix ./api --loglevel=silent run test.lint",
+    "test.lint:fix": "npm --prefix ./app --loglevel=silent run test.lint.fix && npm --prefix ./api --loglevel=silent run test.lint.fix",
+    "test.unit": "npm --prefix ./app --loglevel=silent run test.unit && npm --prefix ./api --loglevel=silent run test.unit"
   },
   "repository": {
     "type": "git",

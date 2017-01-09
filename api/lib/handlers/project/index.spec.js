@@ -7,7 +7,7 @@ var server = require('../../../server.js');
 var ApiService = require('../../ApiService.js').ApiService;
 let id;
 
-describe('Projects', function () {
+describe('Project', function () {
 
     before(() =>
         ApiService('TRUNCATE give_me_time_public.project',
