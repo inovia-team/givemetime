@@ -6,7 +6,7 @@ const OAuth2 = google.auth.OAuth2;
 module.exports.getUserIdFromToken = function (token, next, cb) {
 
     if (process.env.GOOGLE_AUTH_MOCK)
-        return cb(null, 1); // Return only user in test mode
+        return cb(null, token === 'uTest' ? 2 : 1); // Return only user in test mode
 
     const oauth2Client = new OAuth2(
         process.env.GOOGLE_CLIENT_ID,

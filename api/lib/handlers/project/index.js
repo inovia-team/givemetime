@@ -28,7 +28,7 @@ module.exports.get = function (req, res, next) {
     ApiService('SELECT * FROM give_me_time_public.project WHERE id=($1)',
     [id], next,
     result => {
-        if (!result.length)
+        if (!result.id)
             return next({ message: error.UNKNOWN_PROJECT });
         return res.send(result);
     });
@@ -45,7 +45,9 @@ module.exports.delete = function (req, res, next) {
             ApiService('SELECT * from give_me_time_public.project WHERE id=($1)',
             [id], next,
             result => {
-                if (result.author_id != userId)
+                if (!result.author_id)
+                    return next({ message: error.UNKNOWN_PROJECT });
+                else if (result.author_id != userId)
                     return next({ message: error.DELETE_NO_RIGHT });
                 return cb(null);
             });

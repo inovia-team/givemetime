@@ -8,7 +8,7 @@
     "start-dev": "./server-dev.sh",
     "test.lint": "./node_modules/.bin/eslint . --ext .js --ext .jsx",
     "test.lint.fix": "npm --loglevel=silent run test.lint -- --fix",
-    "test.unit": "GOOGLE_AUTH_MOCK=true PGHOST=0.0.0.0  PGPORT=5430 PGUSER=give_me_time_owner PGPASSWORD=give_me_time PGDATABASE=give_me_time API_URL=http://localhost:3000 ./node_modules/.bin/mocha --recursive $(find lib -name '*.spec.js')"
+    "test.unit": "GOOGLE_AUTH_MOCK=true PGHOST=0.0.0.0 PGPORT=5430 PGUSER=give_me_time_owner PGPASSWORD=give_me_time PGDATABASE=give_me_time API_URL=http://localhost:3000 ./node_modules/.bin/mocha --recursive $(find lib -name '*.spec.js')"
   },
   "devDependencies": {
     "require-all": "^2.1.0",
