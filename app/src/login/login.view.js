@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import Avatar from 'material-ui/Avatar'
 import GoogleLogin from 'react-google-login'
 import * as config from '../config'
 
@@ -10,6 +11,7 @@ export class LoginComponent extends React.Component {
         if (this.props.user.id) {
             return (
                 <div>
+                    <Avatar src={this.props.user.avatar} />
                     {this.props.user.fullname}<br/> Crédits : {this.props.user.credit}<br/>
                     <button onClick={this.props.handleLogout}>Logout</button>
                 </div>
@@ -43,6 +45,7 @@ LoginComponent.propTypes = {
         id: PropTypes.int,
         fullname: PropTypes.string,
         credit: PropTypes.number,
+        avatar: PropTypes.string,
     }).isRequired,
     handleLogout: PropTypes.func.isRequired,
     checkLocalUser: PropTypes.func.isRequired,

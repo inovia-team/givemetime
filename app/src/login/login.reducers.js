@@ -8,6 +8,7 @@ export default function (state = { user: {}, projects: [] }, action) {
             id : action.id,
             credit: action.credit,
             fullname: action.fullname,
+            avatar: action.avatar,
             token: action.token,
         } }
     case loginActions.USER_LOGGED_OUT:
@@ -15,6 +16,7 @@ export default function (state = { user: {}, projects: [] }, action) {
             id: null,
             fullname: null,
             credit : null,
+            avatar: action.avatar,
             token: null,
         }, projects: [] }
 

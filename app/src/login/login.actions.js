@@ -6,11 +6,11 @@ import * as config from '../config'
 const USER_TOKEN_KEY = 'userAuth'
 
 function logUserInWithTokenAndId (dispatch, id, token) {
-    dispatch(RequestService('POST', null,
+    dispatch(RequestService('POST', token,
         { id },
         'login',
         ({ response }) => {
-            dispatch(userLoggedIn(token, response.id, response.fullname, response.credit))
+            dispatch(userLoggedIn(token, response.id, response.fullname, response.credit, response.avatar))
             // TODO: use a middleware to dispatch non-pure functions
             dispatch(() => {
                 localStorage.setItem(USER_TOKEN_KEY, JSON.stringify({ user_id: id, token }))
@@ -101,10 +101,10 @@ export function checkLocalUser () {
     }
 }
 
-export const userLoggedIn = (token, id, fullname, credit) => {
+export const userLoggedIn = (token, id, fullname, credit, avatar) => {
     return {
         type: constant.USER_LOGGED_IN,
-        token, id, fullname, credit,
+        token, id, fullname, credit, avatar,
     }
 }
 
