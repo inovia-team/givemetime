@@ -23,5 +23,6 @@ script:
 - npm run db.test
 
 - npm run reset
+- sleep 10
 - npm run db.migrate
 - npm test
