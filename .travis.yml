@@ -16,13 +16,9 @@ install:
 script:
 - docker-compose --version
 - npm run db.migrate
+- npm test
 - npm run db.test
 # also test down migrations
 - npm run _db_migrate -- down --count 1000
 - npm run db.migrate
 - npm run db.test
-
-- npm run reset
-- sleep 10
-- npm run db.migrate
-- npm test
