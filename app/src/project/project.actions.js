@@ -23,7 +23,7 @@ export function loadProjects () {
 }
 
 export function loadProject (id) {
-    return dispatch => {
+    return () => dispatch => {
         dispatch(RequestService('GET', null, null, `project/${id}`,
             ({ response }) => {
                 handleNodeFetched(dispatch)(response)
