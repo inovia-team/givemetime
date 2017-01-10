@@ -1,0 +1,11 @@
+.logged_appbar_section {
+    display: flex;
+    margin-top: 4px;
+}
+
+.logged_appbar_section  .user_infos {
+    display: flex;
+    margin-left: 8px;
+    margin-right: 8px;
+    align-self: center;
+}

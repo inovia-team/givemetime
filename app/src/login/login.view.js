@@ -1,7 +1,10 @@
 import React, { PropTypes } from 'react'
 import Avatar from 'material-ui/Avatar'
+import RaisedButton from 'material-ui/RaisedButton'
 import GoogleLogin from 'react-google-login'
 import * as config from '../config'
+
+import './login.css'
 
 export class LoginComponent extends React.Component {
     componentDidMount () {
@@ -10,10 +13,10 @@ export class LoginComponent extends React.Component {
     render () {
         if (this.props.user.id) {
             return (
-                <div>
+                <div className='logged_appbar_section'>
                     <Avatar src={this.props.user.avatar} />
-                    {this.props.user.fullname}<br/> Crédits : {this.props.user.credit}<br/>
-                    <button onClick={this.props.handleLogout}>Logout</button>
+                    <div className='user_infos'>{this.props.user.fullname}<br/> Crédits : {this.props.user.credit}</div>
+                    <RaisedButton onClick={this.props.handleLogout} style={{ padding: '3px' }} label={'Logout'}/>
                 </div>
             )
         } else if (process.env.GOOGLE_AUTH_MOCK) {
