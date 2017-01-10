@@ -5,6 +5,7 @@ module.exports.PORT = env.PORT;
 module.exports.API_PORT = API_PORT;
 module.exports.API_URL = (env.API_URL || 'http://localhost') + ':' + API_PORT;
 
+module.exports.JWT_SECRET = 'supersecret';
 
 module.exports.config = {
     user: env.PGUSER,

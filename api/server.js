@@ -7,9 +7,9 @@ const cors = require('cors');
 const handlers = require('./lib/handlers');
 const errorMiddleware = require('./lib/config').errorMiddleware;
 const app = express();
-const pgJwt = require('./auth/pg-jwt');
-const JWT_SECRET = 'supersecret';
+const pgJwt = require('./auth/jwt');
 const PORT = require('./lib/config.js').PORT;
+const JWT_SECRET = require('./lib/config.js').JWT_SECRET;
 // set cors headers first or you get an error
 app.use(cors());
 

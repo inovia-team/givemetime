@@ -22,7 +22,7 @@ module.exports.getUserIdFromToken = function (token, next, cb) {
     });
 
     plus.people.get({ userId: 'me', auth: oauth2Client }, (err, response)=>{
-        if (err) throw err;
+        if (err) return next(err);
 
         DatabaseService('SELECT * from give_me_time_private.person_register_or_retrieve($1, $2)',
             [response.displayName, response.emails

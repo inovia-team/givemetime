@@ -19,7 +19,7 @@ module.exports = (req, res, next)=>{
 
     // ask google for user infos
     plus.people.get({ userId: 'me', auth: oauth2Client }, (err, response)=>{
-        if (err) throw err;
+        if (err) return next(err);
         // add auth info to the request
         req.auth = {
             fullname: response.displayName,
