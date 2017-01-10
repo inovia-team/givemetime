@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react'
 import { AppBar, MenuItem, Drawer } from 'material-ui'
+import Dialog from 'material-ui/Dialog'
 import LoginButton from '../login/login'
+import FlatButton from 'material-ui/FlatButton'
 import { Link } from 'react-router'
-import Modal from 'react-modal'
-import closeImg from '../../assets/cross.png'
 import './layout.style.css'
 
 // Use named export for unconnected component (for tests)
@@ -13,20 +13,25 @@ export class LayoutComponent extends React.Component {
     }
 
     render () {
+        const actions = [
+            <FlatButton
+                label="Okay"
+                primary={true}
+                onTouchTap={this.props.closeModal}
+            />,
+        ]
         const content = this.props.user.id
             ? (
                 <div className="layout">
-                    <Modal
-                        isOpen={this.props.apology != null}
-                        className="modalStyle"
-                        contentLabel="Modal"
-                    >
-                        <div className="error_header">
-                            <h2>Error !</h2>
-                            <img src={closeImg} onClick={this.props.closeModal}/>
-                        </div>
-                        <p>{this.props.apology}</p>
-                </Modal>
+                    <Dialog
+                         title="Error !"
+                         actions={actions}
+                         modal={false}
+                         open={this.props.apology != null}
+                         onRequestClose={this.props.closeModal}
+                       >
+                        {this.props.apology}
+                   </Dialog>
                     {this.props.children}
                 </div>
             )
