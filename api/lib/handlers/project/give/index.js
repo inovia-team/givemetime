@@ -16,7 +16,7 @@ module.exports.post = function (req, res, next) {
         },
         function checkArguments (userIdRes, cb) {
             userId = userIdRes;
-            if (amount <= 0)
+            if (!(!isNaN(parseFloat(amount)) && isFinite(amount)) || amount <= 0)
                 return next({ message: error.AMOUNT_INVALID });
             return cb(null);
         },
