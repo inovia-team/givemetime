@@ -31,6 +31,9 @@ services:
       - GOOGLE_REDIRECT_URL=${GOOGLE_REDIRECT_URL}
       # in development only
       - GOOGLE_AUTH_MOCK=${GOOGLE_AUTH_MOCK}
+      - API_URL=${API_URL}
+      - PORT=${PORT}
+      - API_PORT=${API_PORT}
     depends_on:
       - db
     ports:
@@ -53,6 +56,8 @@ services:
       - GOOGLE_AUTH_MOCK=${GOOGLE_AUTH_MOCK}
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
       - API_URL=${API_URL}
+      - PORT=${PORT}
+      - API_PORT=${API_PORT}
     depends_on:
       - db
     ports:

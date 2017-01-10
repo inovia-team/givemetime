@@ -4,13 +4,13 @@ require('should');
 var async = require('async');
 var request = require('supertest');
 var server = require('../../../server.js');
-var ApiService = require('../../ApiService.js').ApiService;
+var DatabaseService = require('../../DatabaseService.js');
 let id;
 
 describe('Project', function () {
 
     before(() =>
-        ApiService('TRUNCATE give_me_time_public.project',
+        DatabaseService('TRUNCATE give_me_time_public.project',
         [], null,
         () => {
         })
@@ -42,7 +42,7 @@ describe('Project', function () {
         ], done);
     });
 
-    it('should not create a projectif error occurs', function (done) {
+    it('should not create a project if error occurs', function (done) {
         async.waterfall([
             function firstProj (cb) {
                 request(server)

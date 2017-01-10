@@ -1,7 +1,9 @@
 const google = require('googleapis');
-const ApiService = require('../lib/ApiService.js').ApiService;
+const DatabaseService = require('../lib/DatabaseService.js');
 const plus = google.plus('v1');
 const OAuth2 = google.auth.OAuth2;
+
+/* Get the corresponding ID from a known user by his name and unique email*/
 
 module.exports.getUserIdFromToken = function (token, next, cb) {
 
@@ -19,17 +21,16 @@ module.exports.getUserIdFromToken = function (token, next, cb) {
         access_token: token,
     });
 
-    // ask google for user infos
     plus.people.get({ userId: 'me', auth: oauth2Client }, (err, response)=>{
         if (err) throw err;
-        // add auth info to the request
-        ApiService('SELECT * from give_me_time_private.person_register_or_retrieve($1, $2)',
+
+        DatabaseService('SELECT * from give_me_time_private.person_register_or_retrieve($1, $2)',
             [response.displayName, response.emails
                 .filter(emailObj => emailObj.type === 'account')
                 .map(emailObj => emailObj.value)
                 .shift()], next,
             result => {
-                return cb(null, result.id);
+                return cb(null, result.id); // return user ID
             });
     });
 };

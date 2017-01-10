@@ -12,7 +12,7 @@ function checkArguments (args) {
     return true;
 }
 
-module.exports.ApiService = function (query, args, next, cb) {
+module.exports = function (query, args, next, cb) {
     if (!checkArguments(args)) {
         console.error(error['ARGUMENT_MISSING']);
         return next({ message: error.ARGUMENT_MISSING });

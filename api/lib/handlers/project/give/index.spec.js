@@ -4,17 +4,17 @@ require('should');
 var async = require('async');
 var request = require('supertest');
 var server = require('../../../../server.js');
-var ApiService = require('../../../ApiService.js').ApiService;
+var DatabaseService = require('../../../DatabaseService.js');
 let id;
 
 describe('Give time', function () {
 
     before(() =>
-        ApiService('TRUNCATE give_me_time_public.project',
+        DatabaseService('TRUNCATE give_me_time_public.project',
         [], null,
         () => {
         }),
-        ApiService('UPDATE give_me_time_public.person SET credit=20 WHERE id=1', // Reset the original credits
+        DatabaseService('UPDATE give_me_time_public.person SET credit=20 WHERE id=1', // Reset the original credits
         [], null,
         () => {
         })

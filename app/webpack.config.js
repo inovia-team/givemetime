@@ -40,6 +40,7 @@ const common = {
                 'NODE_ENV': JSON.stringify(process.env.STAGING || 'development'),
                 'GOOGLE_CLIENT_ID': JSON.stringify(process.env.GOOGLE_CLIENT_ID || 'Please set the GOOGLE_CLIENT_ID env var'),
                 'API_URL': JSON.stringify(process.env.API_URL || null),
+                'PORT': JSON.stringify(process.env.PORT || null),
                 'GOOGLE_AUTH_MOCK': JSON.stringify(process.env.GOOGLE_AUTH_MOCK || null),
             },
         }),
@@ -74,7 +75,7 @@ if (process.env.STAGING !== 'production') {
 
             // Parse host and port from env so this is easy to customize.
             host: process.env.HOST || '0.0.0.0',
-            port: process.env.PORT || 4000,
+            port: process.env.API_PORT || 4000,
 
             proxy: {
                 '/jwt_auth': {

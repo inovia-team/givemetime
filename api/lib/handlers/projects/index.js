@@ -1,9 +1,9 @@
 'use strict';
 
-var ApiService = require('../../ApiService.js').ApiService;
+var DatabaseService = require('../../DatabaseService.js');
 
 module.exports.get = function (req, res, next) {
-    ApiService('SELECT * FROM give_me_time_public.project',
+    DatabaseService('SELECT * FROM give_me_time_public.project',
     [], next,
     result => {
         if (result.length === 0)

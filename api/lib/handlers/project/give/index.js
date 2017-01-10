@@ -1,6 +1,6 @@
 'use strict';
 
-var ApiService = require('../../../ApiService.js').ApiService;
+var DatabaseService = require('../../../DatabaseService.js');
 var getUserIdFromToken = require('../../../../auth/getIdFromToken.js').getUserIdFromToken;
 var error = require('../../../config.js').errors;
 var async = require('async');
@@ -21,7 +21,7 @@ module.exports.post = function (req, res, next) {
             return cb(null);
         },
         function checkUser (cb) {
-            ApiService('SELECT * FROM give_me_time_public.person WHERE id=($1)',
+            DatabaseService('SELECT * FROM give_me_time_public.person WHERE id=($1)',
             [userId], next,
             result => {
                 if (!result.id)
@@ -30,7 +30,7 @@ module.exports.post = function (req, res, next) {
             });
         },
         function checkProject (resCheck, cb) {
-            ApiService('SELECT * FROM give_me_time_public.project WHERE id=($1)',
+            DatabaseService('SELECT * FROM give_me_time_public.project WHERE id=($1)',
             [id], next,
             result => {
                 if (!result.id)
@@ -43,13 +43,13 @@ module.exports.post = function (req, res, next) {
             });
         },
         function updateUser (cb) {
-            ApiService('UPDATE give_me_time_public.person SET credit=credit-($1) WHERE id=($2)',
+            DatabaseService('UPDATE give_me_time_public.person SET credit=credit-($1) WHERE id=($2)',
             [amount, userId], next,
             () => {
                 return cb(null);
             });
         }, function updateProject (cb) {
-            ApiService('UPDATE give_me_time_public.project SET acquired=acquired+($1) WHERE id=($2) RETURNING *',
+            DatabaseService('UPDATE give_me_time_public.project SET acquired=acquired+($1) WHERE id=($2) RETURNING *',
             [amount, id], next,
             result => {
                 return cb(result);

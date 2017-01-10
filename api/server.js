@@ -9,6 +9,7 @@ const errorMiddleware = require('./lib/config').errorMiddleware;
 const app = express();
 const pgJwt = require('./auth/pg-jwt');
 const JWT_SECRET = 'supersecret';
+const PORT = require('./lib/config.js').PORT;
 // set cors headers first or you get an error
 app.use(cors());
 
@@ -36,7 +37,7 @@ app.post('/login', handlers.login.s.post);
 
 app.use(errorMiddleware);
 
-console.log('Listening to port 3000');
-app.listen(3000);
+console.log(`Listening to port ${PORT}`);
+app.listen(PORT);
 
 module.exports = app;
