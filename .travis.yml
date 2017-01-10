@@ -21,4 +21,5 @@ script:
 - npm run _db_migrate -- down --count 1000
 - npm run db.migrate
 - npm run db.test
+- npm run reset
 - npm test
