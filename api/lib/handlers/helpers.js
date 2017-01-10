@@ -20,7 +20,6 @@ module.exports = function (rawResult, next) {
                 }
             });
         });
-        console.log(rawResult);
         next(rawResult);
     });
 };
