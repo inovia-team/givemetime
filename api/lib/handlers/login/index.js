@@ -10,8 +10,7 @@ module.exports.post = function (req, res, next) {
 
     async.waterfall([
         function getAvatar (cb) {
-            GoogleOAuth(avatarContainer, null, cb);
-
+            process.env.GOOGLE_AUTH_MOCK ? cb(null) : GoogleOAuth(avatarContainer, null, cb);
         },
         function getUser (cb) {
             DatabaseService('SELECT * FROM give_me_time_public.person WHERE id=($1)',

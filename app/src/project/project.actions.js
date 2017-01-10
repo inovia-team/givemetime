@@ -8,7 +8,7 @@ const handleNodeFetched = dispatch => node => {
       node.estimate,
       node.acquired,
       node.description,
-      node.personByAuthorId ? node.personByAuthorId.fullname : null
+      node.author || null
   ))
 }
 

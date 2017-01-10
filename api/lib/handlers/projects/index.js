@@ -1,6 +1,7 @@
 'use strict';
 
 var DatabaseService = require('../../DatabaseService.js');
+var getAuthorNames = require('../helpers.js');
 
 module.exports.get = function (req, res, next) {
     DatabaseService('SELECT * FROM give_me_time_public.project',
@@ -11,6 +12,8 @@ module.exports.get = function (req, res, next) {
         else if (!result.length) {
             result = [result];
         }
-        return res.send(result);
+        getAuthorNames(result, result => {
+            return res.send(result);
+        });
     });
 };
