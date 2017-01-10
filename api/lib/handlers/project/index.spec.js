@@ -57,6 +57,21 @@ describe('Project', function () {
         ], done);
     });
 
+    it('should not create a project if some arguments are missing', function (done) {
+        async.waterfall([
+            function firstProj (cb) {
+                request(server)
+                .post('/project')
+                .send({ userId: 1, description: 'desc', estimate: 42 }) // No title provided
+                .expect(200)
+                .end(function (err, res) {
+                    res.body.should.have.property('error');
+                    cb(null);
+                });
+            },
+        ], done);
+    });
+
     it('should get a project', function (done) {
         async.waterfall([
             function getProj (cb) {

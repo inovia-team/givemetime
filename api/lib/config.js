@@ -29,9 +29,12 @@ module.exports.errors = {
     ARGUMENT_MISSING: 'A required argument is missing.',
 };
 
+var bunyan = require('bunyan');
+var log = bunyan.createLogger({ name: 'GiveMeTime' });
+
 // eslint-disable-next-line
 module.exports.errorMiddleware = function (err, req, res, next) {
-    console.error('ERROR : ', err);
+    log.error('ERROR : ', err);
     res.status(err.status || 500);
     res.json({ error: err });
 };
