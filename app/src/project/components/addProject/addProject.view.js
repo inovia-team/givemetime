@@ -3,39 +3,39 @@ import { RaisedButton } from 'material-ui'
 import { Field } from 'redux-form'
 import { TextField } from '../../../common/form'
 
+import './addProject.css'
 
 export class AddProjectComponent extends React.Component {
     render () {
         const { handleSubmit } = this.props
         return (
-            <div>
+            <div className='add_project_container'>
                 <h1>Add project</h1>
-                <form onSubmit={handleSubmit}>
-                    <Field
+                <form className='add_project_form' onSubmit={handleSubmit}>
+                    Author : <Field
                         id="author" name="author" type="text"
                         component={TextField}
                         disabled={true}
-                        label="Author"
                     />
                     <br/>
-                    <Field
+                    Project name : <Field
                         id="title" name="title" type="text"
                         component={TextField}
-                        label="Project Name"
+                        label="Ex : My super cool project"
                     />
                     <br/>
-                    <Field
+                    Estimate hours : <Field
                         id="estimate" name="estimate" type="number"
                         component={TextField}
-                        label="Estimated hours required"
+                        label="Ex : 42"
                     />
                     <br/>
-                    <Field
+                    Description : <Field
                         id="description" name="description" type="text"
                         component={TextField}
-                        label="Project's description"
+                        label="Ex : This project is going to change the world !"
                         multiLine={true}
-                        rows={4}
+                        rows={1}
                     />
                     <br/>
                     <Field id="userToken" name="userToken" type="hidden" component="input" />

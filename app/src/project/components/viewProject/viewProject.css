@@ -3,7 +3,7 @@
     flex-direction: column;
 }
 .view_project .logo_view {
-    width: 200px;
+    width: calc(100px + 15vw);
 }
 
 .view_project .header_view {
@@ -49,6 +49,11 @@
     margin-right: 20px;
 }
 
+.view_project .project_title {
+    word-wrap: break-word;
+    max-width: 30vw;
+}
+
 .view_project .description {
     display: flex;
     flex-direction: column;
@@ -61,7 +66,7 @@
 }
 
 .CircularProgressbar {
-    width: 200px;
+    width: calc(100px + 15vw);
 }
 
 .CircularProgressbar .CircularProgressbar-path {

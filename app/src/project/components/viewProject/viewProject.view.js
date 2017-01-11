@@ -36,7 +36,7 @@ export class ViewProjectComponent extends Component {
                 <div className='header_view'>
                     <div className='basic_infos'>
                         <img className='logo_view' src={Inovia} />
-                        <h1>{title}</h1>
+                        <h2 className='project_title'>{title}</h2>
                         <p className='author'>By {author}</p>
                     </div>
                     <div className='progress'>

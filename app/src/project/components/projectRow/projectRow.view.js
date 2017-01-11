@@ -55,7 +55,7 @@ export class ProjectRowComponent extends Component {
             <div className='project_row'>
                 <ListItem
                     onClick={() => this.showActions()}
-                    innerDivStyle={{ display: 'flex', alignItems: 'center' }}
+                    innerDivStyle={{ display: 'flex', alignItems: 'center', paddingLeft: '0px', paddingRight: '0px' }}
                     hoverColor='#64B5F6'
                 >
                 <img className='logo_list' src={Inovia} />
