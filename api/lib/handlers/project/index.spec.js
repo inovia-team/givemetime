@@ -35,7 +35,7 @@ describe('Project', function () {
                 .end(function (err, res) {
                     id = res.body.id;
                     res.body.title.should.eql('title test');
-                    res.body.estimate.should.eql(42);
+                    res.body.estimate.should.eql('42');
                     cb(null);
                 });
             },
@@ -80,7 +80,7 @@ describe('Project', function () {
                 .expect(200)
                 .end(function (err, res) {
                     res.body.title.should.eql('title test');
-                    res.body.estimate.should.eql(42);
+                    res.body.estimate.should.eql('42');
                     cb(null);
                 });
             },

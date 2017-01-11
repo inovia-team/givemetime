@@ -47,7 +47,7 @@ describe('Give time', function () {
                 .send({ amount: 3 })
                 .expect(200)
                 .end(function (err, res) {
-                    res.body.acquired.should.eql(3);
+                    res.body.acquired.should.eql('3');
                     cb(null);
                 });
             },
