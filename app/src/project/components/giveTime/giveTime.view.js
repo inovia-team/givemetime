@@ -25,7 +25,7 @@ export class GiveTimeComponent extends Component {
     }
 
     handleSubmit (event) {
-        event.preventDefault()
+        event.preventDefault() // prevent the form submission before validating modal
         this.showAlert()
     }
 

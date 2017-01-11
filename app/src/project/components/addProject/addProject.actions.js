@@ -11,14 +11,15 @@ export function createProject ({ userToken, userId, title, estimate, description
                     response.estimate,
                     response.acquired,
                     response.description,
-                    response.author || null
+                    response.author || null,
+                    response.author_id || null
                 ))
             }
         ))
     }
 }
 
-export const projectCreated = (id, title, estimate, acquired, description, author) => {
+export const projectCreated = (id, title, estimate, acquired, description, author, author_id) => {
     return {
         type: constants.PROJECT_CREATED,
         id: id,
@@ -27,5 +28,6 @@ export const projectCreated = (id, title, estimate, acquired, description, autho
         description: description,
         title: title,
         author: author,
+        author_id: author_id,
     }
 }

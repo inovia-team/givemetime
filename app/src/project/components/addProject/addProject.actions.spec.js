@@ -24,13 +24,14 @@ describe('addProject actions', () => {
             estimate: 42,
             acquired: 0,
             author: null,
+            author_id: null,
             description: 'Inovia rocks!',
             title: 'My test project',
         }
 
         nock(config.API_URL)
         .post('/project')
-        .reply(200, { id: expected.id, title: expected.title, estimate: expected.estimate, description: expected.description, acquired: expected.acquired, author: expected.author })
+        .reply(200, { id: expected.id, title: expected.title, estimate: expected.estimate, description: expected.description, acquired: expected.acquired, author: expected.author, author_id: expected.author_id })
 
         store.dispatch(actions.createProject({ userToken: null, id: expected.id, title: expected.title, estimate: expected.estimate, description: expected.description }))
         unsubscribe = store.subscribe(function () {

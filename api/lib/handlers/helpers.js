@@ -2,6 +2,8 @@
 
 var DatabaseService = require('../DatabaseService.js');
 
+// get Authors name from IDs
+
 module.exports = function (rawResult, next) {
     var tempArray = [];
 
