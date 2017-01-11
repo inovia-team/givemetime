@@ -1,4 +1,4 @@
-.progress {
+.project_row .progress {
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -7,7 +7,7 @@
     align-items: center;
 }
 
-.basic_infos {
+.project_row .basic_infos {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,25 +16,26 @@
     width: 120px;
 }
 
-.percentage {
+.project_row .percentage {
     padding-bottom: 10px;
 }
 
-.author {
+.project_row .author {
     color: rgba(0, 0, 0, 0.541176);
     font-size: 14px;
     white-space: nowrap;
 }
 
-.actions_layer {
+.project_row .actions_layer {
     padding-bottom: 10px;
     padding-top: 10px;
     justify-content: space-around;
     display: flex;
     align-items: center;
+    margin-left: 100px;
 }
 
-.logo_list {
+.project_row .logo_list {
     height: 60px;
     margin-right: 10px;
 }

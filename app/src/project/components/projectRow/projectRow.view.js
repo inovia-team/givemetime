@@ -25,7 +25,7 @@ export class ProjectRowComponent extends Component {
     render () {
         const { userToken, project: { id, title, estimate, acquired, author }, deleteProject } = this.props
         return (
-            <div>
+            <div className='project_row'>
                 <ListItem
                     onClick={() => this.showActions()}
                     innerDivStyle={{ display: 'flex', alignItems: 'center' }}

@@ -33,7 +33,9 @@ module.exports.get = function (req, res, next) {
     result => {
         if (!result.id)
             return next({ message: error.UNKNOWN_PROJECT });
-        return res.send(result);
+        getAuthorNames(result, result => {
+            return res.send(result);
+        });
     });
 };
 
