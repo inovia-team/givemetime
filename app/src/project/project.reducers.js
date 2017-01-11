@@ -17,6 +17,7 @@ export default function (state = { projects: [] }, action) {
                     acquired: action.acquired,
                     description: action.description,
                     author: action.author,
+                    author_id: action.author_id,
                 }]),
         }
 
@@ -38,6 +39,7 @@ export default function (state = { projects: [] }, action) {
                 acquired: action.acquired,
                 description: action.description,
                 author: action.author,
+                author_id: action.author_id,
             }]),
         }
 

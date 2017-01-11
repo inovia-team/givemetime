@@ -6,6 +6,7 @@ import { ProjectRowComponent } from './projectRow.view'
 const mapStateToProps = state => {
     return {
         userToken: state.project.login.user.token,
+        userId: state.project.login.user.id,
     }
 }
 

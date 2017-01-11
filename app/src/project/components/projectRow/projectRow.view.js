@@ -8,6 +8,8 @@ import UpArrow from '../../../../assets/up-arrow.png'
 import Inovia from '../../../../assets/inovia.png'
 import RaisedButton from 'material-ui/RaisedButton'
 import FontIcon from 'material-ui/FontIcon'
+import Dialog from 'material-ui/Dialog'
+import FlatButton from 'material-ui/FlatButton'
 
 import './projectRow.css'
 
@@ -17,13 +19,38 @@ export class ProjectRowComponent extends Component {
         this.setState({ showActions: !this.state.showActions })
     }
 
+    showAlert () {
+        this.setState({ showAlert: true })
+    }
+
+    hideAlert () {
+        this.setState({ showAlert: false })
+    }
+
+    deleteProject (userToken, id) {
+        this.showActions()
+        this.props.deleteProject({ userToken, id })
+    }
+
     constructor (props) {
         super(props)
-        this.state = { showActions: false }
+        this.state = { showActions: false, showAlert: false }
     }
 
     render () {
-        const { userToken, project: { id, title, estimate, acquired, author }, deleteProject } = this.props
+        const actions = [
+            <FlatButton
+                label="Cancel"
+                primary={true}
+                onTouchTap={() => this.hideAlert()}
+            />,
+            <FlatButton
+                label="Delete"
+                primary={true}
+                onTouchTap={() => this.deleteProject(userToken, id)}
+            />,
+        ]
+        const { userId, userToken, project: { id, title, estimate, acquired, author, author_id }, deleteProject } = this.props
         return (
             <div className='project_row'>
                 <ListItem
@@ -37,7 +64,7 @@ export class ProjectRowComponent extends Component {
                         <p className='author'>by {author}</p>
                     </div>
                     <div className='progress'>
-                        <div className='percentage'>{acquired}h of {estimate}h {(acquired / estimate).toFixed(3) * 100}%</div>
+                        <div className='percentage'>{acquired}h of {estimate}h {Math.round((acquired / estimate) * 100)}%</div>
                         <LinearProgress max={estimate} min={0} value={acquired} mode="determinate" style={{ height: '13px' }}/>
                     </div>
                     <img src={this.state.showActions ? UpArrow : DownArrow} />
@@ -46,10 +73,18 @@ export class ProjectRowComponent extends Component {
                     <div className='actions_layer'>
                         <Link to={`/view/${id}`}><RaisedButton backgroundColor='#64B5F6' label={'View'}/></Link>
                         <Link to={`/give/${id}`}><RaisedButton backgroundColor='#4CAF50' label={'Give Time'}/></Link>
-                        <FontIcon onTouchTap={() => {
-                            this.showActions()
-                            deleteProject({ userToken, id })
-                        }} className="material-icons" color='#D84315' style={{ cursor: 'pointer' }}>delete</FontIcon>
+                        <Dialog
+                              actions={actions}
+                              modal={false}
+                              open={this.state.showAlert}
+                              onRequestClose={() => this.hideAlert()}
+                            >
+                              <p>Are you sure that you want to delete the {title} project?</p>
+                        </Dialog>
+                        {userId === author_id && <FontIcon onTouchTap={() => {
+                            this.showAlert()
+
+                        }} className="material-icons" color='#D84315' style={{ cursor: 'pointer' }}>delete</FontIcon>}
                     </div>
                 )}
             </div>
@@ -61,4 +96,5 @@ ProjectRowComponent.propTypes = {
     project: ProjectPropTypes,
     deleteProject: PropTypes.func.isRequired,
     userToken: PropTypes.string,
+    userId: PropTypes.number,
 }
