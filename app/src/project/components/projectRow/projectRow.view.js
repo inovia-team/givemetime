@@ -5,6 +5,7 @@ import { Link } from 'react-router'
 import { ListItem } from 'material-ui/List'
 import DownArrow from '../../../../assets/down-arrow.png'
 import UpArrow from '../../../../assets/up-arrow.png'
+import Inovia from '../../../../assets/inovia.png'
 import RaisedButton from 'material-ui/RaisedButton'
 import FontIcon from 'material-ui/FontIcon'
 
@@ -30,13 +31,14 @@ export class ProjectRowComponent extends Component {
                     innerDivStyle={{ display: 'flex', alignItems: 'center' }}
                     hoverColor='#64B5F6'
                 >
+                <img className='logo_list' src={Inovia} />
                     <div className='basic_infos'>
                         <p>{title}</p>
                         <p className='author'>by {author}</p>
                     </div>
                     <div className='progress'>
-                        <div className='percentage'>{acquired}h of {estimate}h {(acquired / estimate).toFixed(4) * 100}%</div>
-                        <LinearProgress max={estimate} min={0} value={acquired} mode="determinate"/>
+                        <div className='percentage'>{acquired}h of {estimate}h {(acquired / estimate).toFixed(3) * 100}%</div>
+                        <LinearProgress max={estimate} min={0} value={acquired} mode="determinate" style={{ height: '13px' }}/>
                     </div>
                     <img src={this.state.showActions ? UpArrow : DownArrow} />
                 </ListItem>
