@@ -11,12 +11,10 @@ import { layoutMiddleware } from './layout/layout.middleware'
 const middlewares = [thunkMiddleware, routerMiddleware(browserHistory), layoutMiddleware]
 
 export default function configureStore (initialState) {
-
-    const enhancer = compose(
+    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose // enable redux extension
+    const enhancer = composeEnhancers(
         // Middleware you want to use in development:
-        applyMiddleware(...middlewares),
-        // enable redux extension
-        window.devToolsExtension ? window.devToolsExtension() : () => {}
+        applyMiddleware(...middlewares)
     )
 
     const store = createStore(combineReducers({
