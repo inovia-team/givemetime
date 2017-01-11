@@ -40,7 +40,7 @@ export class ViewProjectComponent extends Component {
                         <p className='author'>By {author}</p>
                     </div>
                     <div className='progress'>
-                        <CircularProgressbar percentage={Math.round(acquired / estimate * 100)} />
+                        <CircularProgressbar percentage={(acquired / estimate).toFixed(3) * 100} />
                         <p className='time_required'>Time required : {acquired}/{estimate}h</p>
                         <Link to={`/give/${id}`}><RaisedButton backgroundColor='#4CAF50' label={'Give Time'}/></Link>
                         <br/>

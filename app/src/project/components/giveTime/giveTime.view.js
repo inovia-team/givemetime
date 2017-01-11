@@ -3,6 +3,9 @@ import { RaisedButton } from 'material-ui'
 import { Field } from 'redux-form'
 import { TextField } from '../../../common/form'
 import ProjectPropTypes from '../../project.propTypes'
+import CircularProgressbar from 'react-circular-progressbar'
+
+import './giveTime.css'
 
 export function GiveTimeComponent ({ handleSubmit, userCredit, loadProject, project }) {
     if (! project) {
@@ -13,9 +16,9 @@ export function GiveTimeComponent ({ handleSubmit, userCredit, loadProject, proj
     }
     const { title, acquired, estimate } = project
     return (
-        <div>
-            <h1>Give Time to project {`${title} (${acquired}/${estimate})`}</h1>
-
+        <div className='give_time'>
+            <h1>Give Time to project {title}</h1>
+            <CircularProgressbar percentage={(acquired / estimate).toFixed(3) * 100} />
             <form onSubmit={handleSubmit}>
                 <Field
                     id="amount" name="amount" type="number"
@@ -25,7 +28,7 @@ export function GiveTimeComponent ({ handleSubmit, userCredit, loadProject, proj
                 <br/>
                 <Field id="projectId" name="projectId" type="hidden" component="input"/>
                 <Field id="userToken" name="userToken" type="hidden" component="input" />
-                <RaisedButton onClick={handleSubmit} label="Give time"/>
+                <RaisedButton backgroundColor='#4CAF50' style={{ marginTop:'15px' }} onClick={handleSubmit} label="Give time"/>
             </form>
         </div>
     )
