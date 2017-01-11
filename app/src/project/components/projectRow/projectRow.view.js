@@ -4,6 +4,7 @@ import ProjectPropTypes from '../../project.propTypes'
 import { Link } from 'react-router'
 import { ListItem } from 'material-ui/List'
 import DownArrow from '../../../../assets/down-arrow.png'
+import UpArrow from '../../../../assets/up-arrow.png'
 import RaisedButton from 'material-ui/RaisedButton'
 import FontIcon from 'material-ui/FontIcon'
 
@@ -37,7 +38,7 @@ export class ProjectRowComponent extends Component {
                         <div className='percentage'>{acquired}h of {estimate}h {(acquired / estimate).toFixed(4) * 100}%</div>
                         <LinearProgress max={estimate} min={0} value={acquired} mode="determinate"/>
                     </div>
-                    <img src={DownArrow} />
+                    <img src={this.state.showActions ? UpArrow : DownArrow} />
                 </ListItem>
                 {this.state.showActions && (
                     <div className='actions_layer'>

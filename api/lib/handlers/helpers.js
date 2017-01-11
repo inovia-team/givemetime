@@ -5,10 +5,10 @@ var DatabaseService = require('../DatabaseService.js');
 module.exports = function (rawResult, next) {
     var tempArray = [];
 
+    rawResult.constructor !== Array ? rawResult = [rawResult] : rawResult;
     rawResult.map(row => {
         tempArray.push(row.author_id);
     });
-
     DatabaseService('SELECT * FROM give_me_time_public.person WHERE id=ANY($1::int[])',
     [tempArray], next,
     result => {
@@ -20,6 +20,6 @@ module.exports = function (rawResult, next) {
                 }
             });
         });
-        next(rawResult);
+        next(rawResult.length === 1 ? rawResult[0] : rawResult);
     });
 };

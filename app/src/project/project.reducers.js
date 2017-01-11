@@ -12,8 +12,6 @@ export default function (state = { projects: [] }, action) {
                 .filter(project => project.id !== action.id)
                 .concat([{
                     id: action.id,
-                    name: action.name,
-                    time: action.time,
                     title: action.title,
                     estimate: action.estimate,
                     acquired: action.acquired,
@@ -35,8 +33,6 @@ export default function (state = { projects: [] }, action) {
         return { ...state,
             projects: state.projects.concat([{
                 id: action.id,
-                name: action.name,
-                time: action.time,
                 title: action.title,
                 estimate: action.estimate,
                 acquired: action.acquired,

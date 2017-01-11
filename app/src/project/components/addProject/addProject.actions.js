@@ -11,14 +11,14 @@ export function createProject ({ userToken, userId, title, estimate, description
                     response.estimate,
                     response.acquired,
                     response.description,
-                    response.id // TODO: relation fullname -> ID. API side
+                    response.author || null
                 ))
             }
         ))
     }
 }
 
-export const projectCreated = (id, title, estimate, acquired, description) => {
+export const projectCreated = (id, title, estimate, acquired, description, author) => {
     return {
         type: constants.PROJECT_CREATED,
         id: id,
@@ -26,5 +26,6 @@ export const projectCreated = (id, title, estimate, acquired, description) => {
         acquired: acquired,
         description: description,
         title: title,
+        author: author,
     }
 }
