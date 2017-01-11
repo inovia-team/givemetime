@@ -3,7 +3,7 @@
 
 BEGIN;
 
-create domain credits as double precision not null check (value >= 0.0);
+create domain credits as numeric(16, 10) not null check (value >= 0.0);
 
 create table give_me_time_public.person (
   id               serial not null primary key,
