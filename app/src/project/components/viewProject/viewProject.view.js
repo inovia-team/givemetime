@@ -17,7 +17,7 @@ export class ViewProjectComponent extends Component {
 
     constructor (props) {
         super(props)
-        this.state = { showDesc: true }
+        this.state = { showDesc: false }
     }
 
     render () {

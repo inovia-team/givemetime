@@ -24,6 +24,11 @@ export class GiveTimeComponent extends Component {
         this.state = { showAlert: false }
     }
 
+    handleSubmit (event) {
+        event.preventDefault()
+        this.showAlert()
+    }
+
     render () {
         const { handleSubmit, userCredit, loadProject, project, amount } = this.props
         const actions = [
@@ -51,7 +56,7 @@ export class GiveTimeComponent extends Component {
                 <h1>Give Time to project {title}</h1>
                 <CircularProgressbar percentage={Math.round((acquired / estimate) * 100)} />
                 <p>{acquired} / {estimate}h</p>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={this.handleSubmit.bind(this)}>
                     <Field
                         id="amount" name="amount" type="number"
                         component={TextField}

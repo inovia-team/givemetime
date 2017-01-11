@@ -50,7 +50,7 @@ export class ProjectRowComponent extends Component {
                 onTouchTap={() => this.deleteProject(userToken, id)}
             />,
         ]
-        const { userId, userToken, project: { id, title, estimate, acquired, author, author_id }, deleteProject } = this.props
+        const { userId, userToken, project: { id, title, estimate, acquired, author, author_id } } = this.props
         return (
             <div className='project_row'>
                 <ListItem
