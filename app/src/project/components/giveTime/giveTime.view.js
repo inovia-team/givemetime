@@ -55,7 +55,7 @@ export class GiveTimeComponent extends Component {
             <div className='give_time'>
                 <h1>Give Time to project {title}</h1>
                 <CircularProgressbar percentage={Math.round((acquired / estimate) * 100)} />
-                <p>{acquired} / {estimate}h</p>
+                <p className='project_progress'>{acquired} / {estimate}h</p>
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <Field
                         id="amount" name="amount" type="number"

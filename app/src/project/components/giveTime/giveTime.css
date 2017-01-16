@@ -4,3 +4,7 @@
     align-items: center;
     text-align: center;
 }
+
+.give_time .project_progress {
+    margin-bottom: -15px;
+}
