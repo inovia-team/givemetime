@@ -27,3 +27,7 @@
 .profile .my_project {
     width: 100%;
 }
+
+.profile .expected_credits {
+    text-align: center;
+}

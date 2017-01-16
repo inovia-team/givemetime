@@ -9,3 +9,9 @@
     margin-right: 8px;
     align-self: center;
 }
+
+.logged_appbar_section  .profile_appbar {
+    display: flex;
+    text-decoration: none;
+    color: initial;
+}

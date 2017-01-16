@@ -45,7 +45,7 @@ export class ProfileComponent extends React.Component {
                     autoOk={true}
                     minDate={this.state.minDate}
                     onChange={(x, event) => this.handleChangeDate(x,event)} />
-                { this.state.expectedCredit ? <p style={{ textAlign: 'center' }}>On the date you selected you should have : <br/>{(this.props.user.credit + this.state.expectedCredit).toFixed(2)} credits</p> : '' }
+                { this.state.expectedCredit ? <p className='expected_credits'>On the date you selected you should have : <br/>{(this.props.user.credit + this.state.expectedCredit).toFixed(2)} credits</p> : '' }
                 <div className='my_project'>
                     My projects:
                     <ProjectListComponent fromProfile={true} projects={this.props.myProject}></ProjectListComponent>
