@@ -6,13 +6,14 @@ import { List } from 'material-ui/List'
 export class ProjectListComponent extends React.Component {
 
     componentDidMount () {
-        this.props.loadProjects()
+        if (!this.props.fromProfile)
+            this.props.loadProjects()
     }
     render () {
         return (
             <List
               >
-                 {this.props.projects.map((project, i) =>
+                 { this.props.projects.length && this.props.projects.map((project, i) =>
                     <div key={i}>
                         <ProjectRow project={project} />
                     </div>
@@ -23,6 +24,7 @@ export class ProjectListComponent extends React.Component {
 }
 
 ProjectListComponent.propTypes = {
-    projects: PropTypes.arrayOf(ProjectPropTypes.isRequired).isRequired,
-    loadProjects: PropTypes.func.isRequired,
+    projects: PropTypes.arrayOf(ProjectPropTypes).isRequired,
+    loadProjects: PropTypes.func,
+    fromProfile: PropTypes.bool,
 }

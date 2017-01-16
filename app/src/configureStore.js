@@ -7,7 +7,6 @@ import { routerReducer } from 'react-router-redux'
 import { routerMiddleware } from 'react-router-redux'
 import { layoutMiddleware } from './layout/layout.middleware'
 
-
 const middlewares = [thunkMiddleware, routerMiddleware(browserHistory), layoutMiddleware]
 
 export default function configureStore (initialState) {
