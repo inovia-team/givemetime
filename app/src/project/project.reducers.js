@@ -25,7 +25,7 @@ export default function (state = { projects: [] }, action) {
         return { ...state,
             projects: state.projects.map(
                 project => project.id === action.id
-                    ? { ...project, acquired: action.acquired }
+                    ? { ...project, acquired: parseFloat(action.acquired) }
                     : project
             ),
         }
