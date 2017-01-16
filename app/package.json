@@ -12,7 +12,6 @@
   },
   "devDependencies": {
     "babel-cli": "~6.18.0",
-    "reduce-reducers": "^0.1.1",
     "babel-core": "~6.21.0",
     "babel-istanbul": "~0.12.1",
     "babel-loader": "~6.2.10",
