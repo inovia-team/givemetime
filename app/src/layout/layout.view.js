@@ -4,6 +4,7 @@ import Dialog from 'material-ui/Dialog'
 import LoginButton from '../login/login'
 import FlatButton from 'material-ui/FlatButton'
 import { Link } from 'react-router'
+import Snackbar from 'material-ui/Snackbar'
 import './layout.style.css'
 
 // Use named export for unconnected component (for tests)
@@ -68,6 +69,13 @@ export class LayoutComponent extends React.Component {
                     </Drawer>
                 </div>
                 { content }
+                { this.props.snackbar && <Snackbar
+                  open={this.props.snackbar.open && !this.props.apology}
+                  message={this.props.snackbar.message}
+                  autoHideDuration={4000}
+                  style={{ textAlign: 'center' }}
+                  onRequestClose={this.props.handleRequestClose}
+                /> }
             </div>
         )
     }
@@ -81,6 +89,8 @@ LayoutComponent.propTypes = {
     closeModal: PropTypes.func.isRequired,
     goHomepage: PropTypes.func.isRequired,
     globalMenuToggle: PropTypes.func.isRequired,
+    handleRequestClose: PropTypes.func,
     apology: PropTypes.string,
+    snackbar: PropTypes.object,
     children: PropTypes.element.isRequired,
 }

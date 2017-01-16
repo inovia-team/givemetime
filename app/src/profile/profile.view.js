@@ -50,7 +50,7 @@ export class ProfileComponent extends React.Component {
                     My projects:
                     <ProjectListComponent fromProfile={true} projects={this.props.myProject}></ProjectListComponent>
                 </div>
-            <RaisedButton backgroundColor='#D84315' onClick={this.props.handleLogout} style={{ padding: '3px', width: '100%' }} label={'Logout'}/>
+            <RaisedButton backgroundColor='#D84315' onClick={this.props.handleLogout} style={{ marginTop: '10px', width: '100%' }} label={'Logout'}/>
             </div>
         )
     }

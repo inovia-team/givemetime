@@ -3,7 +3,7 @@ import * as giveTimeActions from './components/giveTime/giveTime.actionTypes'
 import * as projectRowActions from './components/projectRow/projectRow.actionTypes'
 import * as addProjectActions from './components/addProject/addProject.actionTypes'
 
-export default function (state = { projects: [] }, action) {
+export default function (state = { projects: [], snackbar: { open: false, message: '' } }, action) {
     switch (action.type) {
 
     case projectActions.PROJECT_FETCHED:
@@ -47,7 +47,10 @@ export default function (state = { projects: [] }, action) {
         return { ...state,
             projects: state.projects.filter(project => project.id !== action.id),
         }
-
+    case projectActions.SHOW_SNACKBAR:
+        return { ...state, snackbar: { open: true, message: action.message } }
+    case projectActions.HIDE_SNACKBAR:
+        return { ...state, snackbar: { open: false, message: '' } }
     default:
         return state
 

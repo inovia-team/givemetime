@@ -47,3 +47,22 @@ export const projectFetched = (id, title, estimate, acquired, description, autho
         author_id: author_id,
     }
 }
+
+export function hideSnackBar () {
+    return dispatch => {
+        dispatch(closeSnackbar)
+    }
+}
+
+export const closeSnackbar = () => {
+    return {
+        type: constants.HIDE_SNACKBAR,
+    }
+}
+
+export const showSnackbar = message => {
+    return {
+        type: constants.SHOW_SNACKBAR,
+        message: message,
+    }
+}

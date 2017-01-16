@@ -6,11 +6,14 @@ import { ProjectListComponent } from './projectList.view'
 const mapStateToProps = state => {
     return {
         projects: state.project.project.projects,
+        snackbar: state.project.project.snackbar,
+        apology: state.project.common.apology,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators({
+        closeSnackbar: actions.closeSnackbar,
         loadProjects: actions.loadProjects }, dispatch)
 }
 
