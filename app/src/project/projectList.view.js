@@ -4,7 +4,7 @@ import ProjectPropTypes from './project.propTypes'
 import TextField from 'material-ui/TextField'
 import { List } from 'material-ui/List'
 
-export class ProjectListComponent extends React.Component {@
+export class ProjectListComponent extends React.Component {
     constructor (props) {
         super(props)
         this.state = {
