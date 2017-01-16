@@ -9,6 +9,8 @@ const oauth2Client = new OAuth2(
     process.env.GOOGLE_REDIRECT_URL
 );
 
+/* Get user name and email from OAuth login */
+
 module.exports = (req, res, next)=>{
     // impersonate user using his credentials
     oauth2Client.setCredentials({
@@ -17,15 +19,15 @@ module.exports = (req, res, next)=>{
 
     // ask google for user infos
     plus.people.get({ userId: 'me', auth: oauth2Client }, (err, response)=>{
-        if (err) throw err;
+        if (err) return next(err);
         // add auth info to the request
         req.auth = {
             fullname: response.displayName,
             email: response.emails
                 .filter(emailObj => emailObj.type === 'account')
                 .map(emailObj => emailObj.value)
-                .shift()
+                .shift(),
         };
-        next();
+        return next(); // returns user infos
     });
 };

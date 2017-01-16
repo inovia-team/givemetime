@@ -1,0 +1,39 @@
+.layout {
+    margin: 30px 30px 30px 50px;
+}
+
+.modalStyle p {
+    padding: 10px;
+}
+
+.modalStyle {
+    position: absolute;
+    top: initial;
+    left: 40%;
+    right: initial;
+    bottom: 0px;
+    border: 1px solid rgb(204, 204, 204);
+    background-color: #e74c3c;
+    overflow: auto;
+    border-radius: 4px;
+    outline: none;
+    padding: 0px;
+    text-align: center;
+}
+
+.error_header {
+    margin: 0;
+    background-color: #c0392b;
+    padding: 8px 0px;
+}
+
+.error_header h2 {
+    display: inline;
+    padding-left: 17px;
+}
+
+.error_header img {
+    height: 17px;
+    float: right;
+    margin-right: 10px;
+}

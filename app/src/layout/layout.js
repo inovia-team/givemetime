@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import * as actions from './layout.actions'
 import { bindActionCreators } from 'redux'
 import { LayoutComponent } from './layout.view'
+import { closeModal, goHomepage } from '../common/common.actions'
 
 const mapStateToProps = state => {
     return {
@@ -13,7 +14,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators({
-        globalMenuToggle: actions.globalMenuToggle }, dispatch)
+        globalMenuToggle: actions.globalMenuToggle,
+        closeModal: closeModal,
+        goHomepage: goHomepage }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LayoutComponent)

@@ -1,38 +1,39 @@
 import * as constants from './common.actionTypes'
 import fetch from 'isomorphic-fetch'
 import * as config from '../config'
+import { replace } from 'react-router-redux'
 
-export const getGraphQL = (userToken, query, variables, onSuccess, onError) => {
+export const RequestService = (method, userToken, variables, route, onSuccess, onError) => {
     onSuccess = onSuccess || (a => a)
     return dispatch => {
         onError = onError || (a => dispatch(apologize(a)))
         let headers = { 'content-type': 'application/json' }
         if (userToken) {
-            headers['authorization'] = `Bearer ${userToken}`
+            headers['authorization'] = userToken
         }
-        return fetch(`${config.API_URL}/graphql`, {
-            method: 'POST',
+        return fetch(`${config.API_URL}/${route}`, {
+            method: method,
             headers: headers,
-            body: JSON.stringify({ query, variables }),
+            body: variables ? JSON.stringify(variables) : null,
         })
         .then(response => {
             if (response.status === 200) {
                 return response.json()
             }
+
             return Promise.reject(response)
         })
         .catch(err => {
             if (err.json) {
                 return err.json()
             }
-            return { errors: [ err ] }
+            return { error: err }
         })
         .then(response => {
-
-            if (response.errors) {
-                onError(response.errors.map(err => err.message || err).join('. '))
+            if (response.error) {
+                return onError(response.error.message)
             } else {
-                onSuccess(response.data)
+                return onSuccess({ response })
             }
         })
     }
@@ -42,3 +43,21 @@ export const apologize = msg => ({
     type: constants.APOLOGIZE,
     message: msg,
 })
+
+export function closeModal () {
+    return dispatch => {
+        dispatch(closeModalAction())
+    }
+}
+
+export function goHomepage () {
+    return dispatch => {
+        dispatch(replace('/'))
+    }
+}
+
+export const closeModalAction = () => {
+    return {
+        type: constants.CLOSE_MODAL,
+    }
+}

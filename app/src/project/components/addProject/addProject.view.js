@@ -38,6 +38,7 @@ export function AddProjectComponent ({ handleSubmit }) {
                 />
                 <br/>
                 <Field id="userToken" name="userToken" type="hidden" component="input" />
+                <Field id="userId" name="userId" type="hidden" component="input" />
                 <RaisedButton onClick={handleSubmit} label="Create project"/>
             </form>
         </div>

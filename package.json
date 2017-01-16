@@ -6,16 +6,16 @@
   "devDependencies": {},
   "scripts": {
     "test": "npm --loglevel=silent run test.lint && npm --loglevel=silent run test.unit",
-    "start": "API_URL=http://localhost:3000 PGADMINPASSWORD=postgres PGPASSWORD=give_me_time GOOGLE_AUTH_MOCK=true docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
+    "start": "API_URL=http://localhost PORT=3000 API_PORT=4000 PGADMINPASSWORD=postgres PGPASSWORD=give_me_time GOOGLE_AUTH_MOCK=true docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
     "_db_migrate": "PGPASSWORD=give_me_time docker-compose -f docker-compose.yml -f docker-compose.dev.yml run --rm -w /usr/src/app api ./node_modules/.bin/db-migrate --migrations-dir ./migration",
     "db.migrate": "npm --loglevel=silent run _db_migrate up",
     "db.revert": "npm --loglevel=silent run _db_migrate down",
     "db.migration.create": "npm --loglevel=silent run _db_migrate --sql-file create",
     "db.test": "./api/db-test.sh",
     "reset": "docker-compose stop && docker-compose rm --force",
-    "test.lint": "npm --prefix ./app --loglevel=silent run test.lint",
-    "test.lint:fix": "npm --prefix ./app --loglevel=silent run test.lint.fix",
-    "test.unit": "npm --prefix ./app --loglevel=silent run test.unit"
+    "test.lint": "npm --prefix ./app --loglevel=silent run test.lint && npm --prefix ./api --loglevel=silent run test.lint",
+    "test.lint:fix": "npm --prefix ./app --loglevel=silent run test.lint.fix && npm --prefix ./api --loglevel=silent run test.lint.fix",
+    "test.unit": "npm --prefix ./app --loglevel=silent run test.unit && npm --prefix ./api --loglevel=silent run test.unit"
   },
   "repository": {
     "type": "git",

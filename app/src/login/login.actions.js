@@ -1,4 +1,4 @@
-import { getGraphQL, apologize } from '../common/common.actions'
+import { RequestService, apologize } from '../common/common.actions'
 import * as constant from './login.actionTypes'
 import fetch from 'isomorphic-fetch'
 import * as config from '../config'
@@ -6,20 +6,11 @@ import * as config from '../config'
 const USER_TOKEN_KEY = 'userAuth'
 
 function logUserInWithTokenAndId (dispatch, id, token) {
-    dispatch(getGraphQL(null, `
-            query findPersonById($id: ID!) {
-              person(id: $id) {
-                id,
-                rowId,
-                fullname
-                credit
-                createdAt
-              }
-            }
-        `,
+    dispatch(RequestService('POST', null,
         { id },
-        ({ person }) => {
-            dispatch(userLoggedIn(token, person.id, person.rowId, person.fullname, person.credit))
+        'login',
+        ({ response }) => {
+            dispatch(userLoggedIn(token, response.id, response.fullname, response.credit))
             // TODO: use a middleware to dispatch non-pure functions
             dispatch(() => {
                 localStorage.setItem(USER_TOKEN_KEY, JSON.stringify({ user_id: id, token }))
@@ -35,6 +26,7 @@ export function failureError (response) {
 }
 
 export function createUserIfNotExists (response) {
+
     const access_token = response.accessToken
     return dispatch => {
         // auth the user and get a token
@@ -59,7 +51,7 @@ export function createUserIfNotExists (response) {
             if (jwtResponse.errors) {
                 apologize(jwtResponse.errors.map(err => err.message || err).join('. '))
             } else {
-                logUserInWithTokenAndId(dispatch, jwtResponse.user_id, jwtResponse.token)
+                logUserInWithTokenAndId(dispatch, jwtResponse.user_id, access_token)
             }
         })
     }
@@ -77,7 +69,7 @@ export function handleLogout () {
 export function checkLocalUser () {
     return dispatch => {
         // if the user is "google" logged in and an id is present in localstorage,
-        // we try to fetch user from graphql and dispatch the userLoggedInAction
+        // we try to fetch user from the api and dispatch the userLoggedInAction
 
         const userAuth = JSON.parse(localStorage.getItem(USER_TOKEN_KEY) || 'null')
 
@@ -109,10 +101,10 @@ export function checkLocalUser () {
     }
 }
 
-export const userLoggedIn = (token, id, rowId, fullname, credit) => {
+export const userLoggedIn = (token, id, fullname, credit) => {
     return {
         type: constant.USER_LOGGED_IN,
-        token, id, rowId, fullname, credit,
+        token, id, fullname, credit,
     }
 }
 

@@ -1,27 +1,17 @@
-import { getGraphQL } from '../../../common/common.actions'
+import { RequestService } from '../../../common/common.actions'
 import * as constants from './projectRow.actionTypes'
 
-export function deleteProject ({ userToken, rowId }) {
+export function deleteProject ({ userToken, id }) {
     return dispatch => {
-        dispatch(getGraphQL(userToken, `
-            mutation projectDelete(
-                $rowId: Int!
-            ) {
-                projectDelete(input: {
-                    id: $rowId
-                }) {
-                    output
-                }
-            }`,
-            { rowId },
-            response => dispatch(projectDeleted(parseInt(response.projectDelete.output || '0')))
+        dispatch(RequestService('DELETE', userToken, null, `project/${id}`,
+            ({ response }) => dispatch(projectDeleted(response.id || '0'))
         ))
     }
 }
 
-export const projectDeleted = rowId => {
+export const projectDeleted = id => {
     return {
         type: constants.PROJECT_DELETED,
-        rowId: rowId,
+        id: id,
     }
 }

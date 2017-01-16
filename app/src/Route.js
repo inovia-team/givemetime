@@ -19,7 +19,7 @@ function AppRoutes ({ history }) {
                     <IndexRoute component={ProjectList} />
                     <Route path="add" component={Add} />
                     <Route path="view/:id" component={View} />
-                    <Route path="give/:id/:rowId" component={GiveTime} />
+                    <Route path="give/:id" component={GiveTime} />
                 </Route>
             </Router>
         </MuiThemeProvider>

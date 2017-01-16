@@ -5,19 +5,28 @@
   "main": "server.js",
   "scripts": {
     "start": "./server.sh",
-    "start-dev": "./server-dev.sh"
+    "start-dev": "./server-dev.sh",
+    "test.lint": "./node_modules/.bin/eslint . --ext .js --ext .jsx",
+    "test.lint.fix": "npm --loglevel=silent run test.lint -- --fix",
+    "test.unit": "GOOGLE_AUTH_MOCK=true PGHOST=0.0.0.0 PGPORT=5430 PGUSER=give_me_time_owner PGPASSWORD=give_me_time PGDATABASE=give_me_time API_URL=http://localhost PORT=3000 API_PORT=4000 ./node_modules/.bin/mocha --recursive $(find lib -name '*.spec.js')"
   },
   "devDependencies": {
-    "nodemon": "^1.10.2"
+    "require-all": "^2.1.0",
+    "nodemon": "^1.11.0",
+    "async": "^2.1.4",
+    "eslint": "^3.12.2",
+    "mocha": "^3.2.0",
+    "should": "^11.1.2",
+    "bunyan": "^1.8.5",
+    "supertest": "^2.0.1"
   },
   "dependencies": {
     "cors": "^2.8.1",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "googleapis": "^13.0.0",
-    "jsonwebtoken": "^7.1.9",
-    "pg": "^6.1.0",
-    "postgraphql": "^1.9.3",
+    "googleapis": "^16.0.0",
+    "jsonwebtoken": "^7.2.1",
+    "pg": "^6.1.2",
     "db-migrate": "^0.9.25"
   },
   "repository": {

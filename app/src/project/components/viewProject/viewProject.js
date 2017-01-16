@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import * as actions from '../../project.actions'
 
 const mapStateToProps = (state, ownProps) => ({
-    project: state.project.project.projects.find(project => project.id === ownProps.params.id),
+    project: state.project.project.projects.find(project => project.id == ownProps.params.id),
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => {
