@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { TextField as FormTextField } from 'material-ui'
 
 export function TextField ({ input, label, disabled, value, multiLine, rows, type }) {
-    const width = multiLine ? '500px' : '256px'
+    const width = multiLine ? '100vw' : '256px'
     return (
         <FormTextField
             floatingLabelText={label}
@@ -12,7 +12,7 @@ export function TextField ({ input, label, disabled, value, multiLine, rows, typ
             rows={rows}
             className='text_field'
             type={type}
-            style={{ width: width, display: 'flex', alignItems: 'center', flexDirection: 'column' }}
+            style={{ width: width, maxWidth: '500px', display: 'flex', alignItems: 'center', flexDirection: 'column' }}
             {...input}
         />
     )
