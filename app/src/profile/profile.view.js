@@ -41,6 +41,7 @@ export class ProfileComponent extends React.Component {
                     className='date_picker'
                     hintText="Calculate your future credits !"
                     container="inline"
+                    mode={this.props.orientation}
                     autoOk={true}
                     minDate={this.state.minDate}
                     onChange={(x, event) => this.handleChangeDate(x,event)} />
@@ -62,6 +63,7 @@ ProfileComponent.propTypes = {
         credit: PropTypes.number,
         avatar: PropTypes.string,
     }).isRequired,
+    orientation: PropTypes.string.isRequired,
     handleLogout: PropTypes.func.isRequired,
     loadProjects: PropTypes.func.isRequired,
     myProject: PropTypes.array.isRequired,

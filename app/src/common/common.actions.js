@@ -39,6 +39,11 @@ export const RequestService = (method, userToken, variables, route, onSuccess, o
     }
 }
 
+export const changeOrientation = orientation => ({
+    type: constants.CHANGE_ORIENTATION,
+    orientation: orientation,
+})
+
 export const apologize = msg => ({
     type: constants.APOLOGIZE,
     message: msg,
