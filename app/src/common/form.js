@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { TextField as FormTextField } from 'material-ui'
 
-export function TextField ({ input, label, disabled, value, multiLine, rows }) {
+export function TextField ({ input, label, disabled, value, multiLine, rows, type }) {
     const width = multiLine ? '500px' : '256px'
     return (
         <FormTextField
@@ -11,6 +11,7 @@ export function TextField ({ input, label, disabled, value, multiLine, rows }) {
             multiLine={multiLine}
             rows={rows}
             className='text_field'
+            type={type}
             style={{ width: width, display: 'flex', alignItems: 'center', flexDirection: 'column' }}
             {...input}
         />
@@ -20,6 +21,7 @@ export function TextField ({ input, label, disabled, value, multiLine, rows }) {
 TextField.propTypes = {
     input: PropTypes.object.isRequired,
     label: PropTypes.string,
+    type: PropTypes.string,
     disabled: PropTypes.bool,
     multiLine: PropTypes.bool,
     rows: PropTypes.number,
