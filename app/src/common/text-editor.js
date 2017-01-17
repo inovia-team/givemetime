@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { Component, PropTypes } from 'react'
 import 'medium-draft/lib/index.css'
 import {
     Editor,
     ImageSideButton,
-    createEditorState,
 } from 'medium-draft'
 
-import { stateToHTML } from 'draft-js-export-html'
+import {
+  EditorState,
+} from 'draft-js'
 
-export class TextEditor extends React.Component {
+
+import { convertToHTML } from 'draft-convert'
+
+export class TextEditor extends Component {
     constructor (props) {
         super(props)
 
@@ -18,12 +22,12 @@ export class TextEditor extends React.Component {
         }]
 
         this.state = {
-            editorState: createEditorState(), // for empty content
+            editorState: props.data ? EditorState.createWithContent(props.data) : EditorState.createEmpty(),
         }
 
         this.onChange = editorState => {
             this.setState({ editorState })
-            const html = stateToHTML(editorState.getCurrentContent())
+            const html = convertToHTML(editorState.getCurrentContent())
             this.props.input.onChange(JSON.stringify(html))
         }
     }
@@ -40,4 +44,9 @@ export class TextEditor extends React.Component {
                 sideButtons={this.sideButtons} />
         )
     }
+}
+
+TextEditor.propTypes = {
+    input: PropTypes.object,
+    data: PropTypes.object,
 }

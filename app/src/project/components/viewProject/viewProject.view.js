@@ -6,6 +6,11 @@ import RaisedButton from 'material-ui/RaisedButton'
 import { Link } from 'react-router'
 import DownArrow from '../../../../assets/down-arrow.png'
 import UpArrow from '../../../../assets/up-arrow.png'
+import EditIcon from '../../../../assets/edit-icon.png'
+import SaveIcon from '../../../../assets/save-icon.png'
+import { TextEditor } from '../../../common/text-editor'
+import { Field } from 'redux-form'
+import { convertFromHTML } from 'draft-convert'
 
 import './viewProject.css'
 
@@ -15,9 +20,14 @@ export class ViewProjectComponent extends Component {
         this.setState({ showDesc: !this.state.showDesc })
     }
 
+    editOrSave () {
+        this.state.editing && this.props.handleSubmit()
+        this.setState({ editing: !this.state.editing })
+    }
+
     constructor (props) {
         super(props)
-        this.state = { showDesc: false }
+        this.state = { showDesc: false, editing: false }
     }
 
     createMarkup (html) {
@@ -26,7 +36,7 @@ export class ViewProjectComponent extends Component {
 
     render () {
 
-        const { project, loadProject } = this.props
+        const { project, loadProject, handleSubmit } = this.props
 
         if (!this.props.project) {
             loadProject()
@@ -54,9 +64,25 @@ export class ViewProjectComponent extends Component {
                 <div className='description'>
                     <div className='title_arrow'>
                         <h2 className='title_desc'>Description</h2>
+                        <img onClick={() => this.editOrSave()} src={this.state.editing ? SaveIcon : EditIcon} />
                         <img className='arrow_desc' onClick={() => this.showDesc()} src={this.state.showDesc ? UpArrow : DownArrow} />
                     </div>
-                    {this.state.showDesc && (<p dangerouslySetInnerHTML={this.createMarkup(description)}></p>)}
+                    {this.state.showDesc && !this.state.editing && (<p dangerouslySetInnerHTML={this.createMarkup(description)}></p>)}
+                    {this.state.editing && (
+                        <form className='add_project_form' onSubmit={handleSubmit}>
+                            <Field
+                                id="description" name="description" type="text"
+                                component={TextEditor}
+                                data={convertFromHTML(JSON.parse(description))}
+                            />
+                            <br/>
+                            <Field id="estimate" name="estimate" type="hidden" component="input" />
+                            <Field id="title" name="title" type="hidden" component="input" />
+                            <Field id="author" name="author" type="hidden" component="input" />
+                            <Field id="userToken" name="userToken" type="hidden" component="input" />
+                            <Field id="userId" name="userId" type="hidden" component="input" />
+                        </form>
+                    )}
                 </div>
             </div>
         )
@@ -66,4 +92,5 @@ export class ViewProjectComponent extends Component {
 ViewProjectComponent.propTypes = {
     project: ProjectPropTypes,
     loadProject: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
 }
