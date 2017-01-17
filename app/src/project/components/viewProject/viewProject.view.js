@@ -20,7 +20,12 @@ export class ViewProjectComponent extends Component {
         this.state = { showDesc: false }
     }
 
+    createMarkup (html) {
+        return { __html: JSON.parse(html) }
+    }
+
     render () {
+
         const { project, loadProject } = this.props
 
         if (!this.props.project) {
@@ -51,7 +56,7 @@ export class ViewProjectComponent extends Component {
                         <h2 className='title_desc'>Description</h2>
                         <img className='arrow_desc' onClick={() => this.showDesc()} src={this.state.showDesc ? UpArrow : DownArrow} />
                     </div>
-                    {this.state.showDesc && (<p>{description}</p>)}
+                    {this.state.showDesc && (<p dangerouslySetInnerHTML={this.createMarkup(description)}></p>)}
                 </div>
             </div>
         )

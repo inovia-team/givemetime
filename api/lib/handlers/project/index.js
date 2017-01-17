@@ -58,7 +58,7 @@ module.exports.delete = function (req, res, next) {
             });
         }, function giveBackCredits (userId, resProject, cb) {
             /*
-                If a project get deleted we need to give back the credits to their user
+                If a project get deleted we need to give back the credits to their users
                 Since there is no object in postgres we made and array of composite type (id, credits)
                 We need to parse it to make it JS-usable
             */

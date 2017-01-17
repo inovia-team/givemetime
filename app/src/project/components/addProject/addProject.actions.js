@@ -2,6 +2,8 @@ import { RequestService } from '../../../common/common.actions'
 import * as constants from './addProject.actionTypes'
 
 export function createProject ({ userToken, userId, title, estimate, description }) {
+    console.log(estimate)
+    console.log(description)
     return dispatch => {
         dispatch(RequestService('POST', userToken, { userId, title, estimate, description }, 'project',
             ({ response }) => {
