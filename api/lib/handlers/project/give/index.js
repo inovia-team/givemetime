@@ -4,6 +4,7 @@ var DatabaseService = require('../../../DatabaseService.js');
 var getUserIdFromToken = require('../../../../auth/getIdFromToken.js').getUserIdFromToken;
 var error = require('../../../config.js').errors;
 var async = require('async');
+var postgresArray = require('postgres-array');
 
 module.exports.post = function (req, res, next) {
     const id = req.params.id;
@@ -37,19 +38,32 @@ module.exports.post = function (req, res, next) {
                     return next({ message: error.UNKNOWN_PROJECT });
                 else if (result.estimate - result.acquired < amount)
                     return next({ message: error.TOO_MUCH_CREDIT });
-                else if (resCheck.credit < amount)
+                else if (parseFloat(resCheck.credit) < amount)
                     return next({ message: error.NOT_ENOUGH_CREDIT });
-                return cb(null);
+                return cb(null, result);
             });
         },
-        function updateUser (cb) {
+        function updateUser (resProject, cb) {
             DatabaseService('UPDATE give_me_time_public.person SET credit=credit-($1) WHERE id=($2)',
             [amount, userId], next,
             () => {
-                return cb(null);
+                return cb(null, resProject);
             });
-        }, function updateProject (cb) {
-            DatabaseService('UPDATE give_me_time_public.project SET acquired=acquired+($1) WHERE id=($2) RETURNING *',
+        }, function updateProject (resProject, cb) {
+            /*
+                If the user never donated to the project, just concat the value to the array
+                Else we need to find the index of the array storing the user given credits
+                Since there is no object in postgres we made and array of composite type (id, credits)
+                We need to parse it to make it JS-usable
+                Once the prepared SQL statement has been made, we can just add it to the query
+            */
+            let i = 0;
+            const query = resProject.associate_users && postgresArray.parse(resProject.associate_users).find(user => {
+                user = eval(user.replace(/\(/g, '[').replace(/\)/g, ']'));
+                i++;
+                return user[0] === userId;
+            }) ? `associate_users[${i}].credits_amount = associate_users[${i}].credits_amount + ${amount}` : `associate_users = associate_users || '{"(${userId}, ${amount})"}'`;
+            DatabaseService(`UPDATE give_me_time_public.project SET acquired=acquired+($1), ${query} WHERE id=($2) RETURNING *`,
             [amount, id], next,
             result => {
                 return cb(result);

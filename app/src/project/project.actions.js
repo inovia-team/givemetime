@@ -18,7 +18,7 @@ export function loadProjects () {
     return dispatch => {
         dispatch(RequestService('GET', null, null, 'projects',
             ({ response }) => {
-                !response.length ? response = [response] : ''
+                !response.length && response.id ? response = [response] : ''
                 response.map(handleNodeFetched(dispatch))
             }
         ))
