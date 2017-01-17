@@ -1,5 +1,6 @@
 import * as loginActions from './login.actionTypes'
 import * as giveTimeActions from '../project/components/giveTime/giveTime.actionTypes'
+import { PROJECT_DELETED } from '../project/components/projectRow/projectRow.actionTypes'
 
 export default function (state = { user: {}, projects: [] }, action) {
     switch (action.type) {
@@ -24,6 +25,13 @@ export default function (state = { user: {}, projects: [] }, action) {
         return { ...state,
             user: { ...state.user, credit: state.user.credit - action.amount },
         }
+    case PROJECT_DELETED:
+        if (action.newCredits) {
+            return { ...state,
+                user: { ...state.user, credit: Math.round(action.newCredits) },
+            }
+        }
+        break
     default:
         return state
     }
