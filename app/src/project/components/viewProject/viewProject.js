@@ -3,17 +3,16 @@ import { ViewProjectComponent } from './viewProject.view'
 import { bindActionCreators } from 'redux'
 import { reduxForm } from 'redux-form'
 import * as actions from '../../project.actions'
+import { editProject } from '../addProject/addProject.actions'
 
 function mapStateToProps (state, ownProps) {
     const project = state.project.project.projects.find(project => project.id == ownProps.params.id)
     return {
         project: project,
         initialValues: {
-            author: state.project.login.user.fullname,
+            projectId: ownProps.params.id,
             userToken: state.project.login.user.token,
             userId: state.project.login.user.id,
-            title: project && project.title,
-            estimate: project && project.estimate,
         },
     }
 }
@@ -21,6 +20,7 @@ function mapStateToProps (state, ownProps) {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return bindActionCreators({
         loadProject: actions.loadProject(ownProps.params.id),
+        onSubmit: editProject,
     }, dispatch)
 }
 

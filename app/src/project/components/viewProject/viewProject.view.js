@@ -9,6 +9,7 @@ import UpArrow from '../../../../assets/up-arrow.png'
 import EditIcon from '../../../../assets/edit-icon.png'
 import SaveIcon from '../../../../assets/save-icon.png'
 import { TextEditor } from '../../../common/text-editor'
+import { TextField } from '../../../common/form'
 import { Field } from 'redux-form'
 import { convertFromHTML } from 'draft-convert'
 
@@ -48,42 +49,45 @@ export class ViewProjectComponent extends Component {
         const { id, title, author, acquired, estimate, description } = project
         return (
             <div className='view_project'>
-                <div className='header_view'>
-                    <div className='basic_infos'>
-                        <img className='logo_view' src={Inovia} />
-                        <h2 className='project_title'>{title}</h2>
-                        <p className='author'>By {author}</p>
-                    </div>
-                    <div className='progress'>
-                        <CircularProgressbar percentage={Math.round((acquired / estimate) * 100)} />
-                        <p className='time_required'>Time required : {acquired}/{estimate}h</p>
-                        <Link to={`/give/${id}`}><RaisedButton backgroundColor='#4CAF50' label={'Give Time'}/></Link>
-                        <br/>
-                    </div>
-                </div>
-                <div className='description'>
-                    <div className='title_arrow'>
-                        <h2 className='title_desc'>Description</h2>
-                        <img onClick={() => this.editOrSave()} src={this.state.editing ? SaveIcon : EditIcon} />
-                        <img className='arrow_desc' onClick={() => this.showDesc()} src={this.state.showDesc ? UpArrow : DownArrow} />
-                    </div>
-                    {this.state.showDesc && !this.state.editing && (<p dangerouslySetInnerHTML={this.createMarkup(description)}></p>)}
-                    {this.state.editing && (
-                        <form className='add_project_form' onSubmit={handleSubmit}>
-                            <Field
-                                id="description" name="description" type="text"
-                                component={TextEditor}
-                                data={convertFromHTML(JSON.parse(description))}
-                            />
+                <form conSubmit={handleSubmit}>
+                    <img style={{ float: 'right' }} onClick={() => this.editOrSave()} src={this.state.editing ? SaveIcon : EditIcon} />
+                    <div className='header_view'>
+                        <div className='basic_infos'>
+                            <img className='logo_view' src={Inovia} />
+                            {this.state.editing ? <Field
+                                id="title" name="title" type="text"
+                                component={TextField}
+                            /> : <h2 className='project_title'>{title}</h2>}
+                            <p className='author'>By {author}</p>
+                        </div>
+                        <div className='progress'>
+                            <CircularProgressbar percentage={Math.round((acquired / estimate) * 100)} />
+                            <p className='time_required'>Time required : {acquired}/{estimate}h</p>
+                            <Link to={`/give/${id}`}><RaisedButton backgroundColor='#4CAF50' label={'Give Time'}/></Link>
                             <br/>
-                            <Field id="estimate" name="estimate" type="hidden" component="input" />
-                            <Field id="title" name="title" type="hidden" component="input" />
-                            <Field id="author" name="author" type="hidden" component="input" />
-                            <Field id="userToken" name="userToken" type="hidden" component="input" />
-                            <Field id="userId" name="userId" type="hidden" component="input" />
-                        </form>
-                    )}
-                </div>
+                        </div>
+                    </div>
+                    <div className='description'>
+                        <div className='title_arrow'>
+                            <h2 className='title_desc'>Description</h2>
+                            <img className='arrow_desc' onClick={() => this.showDesc()} src={this.state.showDesc ? UpArrow : DownArrow} />
+                        </div>
+                        {this.state.showDesc && !this.state.editing && (<p dangerouslySetInnerHTML={this.createMarkup(description)}></p>)}
+                        {this.state.editing && (
+                            <div>
+                                <Field
+                                    id="description" name="description" type="text"
+                                    component={TextEditor}
+                                    data={convertFromHTML(JSON.parse(description))}
+                                />
+                                <br/>
+                                <Field id="projectId" name="projectId" type="hidden" component="input"/>
+                                <Field id="userToken" name="userToken" type="hidden" component="input" />
+                                <Field id="userId" name="userId" type="hidden" component="input" />
+                            </div>
+                        )}
+                    </div>
+                </form>
             </div>
         )
     }

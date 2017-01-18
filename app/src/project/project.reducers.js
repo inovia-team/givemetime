@@ -43,6 +43,19 @@ export default function (state = { projects: [], snackbar: { open: false, messag
             }]),
         }
 
+    case addProjectActions.PROJECT_EDITED:
+        return { ...state,
+            projects: state.projects.map(
+                project => project.id === action.id
+                    ? { ...project,
+                        title: action.title || project.title,
+                        estimate: parseFloat(action.estimate) || project.estimate,
+                        description: action.description || project.description,
+                    }
+                    : project
+            ),
+        }
+
     case projectRowActions.PROJECT_DELETED:
         return { ...state,
             projects: state.projects.filter(project => project.id !== action.id),

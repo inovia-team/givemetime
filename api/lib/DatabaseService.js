@@ -14,8 +14,8 @@ function checkArguments (args) { // If one required argument is either null or u
     return true;
 }
 
-module.exports = function (query, args, next, cb) {
-    if (!checkArguments(args)) {
+module.exports = function (query, args, next, cb, acceptNull) {
+    if (!checkArguments(args) && !acceptNull) {
         log.error(error['ARGUMENT_MISSING']);
         return next({ message: error.ARGUMENT_MISSING });
     }

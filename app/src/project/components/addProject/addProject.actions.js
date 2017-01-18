@@ -2,8 +2,6 @@ import { RequestService } from '../../../common/common.actions'
 import * as constants from './addProject.actionTypes'
 
 export function createProject ({ userToken, userId, title, estimate, description }) {
-    console.log(estimate)
-    console.log(description)
     return dispatch => {
         dispatch(RequestService('POST', userToken, { userId, title, estimate, description }, 'project',
             ({ response }) => {
@@ -18,6 +16,31 @@ export function createProject ({ userToken, userId, title, estimate, description
                 ))
             }
         ))
+    }
+}
+
+export function editProject ({ userToken, userId, projectId, title, estimate, description }) {
+    return dispatch => {
+        dispatch(RequestService('PUT', userToken, { userId, title, estimate, description }, `project/${projectId}`,
+            ({ response }) => {
+                dispatch(projectEdited(
+                    response.id,
+                    response.title,
+                    response.estimate,
+                    response.description
+                ))
+            }
+        ))
+    }
+}
+
+export const projectEdited = (id, title, estimate, description) => {
+    return {
+        type: constants.PROJECT_EDITED,
+        id: id,
+        estimate: estimate,
+        description: description,
+        title: title,
     }
 }
 
