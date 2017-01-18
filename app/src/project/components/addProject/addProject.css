@@ -10,6 +10,6 @@
     flex-direction: column;
 }
 
-.md-RichEditor-root {
+.add_project_container  .md-RichEditor-root {
     width: 90vw;
 }

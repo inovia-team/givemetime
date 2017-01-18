@@ -45,8 +45,6 @@ module.exports.put = function (req, res, next) {
     const estimate = req.body.estimate;
     const description = req.body.description;
 
-    console.log(title, estimate, description)
-
     DatabaseService('UPDATE give_me_time_public.project SET title = COALESCE(($2), title), estimate = COALESCE(($3), estimate), description = COALESCE(($4), description) WHERE id=($1) RETURNING *',
     [id, title, estimate, description], next,
     result => {
