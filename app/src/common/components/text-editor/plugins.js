@@ -7,6 +7,7 @@ import createEmojiPlugin from 'draft-js-emoji-plugin'
 import Editor from 'draft-js-plugins-editor'
 import createLinkifyPlugin from 'draft-js-linkify-plugin'
 import createUndoPlugin from 'draft-js-undo-plugin'
+import createImagePlugin from 'draft-js-image-plugin'
 import createInlineToolbarPlugin, { Separator } from 'draft-js-inline-toolbar-plugin'
 
 // Import all plugins styles
@@ -46,6 +47,7 @@ var LinkComponent = React.createClass({
 
 const hashtagPlugin = createHashtagPlugin()
 const undoPlugin = createUndoPlugin()
+const imagePlugin = createImagePlugin()
 const emojiPlugin = createEmojiPlugin()
 const linkifyPlugin = createLinkifyPlugin({ component: LinkComponent })
 const inlineToolbarPlugin = createInlineToolbarPlugin({
@@ -76,6 +78,7 @@ export {
     inlineToolbarPlugin,
     emojiPlugin,
     hashtagPlugin,
+    imagePlugin,
     undoPlugin,
     Editor,
     InlineToolbar,

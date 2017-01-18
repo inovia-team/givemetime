@@ -83,7 +83,7 @@ export class ViewProjectComponent extends Component {
                                 <Field
                                     id="description" name="description" type="text"
                                     component={TextEditor}
-                                    data={convertFromHTML(JSON.parse(description))}
+                                    data={JSON.parse(description)}
                                 />
                                 <br/>
                                 <Field id="projectId" name="projectId" type="hidden" component="input"/>
