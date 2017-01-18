@@ -13,8 +13,3 @@
 .editor :global(.public-DraftEditor-content) {
   min-height: 140px;
 }
-
-span[attribute*="draftJsHashtagPlugin__hashtag"] {
-    color: #1CA782;
-    font-family: cursive;
-}
