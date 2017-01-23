@@ -50,7 +50,7 @@ export class ProjectListComponent extends React.Component {
                   message={this.props.snackbar.message}
                   autoHideDuration={4000}
                   style={{ textAlign: 'center' }}
-                  onRequestClose={this.props.handleRequestClose}
+                  onRequestClose={this.props.closeSnackbar}
                 /> }
             </div>
         )
@@ -60,7 +60,7 @@ export class ProjectListComponent extends React.Component {
 ProjectListComponent.propTypes = {
     projects: PropTypes.arrayOf(ProjectPropTypes).isRequired,
     loadProjects: PropTypes.func,
-    handleRequestClose: PropTypes.func,
+    closeSnackbar: PropTypes.func,
     apology: PropTypes.string,
     fromProfile: PropTypes.bool,
     snackbar: PropTypes.object,

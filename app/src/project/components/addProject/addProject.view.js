@@ -31,7 +31,7 @@ export class AddProjectComponent extends React.Component {
                         label="Ex : 42"
                     />
                     <br/>
-                    Description : <Field
+                    Description : <br/><br/><Field
                         id="description" name="description" type="text"
                         component={TextEditor}
                     />

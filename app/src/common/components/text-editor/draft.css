@@ -13,3 +13,7 @@
 .editor :global(.public-DraftEditor-content) {
   min-height: 140px;
 }
+
+.add_project_form .editor {
+  width: 90vw;
+}

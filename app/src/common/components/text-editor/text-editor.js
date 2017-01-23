@@ -5,7 +5,7 @@ import { stateToHTML } from 'draft-js-export-html'
 import { stateFromHTML } from 'draft-js-import-html'
 
 
-import { EditorState } from 'draft-js'
+import { EditorState, convertToRaw } from 'draft-js'
 import ImageAdd from './image-add'
 
 import {
@@ -35,6 +35,7 @@ export class TextEditor extends Component {
         this.onChange = editorState => {
             this.setState({ editorState })
             let html = stateToHTML(editorState.getCurrentContent())
+            console.log(html)
             this.props.input.onChange(JSON.stringify(html))
         }
     }
