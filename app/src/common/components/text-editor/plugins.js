@@ -12,7 +12,7 @@ import createInlineToolbarPlugin, { Separator } from 'draft-js-inline-toolbar-pl
 
 import createAlignmentPlugin from 'draft-js-alignment-plugin'
 import createFocusPlugin from 'draft-js-focus-plugin'
-import createResizeablePlugin from './custom-plugins/resize'
+import createResizeablePlugin from 'draft-js-resizeable-plugin'
 
 // Import all plugins styles
 
@@ -21,6 +21,7 @@ import 'draft-js-emoji-plugin/lib/plugin.css'
 import 'draft-js-inline-toolbar-plugin/lib/plugin.css'
 import 'draft-js-linkify-plugin/lib/plugin.css'
 import 'draft-js-image-plugin/lib/plugin.css'
+import 'draft-js-alignment-plugin/lib/plugin.css'
 import 'draft-js-undo-plugin/lib/plugin.css'
 
 import {
@@ -86,7 +87,6 @@ const decorator = composeDecorators(
     resizeablePlugin.decorator,
     alignmentPlugin.decorator,
     focusPlugin.decorator
- // dndPlugin.decorator
 )
 
 const imagePlugin = createImagePlugin({ decorator })
@@ -103,5 +103,9 @@ export {
     InlineToolbar,
     EmojiSuggestions,
     UndoButton,
-    RedoButton, focusPlugin, alignmentPlugin, resizeablePlugin, AlignmentTool,
+    RedoButton,
+    focusPlugin,
+    alignmentPlugin,
+    resizeablePlugin,
+    AlignmentTool,
 }

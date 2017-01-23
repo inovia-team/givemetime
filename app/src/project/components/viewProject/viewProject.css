@@ -71,6 +71,20 @@
     justify-content: center;
 }
 
+.view_project .alignCenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.view_project .alignLeft {
+    float: left;
+}
+
+.view_project .alignRight {
+    float: right;
+}
+
 .view_project  .md-RichEditor-root {
     width: 90%;
 }

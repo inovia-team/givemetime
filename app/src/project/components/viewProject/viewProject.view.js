@@ -11,7 +11,7 @@ import SaveIcon from '../../../../assets/save-icon.png'
 import { TextEditor } from '../../../common/components/text-editor/text-editor'
 import { TextField } from '../../../common/components/form'
 import { Field } from 'redux-form'
-import { stateToHTML } from 'draft-js-export-html'
+import { stateToHTML } from '../../../common/draftjs-to-html/main'
 import { convertFromRaw } from 'draft-js'
 
 
