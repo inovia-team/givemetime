@@ -48,7 +48,7 @@ export class ProjectListComponent extends React.Component {
                 { this.props.snackbar && <Snackbar
                   open={this.props.snackbar.open && !this.props.apology}
                   message={this.props.snackbar.message}
-                  autoHideDuration={4000}
+                  autoHideDuration={3000}
                   style={{ textAlign: 'center' }}
                   onRequestClose={this.props.closeSnackbar}
                 /> }

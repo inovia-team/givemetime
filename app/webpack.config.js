@@ -23,6 +23,10 @@ const common = {
                 //include: PATHS.src,
             },
             {
+                test: /\.json$/,
+                loader: 'json',
+            },
+            {
                 test: /\.jsx?$/,
                 loader: 'babel?cacheDirectory',
                 include: PATHS.src,

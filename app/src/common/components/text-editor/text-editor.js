@@ -1,11 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import './draft.css'
 
-import { stateToHTML } from 'draft-js-export-html'
-import { stateFromHTML } from 'draft-js-import-html'
-
-
-import { EditorState, convertToRaw } from 'draft-js'
+import { EditorState, convertToRaw, convertFromRaw } from 'draft-js'
 import ImageAdd from './image-add'
 
 import {
@@ -28,15 +24,14 @@ export class TextEditor extends Component {
     constructor (props) {
         super(props)
 
+
         this.state = {
-            editorState: props.data ? EditorState.createWithContent(stateFromHTML(props.data)) : EditorState.createEmpty(),
+            editorState: props.data ? EditorState.createWithContent(convertFromRaw(props.data)) : EditorState.createEmpty(),
         }
 
         this.onChange = editorState => {
             this.setState({ editorState })
-            let html = stateToHTML(editorState.getCurrentContent())
-            console.log(html)
-            this.props.input.onChange(JSON.stringify(html))
+            this.props.input.onChange(JSON.stringify(convertToRaw(editorState.getCurrentContent())))
         }
     }
 
@@ -64,5 +59,5 @@ export class TextEditor extends Component {
 
 TextEditor.propTypes = {
     input: PropTypes.object,
-    data: PropTypes.string,
+    data: PropTypes.object,
 }

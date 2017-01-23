@@ -11,7 +11,9 @@ import SaveIcon from '../../../../assets/save-icon.png'
 import { TextEditor } from '../../../common/components/text-editor/text-editor'
 import { TextField } from '../../../common/form'
 import { Field } from 'redux-form'
-import { convertFromHTML } from 'draft-convert'
+import { stateToHTML } from 'draft-js-export-html'
+import { convertFromRaw } from 'draft-js'
+
 
 import './viewProject.css'
 
@@ -32,7 +34,7 @@ export class ViewProjectComponent extends Component {
     }
 
     createMarkup (html) {
-        return { __html: JSON.parse(html) }
+        return { __html: stateToHTML(convertFromRaw(JSON.parse(html))) }
     }
 
     render () {
