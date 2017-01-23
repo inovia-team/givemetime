@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { RaisedButton } from 'material-ui'
 import { Field } from 'redux-form'
-import { TextField } from '../../../common/form'
+import { TextField } from '../../../common/components/form'
 import { TextEditor } from '../../../common/components/text-editor/text-editor'
 
 import './addProject.css'

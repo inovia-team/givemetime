@@ -10,12 +10,18 @@ import createUndoPlugin from 'draft-js-undo-plugin'
 import createImagePlugin from 'draft-js-image-plugin'
 import createInlineToolbarPlugin, { Separator } from 'draft-js-inline-toolbar-plugin'
 
+import createAlignmentPlugin from 'draft-js-alignment-plugin'
+import createFocusPlugin from 'draft-js-focus-plugin'
+import createResizeablePlugin from './custom-plugins/resize'
+
 // Import all plugins styles
 
 import 'draft-js-hashtag-plugin/lib/plugin.css'
 import 'draft-js-emoji-plugin/lib/plugin.css'
 import 'draft-js-inline-toolbar-plugin/lib/plugin.css'
 import 'draft-js-linkify-plugin/lib/plugin.css'
+import 'draft-js-image-plugin/lib/plugin.css'
+import 'draft-js-undo-plugin/lib/plugin.css'
 
 import {
     ItalicButton,
@@ -45,9 +51,13 @@ var LinkComponent = React.createClass({
 
 // Create and initialize components
 
+const focusPlugin = createFocusPlugin()
+const resizeablePlugin = createResizeablePlugin()
+// const dndPlugin = createBlockDndPlugin()
+const alignmentPlugin = createAlignmentPlugin()
 const hashtagPlugin = createHashtagPlugin()
 const undoPlugin = createUndoPlugin()
-const imagePlugin = createImagePlugin()
+//const imagePlugin = createImagePlugin()
 const emojiPlugin = createEmojiPlugin()
 const linkifyPlugin = createLinkifyPlugin({ component: LinkComponent })
 const inlineToolbarPlugin = createInlineToolbarPlugin({
@@ -66,11 +76,20 @@ const inlineToolbarPlugin = createInlineToolbarPlugin({
         CodeBlockButton,
     ],
 })
-
+import { composeDecorators } from 'draft-js-plugins-editor'
 const { EmojiSuggestions } = emojiPlugin
 const { UndoButton, RedoButton } = undoPlugin
 const { InlineToolbar } = inlineToolbarPlugin
+const { AlignmentTool } = alignmentPlugin
 
+const decorator = composeDecorators(
+    resizeablePlugin.decorator,
+    alignmentPlugin.decorator,
+    focusPlugin.decorator
+ // dndPlugin.decorator
+)
+
+const imagePlugin = createImagePlugin({ decorator })
 // Export plugin and components to text-edit
 
 export {
@@ -84,5 +103,5 @@ export {
     InlineToolbar,
     EmojiSuggestions,
     UndoButton,
-    RedoButton,
+    RedoButton, focusPlugin, alignmentPlugin, resizeablePlugin, AlignmentTool,
 }

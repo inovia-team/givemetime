@@ -3,7 +3,6 @@ import './draft.css'
 
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js'
 import ImageAdd from './image-add'
-
 import {
     linkifyPlugin,
     inlineToolbarPlugin,
@@ -11,14 +10,28 @@ import {
     hashtagPlugin,
     undoPlugin,
     imagePlugin,
+    focusPlugin,
+    alignmentPlugin,
+    resizeablePlugin,
     Editor,
     InlineToolbar,
     EmojiSuggestions,
     UndoButton,
     RedoButton,
+    AlignmentTool,
 } from './plugins'
 
-const plugins = [linkifyPlugin, inlineToolbarPlugin, emojiPlugin, hashtagPlugin, undoPlugin, imagePlugin]
+const plugins = [
+    linkifyPlugin,
+    inlineToolbarPlugin,
+    emojiPlugin,
+    hashtagPlugin,
+    undoPlugin,
+    imagePlugin,
+    focusPlugin,
+    alignmentPlugin,
+    resizeablePlugin,
+]
 
 export class TextEditor extends Component {
     constructor (props) {
@@ -35,6 +48,10 @@ export class TextEditor extends Component {
         }
     }
 
+    focus () {
+        this.editor.focus()
+    }
+
     render () {
         return (
             <div className='editor'>
@@ -42,7 +59,8 @@ export class TextEditor extends Component {
                     ref={element => { this.editor = element }}
                     editorState={this.state.editorState}
                     onChange={this.onChange}
-                    plugins={plugins} />
+                    plugins={plugins}
+                    onClick={this.focus.bind(this)} />
                 <InlineToolbar />
                 <EmojiSuggestions />
                 <UndoButton />
@@ -52,6 +70,7 @@ export class TextEditor extends Component {
                     onChange={this.onChange}
                     modifier={imagePlugin.addImage}
                 />
+                <AlignmentTool />
             </div>
         )
     }
