@@ -1,46 +1,48 @@
 import React, { PropTypes } from 'react'
 import ProjectRow from './components/projectRow/projectRow'
-import { Responsive, WidthProvider } from 'react-grid-layout'
 import ProjectPropTypes from './project.propTypes'
-
-const ResponsiveReactGridLayout = WidthProvider(Responsive)
+import TextField from 'material-ui/TextField'
+import { List } from 'material-ui/List'
 
 export class ProjectListComponent extends React.Component {
+    constructor (props) {
+        super(props)
+        this.state = {
+            filter: '',
+        }
+    }
+
+    handleChangeText (x, event) {
+        this.setState({ filter: event })
+    }
 
     componentDidMount () {
-        this.props.loadProjects()
+        if (!this.props.fromProfile)
+            this.props.loadProjects()
     }
     render () {
-        const layout = this.props.projects.map((project, i) => {
-            return {
-                i: '' + i,
-                x: i % 3,
-                y: Math.floor(i / 3),
-                w: 1,
-                h: 1,
-                static: true,
-            }
-        })
         return (
-            <ResponsiveReactGridLayout
-                className="layout"
-                layouts={{ lg: layout, md: layout, sm: layout }}
-                breakpoints={{ lg: 1200, md: 480, sm: 0 }}
-                cols={{ lg: 3, md: 2, sm: 1 }}
-                rowHeight={170}
-                autoSize={true}
-              >
-                 {this.props.projects.map((project, i) =>
-                    <div key={i}>
-                        <ProjectRow project={project} />
-                    </div>
-                )}
-            </ResponsiveReactGridLayout>
+            <div>
+                <TextField
+                  hintText="Filter projects by name"
+                  onChange={(x, event) => this.handleChangeText(x,event)}
+                  fullWidth={true}
+                />
+                <List
+                  >
+                     { this.props.projects.length && this.props.projects.filter(project => project.title.toLowerCase().includes(this.state.filter.toLowerCase())).map((project, i) =>
+                        <div key={i}>
+                            <ProjectRow project={project} />
+                        </div>
+                    )}
+                </List>
+            </div>
         )
     }
 }
 
 ProjectListComponent.propTypes = {
-    projects: PropTypes.arrayOf(ProjectPropTypes.isRequired).isRequired,
-    loadProjects: PropTypes.func.isRequired,
+    projects: PropTypes.arrayOf(ProjectPropTypes).isRequired,
+    loadProjects: PropTypes.func,
+    fromProfile: PropTypes.bool,
 }

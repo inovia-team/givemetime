@@ -8,7 +8,8 @@ const handleNodeFetched = dispatch => node => {
       node.estimate,
       node.acquired,
       node.description,
-      node.personByAuthorId ? node.personByAuthorId.fullname : null
+      node.author || null,
+      node.author_id || null
   ))
 }
 
@@ -23,7 +24,7 @@ export function loadProjects () {
 }
 
 export function loadProject (id) {
-    return dispatch => {
+    return () => dispatch => {
         dispatch(RequestService('GET', null, null, `project/${id}`,
             ({ response }) => {
                 handleNodeFetched(dispatch)(response)
@@ -32,7 +33,7 @@ export function loadProject (id) {
     }
 }
 
-export const projectFetched = (id, title, estimate, acquired, description, author) => {
+export const projectFetched = (id, title, estimate, acquired, description, author, author_id) => {
     return {
         type: constants.PROJECT_FETCHED,
         id: id,
@@ -41,5 +42,6 @@ export const projectFetched = (id, title, estimate, acquired, description, autho
         description: description,
         title: title,
         author: author,
+        author_id: author_id,
     }
 }

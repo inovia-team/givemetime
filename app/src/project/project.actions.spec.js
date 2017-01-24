@@ -25,13 +25,14 @@ describe('loadProject actions', () => {
             acquired: 0,
             description: 'description',
             title: 'title',
-            author: null, // TODO: Fix author when OAuth is working
+            author: null,
+            author_id: null, // We're mocking
         }
 
         nock(config.API_URL)
         .get('/projects')
         .reply(200, [{ id: expected.id, estimate: expected.estimate, acquired: expected.acquired,
-            description: expected.description, title: expected.title, author: expected.author }])
+            description: expected.description, title: expected.title, author: expected.author, author_id: expected.author_id }])
 
         store.dispatch(actions.loadProjects())
         unsubscribe = store.subscribe(function () {
@@ -64,15 +65,16 @@ describe('loadProject actions', () => {
             acquired: 0,
             description: 'description',
             title: 'title',
-            author: null, // TODO: Fix author when OAuth is working
+            author: null,
+            author_id: null, // We're mocking
         }
 
         nock(config.API_URL)
         .get(`/project/${expected.id}`)
         .reply(200, { id: expected.id, estimate: expected.estimate, acquired: expected.acquired,
-            description: expected.description, title: expected.title, author: expected.author })
+            description: expected.description, title: expected.title, author: expected.author, author_id: expected.author_id })
 
-        store.dispatch(actions.loadProject(expected.id))
+        store.dispatch(actions.loadProject(expected.id)())
         unsubscribe = store.subscribe(function () {
             expect(store.getActions()[0]).toEqual(expected)
             done()
@@ -88,7 +90,7 @@ describe('loadProject actions', () => {
         .get(`/project/${id}`)
         .reply(500, { error: { status: 500, message: expected.message } })
 
-        store.dispatch(actions.loadProject(id))
+        store.dispatch(actions.loadProject(id)())
         unsubscribe = store.subscribe(function () {
             expect(store.getActions()[0]).toEqual(expected)
             done()

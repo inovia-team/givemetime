@@ -3,46 +3,48 @@ import { RaisedButton } from 'material-ui'
 import { Field } from 'redux-form'
 import { TextField } from '../../../common/form'
 
-export function AddProjectComponent ({ handleSubmit }) {
-    return (
-        <div>
-            <h1>Add project</h1>
+import './addProject.css'
 
-            <form onSubmit={handleSubmit}>
-                <Field
-                    id="author" name="author" type="text"
-                    component={TextField}
-                    disabled={true}
-                    label="Author"
-                />
-                <br/>
-
-                <Field
-                    id="title" name="title" type="text"
-                    component={TextField}
-                    label="Project Name"
-                />
-                <br/>
-                <Field
-                    id="estimate" name="estimate" type="number"
-                    component={TextField}
-                    label="Estimated hours required"
-                />
-                <br/>
-                <Field
-                    id="description" name="description" type="text"
-                    component={TextField}
-                    label="Project's description"
-                    multiLine={true}
-                    rows={4}
-                />
-                <br/>
-                <Field id="userToken" name="userToken" type="hidden" component="input" />
-                <Field id="userId" name="userId" type="hidden" component="input" />
-                <RaisedButton onClick={handleSubmit} label="Create project"/>
-            </form>
-        </div>
-    )
+export class AddProjectComponent extends React.Component {
+    render () {
+        const { handleSubmit } = this.props
+        return (
+            <div className='add_project_container'>
+                <h1>Add project</h1>
+                <form className='add_project_form' onSubmit={handleSubmit}>
+                    Author : <Field
+                        id="author" name="author" type="text"
+                        component={TextField}
+                        disabled={true}
+                    />
+                    <br/>
+                    Project name : <Field
+                        id="title" name="title" type="text"
+                        component={TextField}
+                        label="Ex : My super cool project"
+                    />
+                    <br/>
+                    Estimate hours : <Field
+                        id="estimate" name="estimate" type="number"
+                        component={TextField}
+                        label="Ex : 42"
+                    />
+                    <br/>
+                    Description : <Field
+                        id="description" name="description" type="text"
+                        component={TextField}
+                        label="Ex : This project is going to change the world !"
+                        multiLine={true}
+                        rows={1}
+                    />
+                    <br/>
+                    <Field id="userToken" name="userToken" type="hidden" component="input" />
+                    <Field id="userId" name="userId" type="hidden" component="input" />
+                    <RaisedButton type="submit" onClick={handleSubmit} label="Create project"/>
+                </form>
+            </div>
+        )
+    }
 }
 
 

@@ -3,6 +3,7 @@
 var DatabaseService = require('../../DatabaseService.js');
 var getUserIdFromToken = require('../../../auth/getIdFromToken.js').getUserIdFromToken;
 var error = require('../../config.js').errors;
+var getAuthorNames = require('../helpers.js');
 var async = require('async');
 
 
@@ -18,7 +19,9 @@ module.exports.post = function (req, res, next) {
     DatabaseService('INSERT INTO give_me_time_public.project (author_id, title, estimate, description) VALUES ($1, $2, $3, $4) RETURNING *',
     [id, title, estimate, description], next,
     result => {
-        return res.send(result);
+        getAuthorNames(result, result => {
+            return res.send(result);
+        });
     });
 };
 
@@ -30,7 +33,9 @@ module.exports.get = function (req, res, next) {
     result => {
         if (!result.id)
             return next({ message: error.UNKNOWN_PROJECT });
-        return res.send(result);
+        getAuthorNames(result, result => {
+            return res.send(result);
+        });
     });
 };
 

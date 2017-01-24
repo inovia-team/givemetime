@@ -1,5 +1,5 @@
 .layout {
-    margin: 30px 30px 30px 50px;
+    margin: 30px 5vw 30px 5vw;
 }
 
 .modalStyle p {
@@ -36,4 +36,28 @@
     height: 17px;
     float: right;
     margin-right: 10px;
+}
+
+.text_field > div {
+    display: flex;
+    align-self: baseline;
+}
+
+/* If a input field is disabled the flex align-items isn't working */
+
+input:nth-child(1) {
+    text-align: center;
+}
+
+.layout h1 {
+    color: rgb(0, 188, 212);
+    font-family: 'Rouge Script', cursive;
+    font-size: 80px;
+    font-weight: normal;
+    line-height: 48px;
+    margin: 0.3em 0 50px;
+    text-align: center;
+    text-shadow: 1px 1px 2px #082b34;
+    max-width: 100%;
+    word-wrap: break-word;
 }
