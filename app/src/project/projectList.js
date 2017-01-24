@@ -3,9 +3,11 @@ import * as actions from './project.actions'
 import { bindActionCreators } from 'redux'
 import { ProjectListComponent } from './projectList.view'
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
     return {
-        projects: state.project.project.projects,
+        projects: ownProps.route.completed ?
+            state.project.project.projects.filter(project => project.estimate === project.acquired) :
+            state.project.project.projects.filter(project => project.estimate !== project.acquired),
         snackbar: state.project.project.snackbar,
         apology: state.project.common.apology,
     }
