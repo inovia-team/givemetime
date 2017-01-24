@@ -1,2 +1,1 @@
 export const PROJECT_FETCHED = 'PROJECT_FETCHED'
-export const SHOW_SNACKBAR = 'SHOW_SNACKBAR'

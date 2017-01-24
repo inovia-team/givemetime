@@ -14,7 +14,7 @@ export function giveTime ({ userToken, amount, projectId }) {
 export const gaveTime = (acquired, amount, projectId) => {
     return {
         type: constants.GAVE_TIME,
-        acquired: acquired,
+        acquired: parseFloat(acquired),
         amount: amount,
         id: projectId,
     }

@@ -8,12 +8,13 @@ var DatabaseService = require('../../DatabaseService.js');
 
 describe('Login', function () {
 
-    before(() =>
+    before(done => {
         DatabaseService('UPDATE give_me_time_public.person SET credit=20 WHERE id=1', // Reset the original credits
         [], null,
         () => {
-        })
-    );
+        }),
+        done();
+    });
 
     it('should get a user', function (done) {
         async.waterfall([
