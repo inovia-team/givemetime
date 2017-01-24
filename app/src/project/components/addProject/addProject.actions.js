@@ -23,8 +23,8 @@ export const projectCreated = (id, title, estimate, acquired, description, autho
     return {
         type: constants.PROJECT_CREATED,
         id: id,
-        estimate: estimate,
-        acquired: acquired,
+        estimate: parseFloat(estimate),
+        acquired: parseFloat(acquired),
         description: description,
         title: title,
         author: author,

@@ -14,8 +14,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 function AppRoutes ({ history }) {
     return (
         <MuiThemeProvider muiTheme={getMuiTheme()}>
-            { /* Scroll to the top of the page to handle phone landscape mode */ }
-            <Router onUpdate={() => window.scrollTo(0, 0)} history={history}>
+            <Router history={history}>
                 <Route path="/" component={Layout}>
                     <IndexRoute component={ProjectList} completed={false} />
                     <Route path="add" component={Add} />

@@ -66,3 +66,22 @@ export const closeModalAction = () => {
         type: constants.CLOSE_MODAL,
     }
 }
+
+export function hideSnackBar () {
+    return dispatch => {
+        dispatch(closeSnackbar)
+    }
+}
+
+export const closeSnackbar = () => {
+    return {
+        type: constants.HIDE_SNACKBAR,
+    }
+}
+
+export const showSnackbar = message => {
+    return {
+        type: constants.SHOW_SNACKBAR,
+        message: message,
+    }
+}
