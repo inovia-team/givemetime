@@ -18,7 +18,8 @@
     "mocha": "^3.2.0",
     "should": "^11.1.2",
     "bunyan": "^1.8.5",
-    "supertest": "^2.0.1"
+    "supertest": "^2.0.1",
+    "postgres-array": "^1.0.2"
   },
   "dependencies": {
     "cors": "^2.8.1",

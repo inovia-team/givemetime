@@ -9,12 +9,17 @@ let id;
 
 describe('Project', function () {
 
-    before(() =>
+    before(done => {
         DatabaseService('TRUNCATE give_me_time_public.project',
         [], null,
         () => {
-        })
-    );
+        }),
+        DatabaseService('UPDATE give_me_time_public.person SET credit=20 WHERE id=1', // Reset the original credits
+        [], null,
+        () => {
+        }),
+        done();
+    });
 
     it('should create a project', function (done) {
         async.waterfall([
@@ -130,13 +135,42 @@ describe('Project', function () {
         ], done);
     });
 
-    it('should delete a project', function (done) {
+    it('should delete a project and give back credits', function (done) {
         async.waterfall([
+            function giveTime (cb) {
+                request(server)
+                .post(`/project/give/${id}`)
+                .send({ amount: 3 })
+                .expect(200)
+                .end(function () {
+                    cb(null);
+                });
+            },
+            function checkUser (cb) {
+                request(server)
+                .post('/login')
+                .send({ id: 1 })
+                .expect(200)
+                .end(function (err, res) {
+                    res.body.credit.should.eql(20 - 3);
+                    cb(null);
+                });
+            },
             function delProj (cb) {
                 request(server)
                 .delete(`/project/${id}`)
                 .expect(200)
                 .end(function () {
+                    cb(null);
+                });
+            },
+            function checkUserAgain (cb) {
+                request(server)
+                .post('/login')
+                .send({ id: 1 })
+                .expect(200)
+                .end(function (err, res) {
+                    res.body.credit.should.eql(20); // should have his credits back
                     cb(null);
                 });
             },
