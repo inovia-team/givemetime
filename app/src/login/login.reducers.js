@@ -30,8 +30,9 @@ export default function (state = { user: {}, projects: [] }, action) {
             return { ...state,
                 user: { ...state.user, credit: Math.round(action.newCredits) },
             }
+        } else {
+            return state
         }
-        break
     default:
         return state
     }

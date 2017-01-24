@@ -21,13 +21,14 @@ describe('Delete actions', () => {
         const expected = {
             type: constants.PROJECT_DELETED,
             id: 42,
+            newCredits: 'undefined',
         }
 
         nock(config.API_URL)
         .delete(`/project/${expected.id}`)
         .reply(200, { id: expected.id })
 
-        store.dispatch(actions.deleteProject({ userToken: null, id: expected.id }))
+        store.dispatch(actions.deleteProject({ userToken: null, id: expected.id, newCredits: expected.newCredits }))
         unsubscribe = store.subscribe(function () {
             expect(store.getActions()[0]).toEqual(expected)
             done()

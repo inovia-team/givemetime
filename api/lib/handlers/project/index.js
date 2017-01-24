@@ -62,6 +62,8 @@ module.exports.delete = function (req, res, next) {
                 Since there is no object in postgres we made and array of composite type (id, credits)
                 We need to parse it to make it JS-usable
             */
+            if (!resProject.associate_users)
+                return cb(null, false);
             const parsedArray = postgresArray.parse(resProject.associate_users);
             resProject.associate_users && parsedArray.map((user, index) => {
                 user = eval(user.replace(/\(/g, '[').replace(/\)/g, ']'));
