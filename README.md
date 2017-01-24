@@ -1,4 +1,4 @@
-# Give me time: collaborative R&D enabler 
+# Give me time: collaborative R&D enabler
 
 [![Build Status](https://travis-ci.org/prevostc/givemetime.svg?branch=master)](https://travis-ci.org/prevostc/givemetime)
 [![Coverage Status](https://coveralls.io/repos/github/prevostc/givemetime/badge.svg?branch=master)](https://coveralls.io/github/prevostc/givemetime?branch=master)
@@ -21,4 +21,4 @@
 
 # use google login
 
-    API_URL=http://localhost:3000 PGADMINPASSWORD=postgres PGPASSWORD=give_me_time GOOGLE_CLIENT_ID=xxxxxx-xxxxx.apps.googleusercontent.com GOOGLE_CLIENT_SECRET=xxxxxxx GOOGLE_REDIRECT_URL=http://localhost:8080/smt docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+    API_URL=http://localhost:3000 PGADMINPASSWORD=postgres PGPASSWORD=give_me_time GOOGLE_CLIENT_ID=xxxxxx-xxxxx.apps.googleusercontent.com GOOGLE_CLIENT_SECRET=xxxxxxx GOOGLE_REDIRECT_URL=http://localhost:8080/smt MAIL_CLIENT_ID=xxxxx MAIL_CLIENT_SECRET docker-compose -f docker-compose.yml -f docker-compose.dev.yml up

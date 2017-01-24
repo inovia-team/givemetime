@@ -1,4 +1,5 @@
-const nodemailer = require('@nodemailer/pro');
+const nodemailer = require('nodemailer');
+var xoauth2 = require('xoauth2');
 var bunyan = require('bunyan');
 
 var log = bunyan.createLogger({ name: 'GiveMeTime' });
@@ -8,8 +9,15 @@ module.exports = function sendEmail (recipient, title) {
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'givemetimeTest@gmail.com',
-            pass: '', // nope
+            xoauth2: xoauth2.createXOAuth2Generator({
+                user: 'givemetimeTest@gmail.com',
+                type: 'OAuth2',
+                clientId: process.env.MAIL_CLIENT_ID,
+                clientSecret: process.env.MAIL_CLIENT_SECRET,
+                expires: 1485274955262,
+                refreshToken: '1/Tbk1UYgmgtdYu6MJ-ZUy82HkqOvVKA7wHjbpMaOClZk',
+                accessToken: 'ya29.GlvdA1Z5pT0st9Htx066O_39mqVurBvO_Rm8gCFu8nFqhfd_53Kfu9TPmNPAJra7jSRQHzRPOl1380DW9YsCb9pqa5KzL8daCMKSSUJ2d6HX79Fc9fqOSnTHkGOU',
+            }),
         },
     });
 

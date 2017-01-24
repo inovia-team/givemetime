@@ -26,10 +26,11 @@
     "jsonwebtoken": "^7.2.1",
     "pg": "^6.1.2",
     "async": "^2.1.4",
-    "@nodemailer/pro": "^1.0.0",
+    "nodemailer": "^2.7.2",
     "require-all": "^2.1.0",
     "db-migrate": "^0.9.25",
-    "postgres-array": "^1.0.2"
+    "postgres-array": "^1.0.2",
+    "xoauth2": "1.2.0"
   },
   "repository": {
     "type": "git",
