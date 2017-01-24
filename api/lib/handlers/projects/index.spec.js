@@ -8,12 +8,13 @@ var DatabaseService = require('../../DatabaseService.js');
 
 describe('Projects', function () {
 
-    before(() =>
+    before(done => {
         DatabaseService('TRUNCATE give_me_time_public.project',
         [], null,
         () => {
-        })
-    );
+        }),
+        done();
+    });
 
     it('should get all the projects', function (done) {
         async.waterfall([

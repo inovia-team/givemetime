@@ -5,11 +5,12 @@ var async = require('async');
 var request = require('supertest');
 var server = require('../../../../server.js');
 var DatabaseService = require('../../../DatabaseService.js');
+var postgresArray = require('postgres-array');
 let id;
 
 describe('Give time', function () {
 
-    before(() =>
+    before(done => {
         DatabaseService('TRUNCATE give_me_time_public.project',
         [], null,
         () => {
@@ -17,8 +18,9 @@ describe('Give time', function () {
         DatabaseService('UPDATE give_me_time_public.person SET credit=20 WHERE id=1', // Reset the original credits
         [], null,
         () => {
-        })
-    );
+        }),
+        done();
+    });
 
     it('should give time to a project', function (done) {
         async.waterfall([
@@ -47,7 +49,15 @@ describe('Give time', function () {
                 .send({ amount: 3 })
                 .expect(200)
                 .end(function (err, res) {
+                    var asso = postgresArray.parse(res.body.associate_users).map(user => {
+                        const tmpUser = eval(user.replace(/\(/g, '[').replace(/\)/g, ']'));
+                        return tmpUser;
+                    });
                     parseFloat(res.body.acquired).should.eql(3);
+                    asso[0][0].should.eql(1); // check the first user ID
+                    asso[0][1].should.eql(3);
+                    // The first (only) user should have given 3 credits
+                    // It's already checked below but we need to make sure it's on the project associative array
                     cb(null);
                 });
             },
