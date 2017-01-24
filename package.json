@@ -7,7 +7,6 @@
   "scripts": {
     "test": "npm --loglevel=silent run test.lint && npm --loglevel=silent run test.unit",
     "start": "API_URL=http://localhost PORT=3000 API_PORT=4000 PGADMINPASSWORD=postgres PGPASSWORD=give_me_time GOOGLE_AUTH_MOCK=true docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
-    "start_with_google": "API_URL=http://localhost PORT=3000 API_PORT=4000 PGADMINPASSWORD=postgres PGPASSWORD=give_me_time GOOGLE_CLIENT_ID=673157831962-gcgp4mj9mgadau0nh9pbaikhbmqkl04d.apps.googleusercontent.com GOOGLE_CLIENT_SECRET=MXCrbpJhjMcgmzcNeIsCMKn_ GOOGLE_REDIRECT_URL=http://localhost:3000 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
     "_db_migrate": "PGPASSWORD=give_me_time docker-compose -f docker-compose.yml -f docker-compose.dev.yml run --rm -w /usr/src/app api ./node_modules/.bin/db-migrate --migrations-dir ./migration",
     "db.migrate": "npm --loglevel=silent run _db_migrate up",
     "db.revert": "npm --loglevel=silent run _db_migrate down",
