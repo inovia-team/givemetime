@@ -11,10 +11,6 @@ import './viewProject.css'
 
 export class ViewProjectComponent extends Component {
 
-    showDesc () {
-        this.setState({ showDesc: !this.state.showDesc })
-    }
-
     constructor (props) {
         super(props)
         this.state = { showDesc: false }
@@ -30,28 +26,15 @@ export class ViewProjectComponent extends Component {
             )
         }
 
-        const { id, title, author, acquired, estimate, description } = project
+        const { description } = project
         return (
             <div className='view_project'>
-                <div className='header_view'>
-                    <div className='basic_infos'>
-                        <img className='logo_view' src={Inovia} />
-                        <h2 className='project_title'>{title}</h2>
-                        <p className='author'>By {author}</p>
-                    </div>
-                    <div className='progress'>
-                        <CircularProgressbar percentage={Math.round((acquired / estimate) * 100)} />
-                        <p className='time_required'>Time required : {acquired}/{estimate}h</p>
-                        <Link to={`/give/${id}`}><RaisedButton backgroundColor='#4CAF50' label={'Give Time'}/></Link>
-                        <br/>
-                    </div>
-                </div>
                 <div className='description'>
                     <div className='title_arrow'>
                         <h2 className='title_desc'>Description</h2>
-                        <img className='arrow_desc' onClick={() => this.showDesc()} src={this.state.showDesc ? UpArrow : DownArrow} />
+                        <img className='arrow_desc' />
                     </div>
-                    {this.state.showDesc && (<p>{description}</p>)}
+                    <p>{description}</p>
                 </div>
             </div>
         )
