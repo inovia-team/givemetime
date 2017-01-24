@@ -39,30 +39,11 @@ export const projectFetched = (id, title, estimate, acquired, description, autho
     return {
         type: constants.PROJECT_FETCHED,
         id: id,
-        estimate: estimate,
-        acquired: acquired,
+        estimate: parseFloat(estimate),
+        acquired: parseFloat(acquired),
         description: description,
         title: title,
         author: author,
         author_id: author_id,
-    }
-}
-
-export function hideSnackBar () {
-    return dispatch => {
-        dispatch(closeSnackbar)
-    }
-}
-
-export const closeSnackbar = () => {
-    return {
-        type: constants.HIDE_SNACKBAR,
-    }
-}
-
-export const showSnackbar = message => {
-    return {
-        type: constants.SHOW_SNACKBAR,
-        message: message,
     }
 }

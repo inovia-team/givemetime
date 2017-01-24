@@ -45,6 +45,7 @@ export class ProjectListComponent extends React.Component {
                       <ContentAdd />
                     </FloatingActionButton>
                 </Link>
+                {/* inline to override material-ui */}
                 { this.props.snackbar && <Snackbar
                   open={this.props.snackbar.open && !this.props.apology}
                   message={this.props.snackbar.message}
