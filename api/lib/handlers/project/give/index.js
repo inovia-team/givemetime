@@ -3,6 +3,7 @@
 var DatabaseService = require('../../../DatabaseService.js');
 var getUserIdFromToken = require('../../../../auth/getIdFromToken.js').getUserIdFromToken;
 var error = require('../../../config.js').errors;
+var getUserMailFromId = require('../../helpers.js').getUserMailFromId;
 var async = require('async');
 var sendEmail = require('../../../sendEmail.js');
 var postgresArray = require('postgres-array');
@@ -70,20 +71,22 @@ module.exports.post = function (req, res, next) {
                 return cb(null, result);
             });
         }, function checkIfCompleted (queryRes, cb) {
-            // GET USER EMAIL
-            console.log(queryRes)
             if (queryRes.estimate === queryRes.acquired) {
-                // setup email data with unicode symbols
-                let mailOptions = {
-                    from: '"GiveMeTime 👻" <givemetime@inovia-team.com>', // sender address
-                    to: 'thibaut.sabot@inovia-team.com', // list of receivers
-                    subject: 'Congratulation', // Subject line
-                    text: 'Your project has reached the needed amount to get started !', // plain text body
-                    html: '<b>Your project has reached the needed amount to get started !</b>', // html body
-                };
-                sendEmail(mailOptions);
+                async.waterfall([
+                    function getMail (cb) {
+                        getUserMailFromId(queryRes.author_id, cb);
+                    },
+                    function sendMail (email, cb) {
+                        sendEmail(email, queryRes.title);
+                        cb(null);
+                    },
+                    function sendRes (cb) {
+                        cb(queryRes);
+                    },
+                ], cb(queryRes));
+            } else {
+                cb(queryRes);
             }
-            cb(queryRes);
         },
     ], function (result) {
         return res.send(result);
