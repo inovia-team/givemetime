@@ -6,7 +6,7 @@ import { browserHistory } from 'react-router'
 import { routerReducer } from 'react-router-redux'
 import { routerMiddleware } from 'react-router-redux'
 import { layoutMiddleware } from './layout/layout.middleware'
-import { snackbarMiddleware } from './project/project.middleware'
+import { snackbarMiddleware } from './common/common.middleware'
 
 const middlewares = [thunkMiddleware, routerMiddleware(browserHistory), layoutMiddleware, snackbarMiddleware]
 

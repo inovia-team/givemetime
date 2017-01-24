@@ -6,7 +6,7 @@ import { ProjectListComponent } from './projectList.view'
 const mapStateToProps = state => {
     return {
         projects: state.project.project.projects,
-        snackbar: state.project.project.snackbar,
+        snackbar: state.project.common.snackbar,
         apology: state.project.common.apology,
     }
 }
