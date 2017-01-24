@@ -9,6 +9,7 @@ const mapStateToProps = state => {
         user: state.project.login.user,
         globalMenuOpen: state.project.layout.globalMenuOpen,
         apology: state.project.common.apology,
+        snackbar: state.project.common.snackbar,
     }
 }
 
@@ -16,6 +17,7 @@ const mapDispatchToProps = dispatch => {
     return bindActionCreators({
         globalMenuToggle: actions.globalMenuToggle,
         closeModal: closeModal,
+        closeSnackbar: actions.closeSnackbar,
         goHomepage: goHomepage }, dispatch)
 }
 

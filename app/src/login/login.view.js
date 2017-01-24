@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import Avatar from 'material-ui/Avatar'
 import RaisedButton from 'material-ui/RaisedButton'
 import GoogleLogin from 'react-google-login'
+import { Link } from 'react-router'
 import * as config from '../config'
 
 import './login.css'
@@ -14,8 +15,10 @@ export class LoginComponent extends React.Component {
         if (this.props.user.id) {
             return (
                 <div className='logged_appbar_section'>
-                    <Avatar src={this.props.user.avatar} />
-                    <div className='user_infos'>{this.props.user.fullname}<br/> Crédits : {this.props.user.credit}</div>
+                    <Link className='profile_appbar' to={'/me'}>
+                        <Avatar src={this.props.user.avatar} />
+                        <div className='user_infos'>{this.props.user.fullname}<br/> Crédits : {this.props.user.credit}</div>
+                    </Link>
                     <RaisedButton onClick={this.props.handleLogout} style={{ padding: '3px' }} label={'Logout'}/>
                 </div>
             )

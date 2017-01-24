@@ -1,0 +1,33 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.date_picker > div {
+    display: flex!important;
+    align-items: center;
+    flex-direction: column;
+}
+
+.date_picker > div > div:nth-of-type(2) {
+    display: flex;
+    align-self: baseline;
+}
+
+.date_picker > div > input {
+    text-align: center;
+}
+
+.profile .user_infos {
+    text-align: center;
+    padding: 15px;
+}
+
+.profile .my_project {
+    width: 100%;
+}
+
+.profile .expected_credits {
+    text-align: center;
+}

@@ -39,6 +39,11 @@ export const RequestService = (method, userToken, variables, route, onSuccess, o
     }
 }
 
+export const changeOrientation = orientation => ({
+    type: constants.CHANGE_ORIENTATION,
+    orientation: orientation,
+})
+
 export const apologize = msg => ({
     type: constants.APOLOGIZE,
     message: msg,
@@ -59,5 +64,24 @@ export function goHomepage () {
 export const closeModalAction = () => {
     return {
         type: constants.CLOSE_MODAL,
+    }
+}
+
+export function hideSnackBar () {
+    return dispatch => {
+        dispatch(closeSnackbar)
+    }
+}
+
+export const closeSnackbar = () => {
+    return {
+        type: constants.HIDE_SNACKBAR,
+    }
+}
+
+export const showSnackbar = message => {
+    return {
+        type: constants.SHOW_SNACKBAR,
+        message: message,
     }
 }

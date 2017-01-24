@@ -5,7 +5,7 @@ import ReactDom from 'react-dom'
 import { Provider } from 'react-redux'
 import { browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
-
+import { changeOrientation } from './common/common.actions'
 import configureStore from './configureStore'
 
 import injectTapEventPlugin from 'react-tap-event-plugin'
@@ -27,3 +27,7 @@ ReactDom.render(
     </Provider>,
     document.getElementById('main')
 )
+
+window.addEventListener('resize', () => {
+    store.dispatch(changeOrientation(window.screen.orientation.angle === 90 || window.screen.orientation.angle === -90 ? 'landscape' : 'portrait'))
+}, 500)

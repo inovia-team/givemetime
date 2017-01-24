@@ -6,9 +6,9 @@ import { browserHistory } from 'react-router'
 import { routerReducer } from 'react-router-redux'
 import { routerMiddleware } from 'react-router-redux'
 import { layoutMiddleware } from './layout/layout.middleware'
+import { snackbarMiddleware } from './common/common.middleware'
 
-
-const middlewares = [thunkMiddleware, routerMiddleware(browserHistory), layoutMiddleware]
+const middlewares = [thunkMiddleware, routerMiddleware(browserHistory), layoutMiddleware, snackbarMiddleware]
 
 export default function configureStore (initialState) {
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose // enable redux extension

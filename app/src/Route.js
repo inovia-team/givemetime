@@ -7,6 +7,7 @@ import ProjectList from './project/projectList'
 import Add from './project/components/addProject/addProject'
 import View from './project/components/viewProject/viewProject'
 import GiveTime from './project/components/giveTime/giveTime'
+import Profile from './profile/profile'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
@@ -20,6 +21,7 @@ function AppRoutes ({ history }) {
                     <Route path="add" component={Add} />
                     <Route path="view/:id" component={View} />
                     <Route path="give/:id" component={GiveTime} />
+                    <Route path="me" component={Profile} />
                 </Route>
             </Router>
         </MuiThemeProvider>

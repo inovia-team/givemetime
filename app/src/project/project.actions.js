@@ -1,6 +1,7 @@
 import { RequestService } from '../common/common.actions.js'
 import * as constants from './project.actionTypes'
 
+
 const handleNodeFetched = dispatch => node => {
     dispatch(projectFetched(
       node.id,
@@ -17,6 +18,7 @@ export function loadProjects () {
     return dispatch => {
         dispatch(RequestService('GET', null, null, 'projects',
             ({ response }) => {
+                !response.length ? response = [response] : ''
                 response.map(handleNodeFetched(dispatch))
             }
         ))
@@ -37,8 +39,8 @@ export const projectFetched = (id, title, estimate, acquired, description, autho
     return {
         type: constants.PROJECT_FETCHED,
         id: id,
-        estimate: estimate,
-        acquired: acquired,
+        estimate: parseFloat(estimate),
+        acquired: parseFloat(acquired),
         description: description,
         title: title,
         author: author,
