@@ -21,7 +21,7 @@ describe('Delete actions', () => {
         const expected = {
             type: constants.PROJECT_DELETED,
             id: 42,
-            newCredits: 'undefined',
+            newCredits: undefined,
         }
 
         nock(config.API_URL)
