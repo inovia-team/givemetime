@@ -1,12 +1,5 @@
 import React, { PropTypes, Component } from 'react'
 import ProjectPropTypes from '../../project.propTypes'
-import Inovia from '../../../../assets/inovia.png'
-import CircularProgressbar from 'react-circular-progressbar'
-import RaisedButton from 'material-ui/RaisedButton'
-import { Link } from 'react-router'
-import DownArrow from '../../../../assets/down-arrow.png'
-import UpArrow from '../../../../assets/up-arrow.png'
-
 import './viewProject.css'
 
 export class ViewProjectComponent extends Component {
