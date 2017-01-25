@@ -93,3 +93,9 @@ export default class ImageAdd extends Component {
         )
     }
 }
+
+ImageAdd.propTypes = {
+    editorState: React.PropTypes.object,
+    onChange: React.PropTypes.func,
+    modifier: React.PropTypes.func,
+}

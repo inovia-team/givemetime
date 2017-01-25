@@ -4,7 +4,7 @@ import EditIcon from '../../../../assets/edit-icon.png'
 import SaveIcon from '../../../../assets/save-icon.png'
 import { TextEditor } from '../../../common/components/text-editor/text-editor'
 import { Field } from 'redux-form'
-import { stateToHTML } from '../../../common/draftjs-to-html/main'
+import stateToHTML from '../../../common/draftjs-to-html'
 import { convertFromRaw } from 'draft-js'
 
 import './viewProject.css'
