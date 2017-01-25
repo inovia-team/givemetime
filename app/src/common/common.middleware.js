@@ -1,6 +1,6 @@
-import { showSnackbar } from './project.actions'
-import { PROJECT_CREATED } from './components/addProject/addProject.actionTypes'
-import { GAVE_TIME } from './components/giveTime/giveTime.actionTypes'
+import { showSnackbar } from './common.actions'
+import { PROJECT_CREATED } from '../project/components/addProject/addProject.actionTypes'
+import { GAVE_TIME } from '../project/components/giveTime/giveTime.actionTypes'
 import { USER_LOGGED_OUT } from '../login/login.actionTypes'
 
 export const snackbarMiddleware = store => next => action => {

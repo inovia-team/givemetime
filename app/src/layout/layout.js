@@ -9,7 +9,7 @@ const mapStateToProps = state => {
         user: state.project.login.user,
         globalMenuOpen: state.project.layout.globalMenuOpen,
         apology: state.project.common.apology,
-        snackbar: state.project.project.snackbar,
+        snackbar: state.project.common.snackbar,
     }
 }
 

@@ -3,7 +3,7 @@ import * as giveTimeActions from './components/giveTime/giveTime.actionTypes'
 import * as projectRowActions from './components/projectRow/projectRow.actionTypes'
 import * as addProjectActions from './components/addProject/addProject.actionTypes'
 
-export default function (state = { projects: [], snackbar: { open: false, message: '' } }, action) {
+export default function (state = { projects: [] }, action) {
     switch (action.type) {
 
     case projectActions.PROJECT_FETCHED:
@@ -13,8 +13,8 @@ export default function (state = { projects: [], snackbar: { open: false, messag
                 .concat([{
                     id: action.id,
                     title: action.title,
-                    estimate: parseFloat(action.estimate),
-                    acquired: parseFloat(action.acquired),
+                    estimate: action.estimate,
+                    acquired: action.acquired,
                     description: action.description,
                     author: action.author,
                     author_id: action.author_id,
@@ -25,7 +25,7 @@ export default function (state = { projects: [], snackbar: { open: false, messag
         return { ...state,
             projects: state.projects.map(
                 project => project.id === action.id
-                    ? { ...project, acquired: parseFloat(action.acquired) }
+                    ? { ...project, acquired: action.acquired }
                     : project
             ),
         }
@@ -35,8 +35,8 @@ export default function (state = { projects: [], snackbar: { open: false, messag
             projects: state.projects.concat([{
                 id: action.id,
                 title: action.title,
-                estimate: parseFloat(action.estimate),
-                acquired: parseFloat(action.acquired),
+                estimate: action.estimate,
+                acquired: action.acquired,
                 description: action.description,
                 author: action.author,
                 author_id: action.author_id,
@@ -60,10 +60,6 @@ export default function (state = { projects: [], snackbar: { open: false, messag
         return { ...state,
             projects: state.projects.filter(project => project.id !== action.id),
         }
-    case projectActions.SHOW_SNACKBAR:
-        return { ...state, snackbar: { open: true, message: action.message } }
-    case projectActions.HIDE_SNACKBAR:
-        return { ...state, snackbar: { open: false, message: '' } }
     default:
         return state
 
