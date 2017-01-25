@@ -28,6 +28,22 @@
     justify-content: center;
 }
 
+.view_project .desc_wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.view_project .title_desc {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+}
+
+.view_project .edit_icon {
+    width: 21px;
+    margin-right: 20px;
+}
+
 .view_project .alignCenter {
     display: block;
     margin-left: auto;

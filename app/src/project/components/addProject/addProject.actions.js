@@ -19,31 +19,6 @@ export function createProject ({ userToken, userId, title, estimate, description
     }
 }
 
-export function editProject ({ userToken, userId, projectId, title, estimate, description }) {
-    return dispatch => {
-        dispatch(RequestService('PUT', userToken, { userId, title, estimate, description }, `project/${projectId}`,
-            ({ response }) => {
-                dispatch(projectEdited(
-                    response.id,
-                    response.title,
-                    response.estimate,
-                    response.description
-                ))
-            }
-        ))
-    }
-}
-
-export const projectEdited = (id, title, estimate, description) => {
-    return {
-        type: constants.PROJECT_EDITED,
-        id: id,
-        estimate: estimate,
-        description: description,
-        title: title,
-    }
-}
-
 export const projectCreated = (id, title, estimate, acquired, description, author, author_id) => {
     return {
         type: constants.PROJECT_CREATED,

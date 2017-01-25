@@ -28,7 +28,7 @@ export class ViewProjectComponent extends Component {
 
     render () {
 
-        const { project, loadProject, handleSubmit } = this.props
+        const { userId, project, loadProject, handleSubmit } = this.props
 
         if (!this.props.project) {
             loadProject()
@@ -41,11 +41,12 @@ export class ViewProjectComponent extends Component {
         return (
             <div className='view_project'>
                 <form onSubmit={handleSubmit}>
-                    <img style={{ float: 'right' }} onClick={() => this.editOrSave()} src={this.state.editing ? SaveIcon : EditIcon} />
                     <div className='description'>
-                        <div className='title_arrow'>
-                            <h2 className='title_desc'>Description</h2>
-                            <img className='arrow_desc' />
+                        <div className='desc_wrapper'>
+                            <h2 className='title_desc' style={userId === project.author_id ? { marginLeft: '40px' } : {}}>Description</h2>
+                            {userId === project.author_id &&
+                                <img className='edit_icon' onClick={() => this.editOrSave()} src={this.state.editing ? SaveIcon : EditIcon} />
+                            }
                         </div>
                         {!this.state.editing && (<p dangerouslySetInnerHTML={this.createMarkup(description)}></p>)}
                         {this.state.editing && (
@@ -60,7 +61,6 @@ export class ViewProjectComponent extends Component {
                                 <Field id="estimate" name="estimate" type="hidden" component="input"/>
                                 <Field id="projectId" name="projectId" type="hidden" component="input"/>
                                 <Field id="userToken" name="userToken" type="hidden" component="input" />
-                                <Field id="userId" name="userId" type="hidden" component="input" />
                             </div>
                         )}
                     </div>
@@ -73,5 +73,6 @@ export class ViewProjectComponent extends Component {
 ViewProjectComponent.propTypes = {
     project: ProjectPropTypes,
     loadProject: PropTypes.func.isRequired,
+    userId: PropTypes.number,
     handleSubmit: PropTypes.func.isRequired,
 }

@@ -92,6 +92,37 @@ describe('Project', function () {
         ], done);
     });
 
+    it('should edit a project', function (done) {
+        async.waterfall([
+            function getProj (cb) {
+                request(server)
+                .put(`/project/${id}`)
+                .send({ userId: 1, title: 'title EDIT', description: 'desc', estimate: 42 })
+                .expect(200)
+                .end(function (err, res) {
+                    res.body.title.should.eql('title EDIT');
+                    parseFloat(res.body.estimate).should.eql(42);
+                    cb(null);
+                });
+            },
+        ], done);
+    });
+
+    it('should not delete a project if don\'t have the right', function (done) {
+        async.waterfall([
+            function delProj (cb) {
+                request(server)
+                .put(`/project/${id}`)
+                .set({ 'authorization': 'uTest' })
+                .expect(200)
+                .end(function (err, res) {
+                    res.body.should.have.property('error');
+                    cb(null);
+                });
+            },
+        ], done);
+    });
+
     it('should not get a project if bad ID', function (done) {
         async.waterfall([
             function getProj (cb) {

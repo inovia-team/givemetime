@@ -27,6 +27,7 @@ module.exports.mailConfig = {
 module.exports.errors = {
     DATABASE_ERROR: 'Error while fetching the database, please try again later',
     DELETE_NO_RIGHT: 'Please only delete your own projects',
+    EDIT_NO_RIGHT: 'Please only edit your own projects',
     AMOUNT_INVALID: 'Amount is invalid',
     UNKNOWN_PERSON: 'This person doesn\'t exist',
     UNKNOWN_PROJECT: 'This project doesn\'t exist',

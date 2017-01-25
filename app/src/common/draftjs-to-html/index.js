@@ -1,5 +1,12 @@
 /* @flow */
 
+/*
+    This is a code from https://github.com/sstur/draft-js-export-html which has been modified to suit givemetime needs
+    We don't need to worry about missing updates since this project has been submitted and confirmed woking long time ago
+    It'll always be up to date since Draftjs syntax is not changing
+    It has been copied here (only the needed files) to be modified freely and be compatible with our draftjs text editor
+*/
+
 import combineOrderedStyles from './helpers/combineOrderedStyles'
 import normalizeAttributes from './helpers/normalizeAttributes'
 import styleToCSS from './helpers/styleToCSS'
