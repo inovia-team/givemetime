@@ -3,8 +3,6 @@
 var config = require('./config.js').config;
 var pg = require('pg');
 var error = require('./config.js').errors;
-var bunyan = require('bunyan');
-var log = bunyan.createLogger({ name: 'GiveMeTime' });
 
 function checkArguments (args) { // If one required argument is either null or undefined it should return an error
     for (let i = 0; i < args.length; i++) {

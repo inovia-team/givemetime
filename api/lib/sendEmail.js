@@ -26,6 +26,7 @@ module.exports = function sendEmail (recipient, title, cb) {
     // send mail with defined transport object
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
+            log.error(error);
             return cb({ message: errors.MAIL_ERROR });
         }
         log.info('Message %s sent: %s', info.messageId, info.response);
