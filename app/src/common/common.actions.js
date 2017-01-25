@@ -85,3 +85,17 @@ export const showSnackbar = message => {
         message: message,
     }
 }
+
+
+export function expandProjectToggle (id) {
+    return dispatch => {
+        dispatch(expandProject(id))
+    }
+}
+
+export const expandProject = id => {
+    return {
+        type: constants.EXPAND_PROJECT,
+        id: id,
+    }
+}

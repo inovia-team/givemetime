@@ -61,6 +61,7 @@ export default function (state = { projects: [] }, action) {
         return { ...state,
             projects: state.projects.filter(project => project.id !== action.id),
         }
+
     default:
         return state
 
