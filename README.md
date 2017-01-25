@@ -24,3 +24,9 @@
     API_URL=http://localhost:3000 PGADMINPASSWORD=postgres PGPASSWORD=give_me_time GOOGLE_CLIENT_ID=xxxxxx-xxxxx.apps.googleusercontent.com GOOGLE_CLIENT_SECRET=xxxxxxx GOOGLE_REDIRECT_URL=http://localhost:3000 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 
     You can find the client ID and secret here : https://console.developers.google.com/apis/credentials?project=inovia-givemetime
+
+# Generate a refresh token
+
+   - Download the Gmail_API_generator folder from https://github.com/thibautsabot/Gmail_API_generator
+   - Install the mandatory packages with `npm install`
+   - Follow the instructions
