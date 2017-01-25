@@ -70,22 +70,25 @@ module.exports.post = function (req, res, next) {
             result => {
                 return cb(null, result);
             });
-        }, function checkIfCompleted (queryRes, cb) {
+        }, function checkIfCompleted (queryRes, callback) {
             if (queryRes.estimate === queryRes.acquired) {
                 async.waterfall([
                     function getMail (cb) {
-                        getUserMailFromId(queryRes.author_id, cb);
+                        return getUserMailFromId(queryRes.author_id, cb);
                     },
                     function sendMail (email, cb) {
-                        sendEmail(email, queryRes.title);
-                        cb(null);
+                        return sendEmail(email, queryRes.title, cb);
                     },
                     function sendRes (cb) {
-                        cb(queryRes);
+                        return cb(null, queryRes);
                     },
-                ], cb(queryRes));
+                ], function (err, res) {
+                    if (err)
+                        return next(err);
+                    return callback(res);
+                });
             } else {
-                cb(queryRes);
+                return callback(queryRes);
             }
         },
     ], function (result) {
