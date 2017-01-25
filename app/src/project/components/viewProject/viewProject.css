@@ -12,49 +12,6 @@
     align-items: center;
 }
 
-.view_project .basic_infos {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.view_project .progress {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.view_project .progress p {
-    margin-top: 15px;
-}
-
-.view_project .author {
-    color: rgba(0, 0, 0, 0.541176);
-    font-size: 14px;
-    white-space: nowrap;
-}
-
-.view_project .title_arrow {
-    display: flex;
-    align-items: center;
-    text-align: center;
-}
-
-.view_project .title_desc {
-    flex: 1;
-    padding-left: 42px; /* img size + img margin */
-}
-
-.view_project .arrow_desc {
-    margin-left: auto;
-    margin-right: 20px;
-}
-
-.view_project .project_title {
-    word-wrap: break-word;
-    max-width: 30vw;
-}
-
 .view_project .description {
     display: flex;
     flex-direction: column;
@@ -87,27 +44,6 @@
 
 .view_project  .md-RichEditor-root {
     width: 90%;
-}
-
-.CircularProgressbar {
-    width: calc(100px + 15vw);
-}
-
-.CircularProgressbar .CircularProgressbar-path {
-  stroke: #3e98c7;
-  stroke-linecap: round;
-  transition: stroke-dashoffset 0.5s ease 0s;
-}
-
-.CircularProgressbar .CircularProgressbar-trail {
-  stroke: #d6d6d6;
-}
-
-.CircularProgressbar .CircularProgressbar-text {
-  fill: #3e98c7;
-  font-size: 20px;
-  dominant-baseline: middle;
-  text-anchor: middle;
 }
 
 body {

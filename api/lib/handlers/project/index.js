@@ -3,7 +3,7 @@
 var DatabaseService = require('../../DatabaseService.js');
 var getUserIdFromToken = require('../../../auth/getIdFromToken.js').getUserIdFromToken;
 var error = require('../../config.js').errors;
-var getAuthorNames = require('../helpers.js');
+var getAuthorNames = require('../helpers.js').getAuthorNames;
 var async = require('async');
 var postgresArray = require('postgres-array');
 

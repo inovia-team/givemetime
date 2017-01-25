@@ -1,6 +1,6 @@
 'use strict';
 
-require('should');
+var should = require('should');
 var async = require('async');
 var request = require('supertest');
 var server = require('../../../../server.js');
@@ -36,7 +36,7 @@ describe('Give time', function () {
             function firstProj (cb) {
                 request(server)
                 .post('/project')
-                .send({ userId: 1, title: 'title test', description: 'desc', estimate: 42 })
+                .send({ userId: 1, title: 'title test', description: 'desc', estimate: 10 })
                 .expect(200)
                 .end(function (err, res) {
                     id = res.body.id;
@@ -144,6 +144,25 @@ describe('Give time', function () {
                 .expect(200)
                 .end(function (err, res) {
                     res.body.should.have.property('error');
+                    cb(null);
+                });
+            },
+        ], done);
+    });
+
+    it('should send an email if a project has been completed', function (done) {
+        this.timeout(5000);
+        async.waterfall([
+            function giveTime (cb) {
+                request(server)
+                .post(`/project/give/${id}`)
+                .send({ amount: 7 })
+                .expect(200)
+                .end(function (err, res) {
+                    // It'll return an error since we are in test mode
+                    // but this way we know that the sendMail function has been called
+                    res.body.should.have.property('error');
+                    should(res.body.error.message.includes('send mail')).be.true();
                     cb(null);
                 });
             },

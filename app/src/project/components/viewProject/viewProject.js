@@ -6,11 +6,13 @@ import * as actions from '../../project.actions'
 import { editProject } from '../addProject/addProject.actions'
 
 function mapStateToProps (state, ownProps) {
-    const project = state.project.project.projects.find(project => project.id == ownProps.params.id)
+    const project = state.project.project.projects.find(project => project.id == ownProps.id)
     return {
         project: project,
         initialValues: {
-            projectId: ownProps.params.id,
+            projectId: ownProps.id,
+            estimate: project.estimate,
+            title: project.title,
             userToken: state.project.login.user.token,
             userId: state.project.login.user.id,
         },
@@ -19,7 +21,7 @@ function mapStateToProps (state, ownProps) {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return bindActionCreators({
-        loadProject: actions.loadProject(ownProps.params.id),
+        loadProject: actions.loadProject(ownProps.id),
         onSubmit: editProject,
     }, dispatch)
 }

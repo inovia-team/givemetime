@@ -1,7 +1,7 @@
 'use strict';
 
 var DatabaseService = require('../../DatabaseService.js');
-var getAuthorNames = require('../helpers.js');
+var getAuthorNames = require('../helpers.js').getAuthorNames;
 
 module.exports.get = function (req, res, next) {
     DatabaseService('SELECT * FROM give_me_time_public.project',

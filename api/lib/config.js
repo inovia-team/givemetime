@@ -17,6 +17,13 @@ module.exports.config = {
     idleTimeoutMillis: 30 * 1000, // how long a client is allowed to remain idle before being closed
 };
 
+module.exports.mailConfig = {
+    user: 'givemetimeTest@gmail.com',
+    clientId: process.env.MAIL_CLIENT_ID,
+    clientSecret: process.env.MAIL_CLIENT_SECRET,
+    refreshToken: process.env.MAIL_REFRESH,
+};
+
 module.exports.errors = {
     DATABASE_ERROR: 'Error while fetching the database, please try again later',
     DELETE_NO_RIGHT: 'Please only delete your own projects',
@@ -27,6 +34,7 @@ module.exports.errors = {
     NOT_ENOUGH_CREDIT: 'You don\'t have enough credits',
     BAD_AMOUNT: 'The estimated number of credits is not valid',
     ARGUMENT_MISSING: 'A required argument is missing.',
+    MAIL_ERROR: 'Couldn\'t send mail',
 };
 
 var bunyan = require('bunyan');

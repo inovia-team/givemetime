@@ -10,6 +10,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import FontIcon from 'material-ui/FontIcon'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
+import ViewProject from '../viewProject/viewProject'
 
 import './projectRow.css'
 
@@ -56,7 +57,7 @@ export class ProjectRowComponent extends Component {
                 <ListItem
                     onClick={() => this.showActions()}
                     innerDivStyle={{ display: 'flex', alignItems: 'center', paddingLeft: '0px', paddingRight: '0px' }}
-                    hoverColor='#64B5F6'
+                    hoverColor='#EEEEEE'
                 >
                 <img className='logo_list' src={Inovia} />
                     <div className='basic_infos'>
@@ -70,21 +71,23 @@ export class ProjectRowComponent extends Component {
                     <img src={this.state.showActions ? UpArrow : DownArrow} />
                 </ListItem>
                 {this.state.showActions && (
-                    <div className='actions_layer'>
-                        <Link to={`/view/${id}`}><RaisedButton backgroundColor='#64B5F6' label={'View'}/></Link>
-                        <Link to={`/give/${id}`}><RaisedButton backgroundColor='#4CAF50' label={'Give Time'}/></Link>
-                        <Dialog
-                              actions={actions}
-                              modal={false}
-                              open={this.state.showAlert}
-                              onRequestClose={() => this.hideAlert()}
-                            >
-                              <p>Are you sure that you want to delete the {title} project?</p>
-                        </Dialog>
-                        {userId === author_id && <FontIcon onTouchTap={() => {
-                            this.showAlert()
+                    <div className='dropdown_project'>
+                        <div className='actions_layer'>
+                            <Link to={`/give/${id}`}><RaisedButton backgroundColor='#4CAF50' label={'Give Time'}/></Link>
+                            <Dialog
+                                  actions={actions}
+                                  modal={false}
+                                  open={this.state.showAlert}
+                                  onRequestClose={() => this.hideAlert()}
+                                >
+                                  <p>Are you sure that you want to delete the {title} project?</p>
+                            </Dialog>
+                            {userId === author_id && <FontIcon onTouchTap={() => {
+                                this.showAlert()
 
-                        }} className="material-icons" color='#D84315' style={{ cursor: 'pointer' }}>delete</FontIcon>}
+                            }} className="material-icons" color='#D84315' style={{ cursor: 'pointer' }}>delete</FontIcon>}
+                        </div>
+                        <ViewProject id={id} />
                     </div>
                 )}
             </div>
