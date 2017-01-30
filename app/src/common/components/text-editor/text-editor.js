@@ -37,7 +37,7 @@ export class TextEditor extends Component {
     constructor (props) {
         super(props)
 
-
+        // If you are editing, populate the editor with the description content
         this.state = {
             editorState: props.data ? EditorState.createWithContent(convertFromRaw(props.data)) : EditorState.createEmpty(),
         }

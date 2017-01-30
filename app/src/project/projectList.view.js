@@ -34,6 +34,7 @@ export class ProjectListComponent extends React.Component {
                 />
                 <List
                   >
+                    {/* Render completed or ongoing project according to the filer */}
                      { this.props.projects.length && this.props.projects.filter(project => project.title.toLowerCase().includes(this.state.filter.toLowerCase())).map((project, i) =>
                         <div key={i}>
                             <ProjectRow project={project} />

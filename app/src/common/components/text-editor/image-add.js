@@ -55,6 +55,7 @@ export default class ImageAdd extends Component {
     }
 
     render () {
+        // Change style if popover is opened
         const popoverClassName = this.state.open ?
             'addImagePopover' :
             'addImageClosedPopover'
@@ -70,6 +71,7 @@ export default class ImageAdd extends Component {
                 >
               +
             </button>
+            {/* Popover opened component */}
             <div
               className={popoverClassName}
               onClick={this.onPopoverClick.bind(this)}

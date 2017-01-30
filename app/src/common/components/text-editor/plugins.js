@@ -54,11 +54,9 @@ var LinkComponent = React.createClass({
 
 const focusPlugin = createFocusPlugin()
 const resizeablePlugin = createResizeablePlugin()
-// const dndPlugin = createBlockDndPlugin()
 const alignmentPlugin = createAlignmentPlugin()
 const hashtagPlugin = createHashtagPlugin()
 const undoPlugin = createUndoPlugin()
-//const imagePlugin = createImagePlugin()
 const emojiPlugin = createEmojiPlugin()
 const linkifyPlugin = createLinkifyPlugin({ component: LinkComponent })
 const inlineToolbarPlugin = createInlineToolbarPlugin({
@@ -82,6 +80,8 @@ const { EmojiSuggestions } = emojiPlugin
 const { UndoButton, RedoButton } = undoPlugin
 const { InlineToolbar } = inlineToolbarPlugin
 const { AlignmentTool } = alignmentPlugin
+
+// Allow image to be resizeable, focused and aligned
 
 const decorator = composeDecorators(
     resizeablePlugin.decorator,

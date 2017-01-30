@@ -13,7 +13,7 @@ export class ViewProjectComponent extends Component {
 
 
     editOrSave () {
-        this.state.editing && this.props.handleSubmit()
+        this.state.editing && this.props.handleSubmit() // If we are already editing, it's a save button
         this.setState({ editing: !this.state.editing })
     }
 
@@ -23,6 +23,7 @@ export class ViewProjectComponent extends Component {
     }
 
     createMarkup (html) {
+        // Convert the editor content to HTML and push it to the <p> tag
         return { __html: stateToHTML(convertFromRaw(JSON.parse(html))) }
     }
 
