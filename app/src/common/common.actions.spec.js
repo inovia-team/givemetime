@@ -79,4 +79,25 @@ describe('Common actions', () => {
         store.dispatch(actions.closeModal())
         expect(store.getActions()[0]).toEqual(expected)
     })
+
+    it('should handle hideSnackBar modal action', () => {
+        var store = mockStore({})
+        const expected = { type: constants.HIDE_SNACKBAR }
+        store.dispatch(actions.closeSnackbar())
+        expect(store.getActions()[0]).toEqual(expected)
+    })
+
+    it('should handle showSnackbar modal action', () => {
+        var store = mockStore({})
+        const expected = { type: constants.SHOW_SNACKBAR, message: 'Coucou Inovia' }
+        store.dispatch(actions.showSnackbar(expected.message))
+        expect(store.getActions()[0]).toEqual(expected)
+    })
+
+    it('should handle expandProjectToggle action', () => {
+        var store = mockStore({})
+        const expected = { type: constants.EXPAND_PROJECT, id: 42 }
+        store.dispatch(actions.expandProjectToggle(expected.id))
+        expect(store.getActions()[0]).toEqual(expected)
+    })
 })

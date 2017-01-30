@@ -3,7 +3,9 @@
 var DatabaseService = require('../../../DatabaseService.js');
 var getUserIdFromToken = require('../../../../auth/getIdFromToken.js').getUserIdFromToken;
 var error = require('../../../config.js').errors;
+var getUserMailFromId = require('../../helpers.js').getUserMailFromId;
 var async = require('async');
+var sendEmail = require('../../../sendEmail.js');
 var postgresArray = require('postgres-array');
 
 module.exports.post = function (req, res, next) {
@@ -66,8 +68,28 @@ module.exports.post = function (req, res, next) {
             DatabaseService(`UPDATE give_me_time_public.project SET acquired=acquired+($1), ${query} WHERE id=($2) RETURNING *`,
             [amount, id], next,
             result => {
-                return cb(result);
+                return cb(null, result);
             });
+        }, function checkIfCompleted (queryRes, callback) {
+            if (queryRes.estimate === queryRes.acquired) {
+                async.waterfall([
+                    function getMail (cb) {
+                        return getUserMailFromId(queryRes.author_id, cb);
+                    },
+                    function sendMail (email, cb) {
+                        return sendEmail(email, queryRes.title, cb);
+                    },
+                    function sendRes (cb) {
+                        return cb(null, queryRes);
+                    },
+                ], function (err, res) {
+                    if (err)
+                        return next(err);
+                    return callback(res);
+                });
+            } else {
+                return callback(queryRes);
+            }
         },
     ], function (result) {
         return res.send(result);

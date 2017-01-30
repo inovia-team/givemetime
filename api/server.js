@@ -31,6 +31,7 @@ app.use(pgJwt(JWT_SECRET));
 app.post('/project', handlers.project.s.post);
 app.post('/project/give/:id', handlers.project.give.s.post);
 app.get('/project/:id', handlers.project.s.get);
+app.put('/project/:id', handlers.project.s.put);
 app.delete('/project/:id', handlers.project.s.delete);
 app.get('/projects', handlers.projects.s.get);
 app.post('/login', handlers.login.s.post);

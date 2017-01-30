@@ -4,7 +4,7 @@ var DatabaseService = require('../DatabaseService.js');
 
 // get Authors name from IDs
 
-module.exports = function (rawResult, next) {
+module.exports.getAuthorNames = function getAuthorNames (rawResult, next) {
     var tempArray = [];
 
     rawResult.constructor !== Array ? rawResult = [rawResult] : rawResult;
@@ -23,5 +23,13 @@ module.exports = function (rawResult, next) {
             });
         });
         next(rawResult.length === 1 ? rawResult[0] : rawResult);
+    });
+};
+
+module.exports.getUserMailFromId = function getUserMailFromId (author_id, next) {
+    DatabaseService('SELECT * FROM give_me_time_private.person_account WHERE person_id=($1)',
+    [author_id], next,
+    result => {
+        next(null, result.email);
     });
 };

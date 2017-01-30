@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import Layout from './layout/layout'
 import ProjectList from './project/projectList'
 import Add from './project/components/addProject/addProject'
-import View from './project/components/viewProject/viewProject'
 import GiveTime from './project/components/giveTime/giveTime'
 import Profile from './profile/profile'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
@@ -17,9 +16,9 @@ function AppRoutes ({ history }) {
         <MuiThemeProvider muiTheme={getMuiTheme()}>
             <Router history={history}>
                 <Route path="/" component={Layout}>
-                    <IndexRoute component={ProjectList} />
+                    <IndexRoute component={ProjectList} completed={false} />
                     <Route path="add" component={Add} />
-                    <Route path="view/:id" component={View} />
+                    <Route path="completed" component={ProjectList} completed={true} />
                     <Route path="give/:id" component={GiveTime} />
                     <Route path="me" component={Profile} />
                 </Route>

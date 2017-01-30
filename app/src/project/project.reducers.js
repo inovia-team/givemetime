@@ -2,6 +2,7 @@ import * as projectActions from './project.actionTypes'
 import * as giveTimeActions from './components/giveTime/giveTime.actionTypes'
 import * as projectRowActions from './components/projectRow/projectRow.actionTypes'
 import * as addProjectActions from './components/addProject/addProject.actionTypes'
+import * as viewProjectActions from './components/viewProject/viewProject.actionTypes'
 
 export default function (state = { projects: [] }, action) {
     switch (action.type) {
@@ -43,10 +44,24 @@ export default function (state = { projects: [] }, action) {
             }]),
         }
 
+    case viewProjectActions.PROJECT_EDITED:
+        return { ...state,
+            projects: state.projects.map(
+                project => project.id === action.id
+                    ? { ...project,
+                        title: action.title || project.title,
+                        estimate: parseFloat(action.estimate) || project.estimate,
+                        description: action.description || project.description,
+                    }
+                    : project
+            ),
+        }
+
     case projectRowActions.PROJECT_DELETED:
         return { ...state,
             projects: state.projects.filter(project => project.id !== action.id),
         }
+
     default:
         return state
 

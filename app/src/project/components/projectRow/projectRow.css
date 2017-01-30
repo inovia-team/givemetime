@@ -39,3 +39,8 @@
     height: 60px;
     margin-right: 10px;
 }
+
+.project_row .dropdown_project {
+    display: flex;
+    flex-direction: column;
+}

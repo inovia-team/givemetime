@@ -12,78 +12,59 @@
     align-items: center;
 }
 
-.view_project .basic_infos {
+.view_project .description {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-self: center;
+    width: 100%;
+    border-radius: 15px;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    background-color: rgb(0, 188, 212);
 }
 
-.view_project .progress {
+.view_project .edit_desc {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
 }
 
-.view_project .progress p {
-    margin-top: 15px;
-}
-
-.view_project .author {
-    color: rgba(0, 0, 0, 0.541176);
-    font-size: 14px;
-    white-space: nowrap;
-}
-
-.view_project .title_arrow {
+.view_project .desc_wrapper {
     display: flex;
     align-items: center;
 }
 
 .view_project .title_desc {
+    display: flex;
     flex: 1;
-    padding-left: 42px; /* img size + img margin */
+    justify-content: center;
 }
 
-.view_project .arrow_desc {
-    margin-left: auto;
+.view_project .edit_icon {
+    width: 21px;
     margin-right: 20px;
 }
 
-.view_project .project_title {
-    word-wrap: break-word;
-    max-width: 30vw;
+.view_project .alignCenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.view_project .description {
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-    text-align: center;
-    width: 100%;
-    border-radius: 15px;
-    margin-top: 20px;
-    background-color: rgb(0, 188, 212);
+.view_project .alignLeft {
+    float: left;
 }
 
-.CircularProgressbar {
-    width: calc(100px + 15vw);
+.view_project .alignRight {
+    float: right;
 }
 
-.CircularProgressbar .CircularProgressbar-path {
-  stroke: #3e98c7;
-  stroke-linecap: round;
-  transition: stroke-dashoffset 0.5s ease 0s;
+.view_project  .md-RichEditor-root {
+    width: 90%;
 }
 
-.CircularProgressbar .CircularProgressbar-trail {
-  stroke: #d6d6d6;
-}
-
-.CircularProgressbar .CircularProgressbar-text {
-  fill: #3e98c7;
-  font-size: 20px;
-  dominant-baseline: middle;
-  text-anchor: middle;
+.view_project  .editor_content {
+    margin-left: 40px;
+    margin-right: 40px;
 }
 
 body {

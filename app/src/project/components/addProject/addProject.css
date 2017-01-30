@@ -9,3 +9,7 @@
     align-items: center;
     flex-direction: column;
 }
+
+.add_project_container  .md-RichEditor-root {
+    width: 90vw;
+}
