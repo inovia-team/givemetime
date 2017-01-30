@@ -7,9 +7,9 @@
     It has been copied here (only the needed files) to be modified freely and be compatible with our draftjs text editor
 */
 
-import combineOrderedStyles from './helpers/combineOrderedStyles'
-import normalizeAttributes from './helpers/normalizeAttributes'
-import styleToCSS from './helpers/styleToCSS'
+import combineOrderedStyles from 'draft-js-export-html/lib/helpers/combineOrderedStyles'
+import normalizeAttributes from 'draft-js-export-html/lib/helpers/normalizeAttributes'
+import styleToCSS from 'draft-js-export-html/lib/helpers/styleToCSS'
 
 import { Entity } from 'draft-js'
 import {
@@ -92,6 +92,7 @@ const DATA_TO_ATTR = {
         }
         return attrs
     },
+    // !!!!!! Modified for givemetime. Handling size and alignment !!!!!!
     [ENTITY_TYPE.IMAGE] (entityType: string, entity: EntityInstance): Attributes {
         let attrMap = ENTITY_ATTR_MAP.hasOwnProperty(entityType) ? ENTITY_ATTR_MAP[entityType] : {}
         let data = entity.getData()

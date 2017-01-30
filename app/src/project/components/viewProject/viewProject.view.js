@@ -49,7 +49,7 @@ export class ViewProjectComponent extends Component {
                                 <img className='edit_icon' onClick={() => this.editOrSave()} src={this.state.editing ? SaveIcon : EditIcon} />
                             }
                         </div>
-                        {!this.state.editing && (<p dangerouslySetInnerHTML={this.createMarkup(description)}></p>)}
+                        {!this.state.editing && (<p className='editor_content' dangerouslySetInnerHTML={this.createMarkup(description)}></p>)}
                         {this.state.editing && (
                             <div className='edit_desc'>
                                 <Field
