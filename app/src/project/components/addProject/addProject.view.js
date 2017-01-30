@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react'
 import { RaisedButton } from 'material-ui'
 import { Field } from 'redux-form'
-import { TextField } from '../../../common/form'
+import { TextField } from '../../../common/components/form'
+import { TextEditor } from '../../../common/components/text-editor/text-editor'
 
 import './addProject.css'
 
@@ -30,12 +31,9 @@ export class AddProjectComponent extends React.Component {
                         label="Ex : 42"
                     />
                     <br/>
-                    Description : <Field
+                    Description : <br/><br/><Field
                         id="description" name="description" type="text"
-                        component={TextField}
-                        label="Ex : This project is going to change the world !"
-                        multiLine={true}
-                        rows={1}
+                        component={TextEditor}
                     />
                     <br/>
                     <Field id="userToken" name="userToken" type="hidden" component="input" />

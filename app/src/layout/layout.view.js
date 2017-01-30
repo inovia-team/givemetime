@@ -76,7 +76,7 @@ export class LayoutComponent extends React.Component {
                   message={this.props.snackbar.message}
                   autoHideDuration={4000}
                   style={{ textAlign: 'center' }}
-                  onRequestClose={this.props.handleRequestClose}
+                  onRequestClose={this.props.closeSnackbar}
                 /> }
             </div>
         )
@@ -91,7 +91,7 @@ LayoutComponent.propTypes = {
     closeModal: PropTypes.func.isRequired,
     goHomepage: PropTypes.func.isRequired,
     globalMenuToggle: PropTypes.func.isRequired,
-    handleRequestClose: PropTypes.func,
+    closeSnackbar: PropTypes.func,
     apology: PropTypes.string,
     snackbar: PropTypes.object,
     children: PropTypes.element.isRequired,

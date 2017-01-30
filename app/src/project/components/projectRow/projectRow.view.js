@@ -16,10 +16,6 @@ import './projectRow.css'
 
 export class ProjectRowComponent extends Component {
 
-    showActions () {
-        this.setState({ showActions: !this.state.showActions })
-    }
-
     showAlert () {
         this.setState({ showAlert: true })
     }
@@ -29,13 +25,13 @@ export class ProjectRowComponent extends Component {
     }
 
     deleteProject (userToken, id) {
-        this.showActions()
+        this.props.expandProjectToggle(id)
         this.props.deleteProject({ userToken, id })
     }
 
     constructor (props) {
         super(props)
-        this.state = { showActions: false, showAlert: false }
+        this.state = { showAlert: false }
     }
 
     render () {
@@ -51,11 +47,12 @@ export class ProjectRowComponent extends Component {
                 onTouchTap={() => this.deleteProject(userToken, id)}
             />,
         ]
-        const { userId, userToken, project: { id, title, estimate, acquired, author, author_id } } = this.props
+        const { userId, userToken, project: { id, title, estimate, acquired, author, author_id }, expansion } = this.props
+        const expanded = expansion.id === id && expansion.expanded
         return (
             <div className='project_row'>
                 <ListItem
-                    onClick={() => this.showActions()}
+                    onClick={() => this.props.expandProjectToggle(id)}
                     innerDivStyle={{ display: 'flex', alignItems: 'center', paddingLeft: '0px', paddingRight: '0px' }}
                     hoverColor='#EEEEEE'
                 >
@@ -68,9 +65,9 @@ export class ProjectRowComponent extends Component {
                         <div className='percentage'>{acquired}h of {estimate}h {Math.round((acquired / estimate) * 100)}%</div>
                         <LinearProgress max={estimate} min={0} value={acquired} mode="determinate" style={{ height: '13px' }}/>
                     </div>
-                    <img src={this.state.showActions ? UpArrow : DownArrow} />
+                    <img src={expanded ? UpArrow : DownArrow} />
                 </ListItem>
-                {this.state.showActions && (
+                {expanded && (
                     <div className='dropdown_project'>
                         <div className='actions_layer'>
                             <Link to={`/give/${id}`}><RaisedButton backgroundColor='#4CAF50' label={'Give Time'}/></Link>
@@ -98,6 +95,8 @@ export class ProjectRowComponent extends Component {
 ProjectRowComponent.propTypes = {
     project: ProjectPropTypes,
     deleteProject: PropTypes.func.isRequired,
+    expandProjectToggle: PropTypes.func.isRequired,
+    expansion: PropTypes.object,
     userToken: PropTypes.string,
     userId: PropTypes.number,
 }

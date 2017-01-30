@@ -39,6 +39,42 @@ module.exports.get = function (req, res, next) {
     });
 };
 
+module.exports.put = function (req, res, next) {
+    const id = req.params.id;
+    const title = req.body.title;
+    const estimate = req.body.estimate;
+    const description = req.body.description;
+
+    async.waterfall([
+        function getID (cb) {
+            return getUserIdFromToken(req.headers.authorization, next, cb);
+        },
+        function checkOwner (userId, cb) {
+            DatabaseService('SELECT * from give_me_time_public.project WHERE id=($1)',
+            [id], next,
+            result => {
+                if (result.author_id != userId)
+                    return next({ message: error.EDIT_NO_RIGHT });
+                else
+                    return cb(null);
+            });
+        },
+        function updateProj (cb) {
+            DatabaseService('UPDATE give_me_time_public.project SET title = COALESCE(($2), title), estimate = COALESCE(($3), estimate), description = COALESCE(($4), description) WHERE id=($1) RETURNING *',
+            [id, title, estimate, description], next,
+            result => {
+                if (!result.id)
+                    return next({ message: error.UNKNOWN_PROJECT });
+                getAuthorNames(result, result => {
+                    return cb(result);
+                });
+            }, true);
+        },
+    ], function (result) {
+        return res.send(result);
+    });
+};
+
 module.exports.delete = function (req, res, next) {
     const id = req.params.id;
 
@@ -58,7 +94,7 @@ module.exports.delete = function (req, res, next) {
             });
         }, function giveBackCredits (userId, resProject, cb) {
             /*
-                If a project get deleted we need to give back the credits to their user
+                If a project get deleted we need to give back the credits to their users
                 Since there is no object in postgres we made and array of composite type (id, credits)
                 We need to parse it to make it JS-usable
             */

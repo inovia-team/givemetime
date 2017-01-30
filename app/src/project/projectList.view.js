@@ -34,6 +34,7 @@ export class ProjectListComponent extends React.Component {
                 />
                 <List
                   >
+                    {/* Render completed or ongoing project according to the filer */}
                      { this.props.projects.length && this.props.projects.filter(project => project.title.toLowerCase().includes(this.state.filter.toLowerCase())).map((project, i) =>
                         <div key={i}>
                             <ProjectRow project={project} />
@@ -49,9 +50,9 @@ export class ProjectListComponent extends React.Component {
                 { this.props.snackbar && <Snackbar
                   open={this.props.snackbar.open && !this.props.apology}
                   message={this.props.snackbar.message}
-                  autoHideDuration={4000}
+                  autoHideDuration={3000}
                   style={{ textAlign: 'center' }}
-                  onRequestClose={this.props.handleRequestClose}
+                  onRequestClose={this.props.closeSnackbar}
                 /> }
             </div>
         )
@@ -61,7 +62,7 @@ export class ProjectListComponent extends React.Component {
 ProjectListComponent.propTypes = {
     projects: PropTypes.arrayOf(ProjectPropTypes).isRequired,
     loadProjects: PropTypes.func,
-    handleRequestClose: PropTypes.func,
+    closeSnackbar: PropTypes.func,
     apology: PropTypes.string,
     fromProfile: PropTypes.bool,
     snackbar: PropTypes.object,
