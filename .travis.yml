@@ -25,7 +25,7 @@ after_success:
 # push to dockerhub after push on successful push into master : build images and push
 - if [ "$TRAVIS_BRANCH" == "master" ]; then
   docker-compose build
-  docker login -u="juliendesbois" -p="$DOCKER_PASSWORD";
-  docker push juliendesbois/node-web-api;
-  docker push juliendesbois/node-web-app;
+  docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+  docker push $DOCKER_USERNAME/node-web-api;
+  docker push $DOCKER_USERNAME/node-web-app;
   fi
