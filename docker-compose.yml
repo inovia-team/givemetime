@@ -17,7 +17,7 @@ services:
       - 5430:5432
 
   api:
-    image: devitito/node-web-api
+    image: node-web-api
     build:
       context: ./api
     environment:
@@ -43,7 +43,7 @@ services:
       - 49160:3000
 
   app:
-    image: devitito/node-web-app
+    image: node-web-app
     build:
       context: ./app
       args:

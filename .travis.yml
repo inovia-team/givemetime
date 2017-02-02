@@ -26,6 +26,6 @@ after_success:
 - if [ "$TRAVIS_BRANCH" == "master" ]; then
   docker images;
   docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-  docker push $DOCKER_USERNAME/node-web-api;
-  docker push $DOCKER_USERNAME/node-web-app;
+  docker push node-web-api;
+  docker push node-web-app;
   fi
