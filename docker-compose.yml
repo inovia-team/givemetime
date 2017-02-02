@@ -40,7 +40,7 @@ services:
     depends_on:
       - db
     ports:
-      - 49160:3000
+      - 3000:3000
 
   app:
     image: ${DOCKER_USERNAME}/node-web-app
@@ -64,7 +64,7 @@ services:
     depends_on:
       - db
     ports:
-      - 49161:4000
+      - 80:4000
 
 volumes:
   pgvolume:

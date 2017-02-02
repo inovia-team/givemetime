@@ -14,11 +14,11 @@ RUN npm install --quiet
 # Bundle app source
 COPY . /usr/src/app
 
-ENV NODE_ENV=production
+ENV STAGING=production
 ENV PORT=4000
 
 RUN ./node_modules/.bin/webpack --config webpack.config.js
 
-EXPOSE 3000
+EXPOSE 4000
 
 CMD [ "npm", "start" ]
