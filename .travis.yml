@@ -15,16 +15,15 @@ install:
 - cd -
 script:
 - docker-compose --version
-#- npm run db.migrate
-#- npm test
+- npm run db.migrate
+- npm test
 # also test down migrations
-#- npm run _db_migrate -- down --count 1000
-#- npm run db.migrate
-#- npm run db.test
+- npm run _db_migrate -- down --count 1000
+- npm run db.migrate
+- npm run db.test
 after_success:
 # push to dockerhub after push on successful push into master : build images and push
 - if [ "$TRAVIS_BRANCH" == "master" ]; then
-  docker images;
   docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
   docker push $DOCKER_USERNAME/node-web-api;
   docker push $DOCKER_USERNAME/node-web-app;

@@ -43,6 +43,8 @@ const common = {
             'process.env': {
                 'NODE_ENV': JSON.stringify(process.env.STAGING || 'development'),
                 'GOOGLE_CLIENT_ID': JSON.stringify(process.env.GOOGLE_CLIENT_ID || 'Please set the GOOGLE_CLIENT_ID env var'),
+                'GOOGLE_CLIENT_SECRET': JSON.stringify(process.env.GOOGLE_CLIENT_SECRET || 'Please set the GOOGLE_CLIENT_SECRET env var'),
+                'GOOGLE_REDIRECT_URL': JSON.stringify(process.env.GOOGLE_REDIRECT_URL || 'Please set the GOOGLE_REDIRECT_URL env var'),
                 'API_URL': JSON.stringify(process.env.API_URL || null),
                 'PORT': JSON.stringify(process.env.PORT || null),
                 'GOOGLE_AUTH_MOCK': JSON.stringify(process.env.GOOGLE_AUTH_MOCK || null),
