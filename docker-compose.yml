@@ -17,7 +17,7 @@ services:
       - 5430:5432
 
   api:
-    image: givemetime/node-web-api
+    image: devitito/node-web-api
     build:
       context: ./api
     environment:
@@ -43,7 +43,7 @@ services:
       - 49160:3000
 
   app:
-    image: givemetime/node-web-app
+    image: devitito/node-web-app
     build:
       context: ./app
       args:
