@@ -1,0 +1,72 @@
+version: '2'
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${PGADMINPASSWORD}
+      - PG_PROJECT_OWNER=give_me_time_owner
+      - PG_PROJECT_USER=give_me_time_user
+      - PG_PROJECT_PASSWORD=${PGPASSWORD}
+      - PG_PROJECT_DATABASE=give_me_time
+    volumes:
+      # this volume container is not deleted by docker-compose rm
+      #- pgvolume:/var/lib/postgresql/data #using the declared volume
+      - ./db/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+    ports:
+      - 5430:5432
+
+  api:
+    image: ${DOCKER_USERNAME}/node-web-api-test
+    build:
+      context: ./api
+    environment:
+      - PGHOST=db
+      - PGPORT=5432
+      - PGUSER=give_me_time_owner
+      - PGPASSWORD=${PGPASSWORD}
+      - PGDATABASE=give_me_time
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - GOOGLE_REDIRECT_URL=${GOOGLE_REDIRECT_URL}
+      # in development only
+      - MAIL_CLIENT_ID=${MAIL_CLIENT_ID}
+      - MAIL_CLIENT_SECRET=${MAIL_CLIENT_SECRET}
+      - MAIL_REFRESH=${MAIL_REFRESH}
+      - GOOGLE_AUTH_MOCK=${GOOGLE_AUTH_MOCK}
+      - API_URL=${API_URL}
+      - PORT=${PORT}
+      - API_PORT=${API_PORT}
+    depends_on:
+      - db
+    ports:
+      - 3000:3000
+
+  app:
+    image: ${DOCKER_USERNAME}/node-web-app-test
+    build:
+      context: ./app
+      args:
+          GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+          API_URL: ${API_URL}
+    environment:
+      - PGHOST=db
+      - PGPORT=5432
+      - PGUSER=give_me_time_owner
+      - PGPASSWORD=${PGPASSWORD}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - GOOGLE_REDIRECT_URL=${GOOGLE_REDIRECT_URL}
+      - PGDATABASE=give_me_time
+      # in development only
+      - GOOGLE_AUTH_MOCK=${GOOGLE_AUTH_MOCK}
+      - API_URL=${API_URL}
+      - PORT=${PORT}
+      - API_PORT=${API_PORT}
+    depends_on:
+      - db
+    ports:
+      - 80:4000
+
+volumes:
+  pgvolume:
