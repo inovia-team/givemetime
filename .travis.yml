@@ -24,7 +24,7 @@ script:
 after_success:
 # push to dockerhub after push on successful push into master : build images and push
 - if [ "$TRAVIS_BRANCH" == "master" ]; then
-  GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID docker-compose -f docker-compose.yml build;
+  GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID API_URL=$API_URL docker-compose -f docker-compose.yml build;
   docker login -u="inoviateam" -p="$DOCKER_PASSWORD";
   docker push inoviateam/node-web-api;
   docker push inoviateam/node-web-app;
