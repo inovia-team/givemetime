@@ -17,9 +17,7 @@ services:
       - 5430:5432
 
   api:
-    image: ${DOCKER_USERNAME}/node-web-api
-    build:
-      context: ./api
+      image: inoviateam/node-web-api
     environment:
       - PGHOST=db
       - PGPORT=5432
@@ -43,12 +41,7 @@ services:
       - 3000:3000
 
   app:
-    image: ${DOCKER_USERNAME}/node-web-app
-    build:
-      context: ./app
-      args:
-          GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
-          API_URL: ${API_URL}
+    image: inoviateam/node-web-app
     environment:
       - PGHOST=db
       - PGPORT=5432
