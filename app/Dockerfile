@@ -1,9 +1,6 @@
 FROM node
 
 ARG GOOGLE_CLIENT_ID
-ARG GOOGLE_CLIENT_SECRET
-ARG GOOGLE_REDIRECT_URL
-ARG API_URL
 
 # Create app directory
 RUN mkdir -p /usr/src/app
