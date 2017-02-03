@@ -26,8 +26,8 @@ after_success:
 #  docker push $DOCKER_USERNAME/node-web-api;
 #  docker push $DOCKER_USERNAME/node-web-app;
 - if [ "$TRAVIS_BRANCH" == "master" ]; then
-  DOCKER_USERNAME=$DOCKER_USERNAME API_URL=$API_URL PORT=4000 API_PORT=3000 PGADMINPASSWORD=postgres PGPASSWORD=give_me_time GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET GOOGLE_REDIRECT_URL=$GOOGLE_REDIRECT_URL docker-compose -f docker-compose.test.yml build;
+  DOCKER_USERNAME=$DOCKER_USERNAME docker-compose -f docker-compose.yml build;
   docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-  docker push $DOCKER_USERNAME/node-web-api-test;
-  docker push $DOCKER_USERNAME/node-web-app-test;
+  docker push $DOCKER_USERNAME/node-web-api;
+  docker push $DOCKER_USERNAME/node-web-app;
   fi
