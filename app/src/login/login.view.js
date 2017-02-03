@@ -32,7 +32,7 @@ export class LoginComponent extends React.Component {
         } else {
             return (
                 <GoogleLogin
-                    clientId={config.GOOGLE_KEY}
+                    clientId={config.GOOGLE_CLIENT_ID}
                     buttonText="Login"
                     onSuccess={this.props.createUserIfNotExists.bind(this)}
                     onFailure={this.props.failureError.bind(this)}>

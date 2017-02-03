@@ -54,10 +54,12 @@ services:
       - PGPORT=5432
       - PGUSER=give_me_time_owner
       - PGPASSWORD=${PGPASSWORD}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - GOOGLE_REDIRECT_URL=${GOOGLE_REDIRECT_URL}
       - PGDATABASE=give_me_time
       # in development only
       - GOOGLE_AUTH_MOCK=${GOOGLE_AUTH_MOCK}
-      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
       - API_URL=${API_URL}
       - PORT=${PORT}
       - API_PORT=${API_PORT}
