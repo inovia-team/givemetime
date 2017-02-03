@@ -1,0 +1,8 @@
+# Application staging
+stage: test
+
+project_name: givemetime
+workspace: /var/www/givemetime
+jenkins_workspace: /var/www/workspace/give-me-time
+deploy_archive_path: /var/www/givemetime
+deploy_archive_name: package.zip
