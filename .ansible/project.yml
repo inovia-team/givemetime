@@ -1,5 +1,0 @@
-- name: Install and configure webserver
-  hosts: app-web
-  roles:
-  - common
-  - npm
