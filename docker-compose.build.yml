@@ -11,7 +11,7 @@ services:
       - PG_PROJECT_DATABASE=give_me_time
     volumes:
       # this volume container is not deleted by docker-compose rm
-      #- pgvolume:/var/lib/postgresql/data #using the declared volume
+      - pgvolume:/var/lib/postgresql/data #using the declared volume
       - ./db/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
     ports:
       - 5430:5432
