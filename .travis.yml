@@ -5,8 +5,8 @@ language: node_js
 node_js:
 - '6'
 install:
-- docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d db
-- docker-compose -f docker-compose.yml build # build for test env
+- docker-compose -f docker-compose.build.yml -f docker-compose.dev.yml up -d db
+- docker-compose -f docker-compose.build.yml build # build for test env
 - cd api
 - npm install
 - cd -
@@ -21,3 +21,11 @@ script:
 - npm run _db_migrate -- down --count 1000
 - npm run db.migrate
 - npm run db.test
+after_success:
+# push to dockerhub after push on successful push into master : build images and push
+- if [ "$TRAVIS_BRANCH" == "master" ]; then
+  GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID API_URL=$API_URL docker-compose -f docker-compose.build.yml build;
+  docker login -u="inoviateam" -p="$DOCKER_PASSWORD";
+  docker push inoviateam/node-web-api;
+  docker push inoviateam/node-web-app;
+  fi
